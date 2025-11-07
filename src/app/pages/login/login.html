@@ -28,4 +28,16 @@
 
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </form>
+
+  <div class="register-links">
+    <p>¿No tienes cuenta?</p>
+    <a routerLink="/register-candidato">Crear cuenta de Candidato</a>
+    <span> | </span>
+    <a routerLink="/register-empresa">Registrar Empresa</a>
+  </div>
+
+  <!-- 🔹 Nuevo enlace para regresar al home -->
+  <div class="back-home">
+    <a routerLink="/home">← Volver al inicio</a>
+  </div>
 </section>

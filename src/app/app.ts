@@ -1,12 +1,28 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {NavbarComponent} from './components/navbar/navbar'
+import { Component } from '@angular/core';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { CommonModule, NgIf } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar';
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,NavbarComponent],
+  standalone: true,
+  // 👇 importa los módulos necesarios
+  imports: [CommonModule, NgIf, RouterOutlet, NavbarComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('portal-empleos-front');
+  currentRoute = '';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects;
+      }
+    });
+  }
+
+  isLoginPage(): boolean {
+    return this.currentRoute === '/login';
+  }
 }

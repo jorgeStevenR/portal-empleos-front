@@ -1,4 +1,5 @@
-<app-navbar></app-navbar>
+<ng-container *ngIf="!isLoginPage() && currentRoute !== '/register-candidato' && currentRoute !== '/register-empresa'">
+  <app-navbar></app-navbar>
+</ng-container>
+
 <router-outlet></router-outlet>
-
-

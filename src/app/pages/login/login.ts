@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // ✅ agrega RouterModule
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule], // ✅ agrega RouterModule aquí también
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -24,7 +24,7 @@ export class LoginComponent {
         const { token, role } = res;
         this.auth.saveSession(token, role);
 
-        // Redirige según el rol
+        // 🔁 Redirige según el rol
         if (role === 'ADMIN') this.router.navigate(['/admin']);
         else if (role === 'COMPANY') this.router.navigate(['/empresa']);
         else this.router.navigate(['/candidato']);

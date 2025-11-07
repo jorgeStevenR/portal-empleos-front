@@ -1,16 +1,13 @@
-/* Contenedor principal centrado */
-.login-container {
+.register-container {
   max-width: 420px;
   margin: 8vh auto;
   padding: 2rem;
   border-radius: 12px;
   background: #f5fbf5;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  text-align: left;
   font-family: "Inter", sans-serif;
 }
 
-/* Título */
 h2 {
   text-align: center;
   color: #2e7d32;
@@ -18,15 +15,9 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-/* Campos del formulario */
-.form-group {
-  margin-bottom: 1rem;
-}
-
 label {
   display: block;
-  margin-bottom: 0.4rem;
-  color: #333;
+  margin-top: 0.8rem;
   font-weight: 600;
 }
 
@@ -36,7 +27,6 @@ input {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 0.95rem;
-  transition: border-color 0.2s ease;
 }
 
 input:focus {
@@ -44,61 +34,36 @@ input:focus {
   border-color: #2e7d32;
 }
 
-/* Botón */
-.btn-login {
+button {
   width: 100%;
   padding: 0.8rem;
-  margin-top: 0.5rem;
   background-color: #2e7d32;
   color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  margin-top: 1.5rem;
   font-weight: 600;
+  cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.btn-login:hover {
+button:hover {
   background-color: #256028;
 }
 
-/* Error */
-.error {
-  margin-top: 1rem;
-  color: #c62828;
-  text-align: center;
-  font-weight: 600;
-}
-
-/* Enlaces de registro */
-.register-links {
-  text-align: center;
-  margin-top: 1.8rem;
-  font-size: 0.95rem;
-}
-
-.register-links a {
-  color: #2e7d32;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.register-links a:hover {
-  text-decoration: underline;
-}
-.back-home {
+/* 🔙 Enlace de regreso */
+.back-login {
   text-align: center;
   margin-top: 2rem;
 }
 
-.back-home a {
+.back-login a {
   color: #2e7d32;
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s ease;
 }
 
-.back-home a:hover {
+.back-login a:hover {
   text-decoration: underline;
   color: #1b5e20;
 }
