@@ -1,0 +1,16 @@
+<section class="jobs-container">
+  <h2>Ofertas Laborales del Corredor Ecológico</h2>
+
+  <div *ngFor="let empleo of empleos" class="job-card">
+    <h3>{{ empleo.titulo }}</h3>
+    <p>{{ empleo.descripcion }}</p>
+
+    <button *ngIf="auth.isAuthenticated()" (click)="postular(empleo.id)">
+      Postularme
+    </button>
+
+    <p *ngIf="!auth.isAuthenticated()" class="login-warning">
+      🔒 Inicia sesión para postularte
+    </p>
+  </div>
+</section>

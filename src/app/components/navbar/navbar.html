@@ -1,0 +1,15 @@
+<nav class="navbar">
+  <h1 class="logo">Portal Empleos</h1>
+
+  <ul class="menu">
+    <li><a routerLink="/home">Inicio</a></li>
+    <li><a routerLink="/login" *ngIf="!isAuthenticated()">Login</a></li>
+    <li><a routerLink="/empresa" *ngIf="getRole() === 'COMPANY'">Empresa</a></li>
+    <li><a routerLink="/candidato" *ngIf="getRole() === 'CANDIDATE'">Candidato</a></li>
+    <li><a routerLink="/admin" *ngIf="getRole() === 'ADMIN'">Admin</a></li>
+
+    <li *ngIf="isAuthenticated()">
+      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    </li>
+  </ul>
+</nav>
