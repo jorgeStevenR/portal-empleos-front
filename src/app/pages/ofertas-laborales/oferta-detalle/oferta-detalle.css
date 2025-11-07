@@ -1,0 +1,14 @@
+.detalle-container {
+  padding: 30px;
+  background: #fafafa;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 20px auto;
+}
+button {
+  background: #3a8d3a;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+}

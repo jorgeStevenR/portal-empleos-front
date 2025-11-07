@@ -1,15 +1,18 @@
+// ============================================
+// 📂 src/app/pages/register-candidato/register-candidato.ts
+// ============================================
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router'; // ✅ Importado RouterModule
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register-candidato',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule], // ✅ Añadido aquí
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register-candidato.html',
-  styleUrl: './register-candidato.css'
+  styleUrls: ['./register-candidato.css']
 })
 export class RegisterCandidatoComponent {
   name = '';
@@ -18,7 +21,7 @@ export class RegisterCandidatoComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  onRegister() {
+  onRegister(): void {
     const user = {
       name: this.name,
       email: this.email,
@@ -26,14 +29,14 @@ export class RegisterCandidatoComponent {
       role: 'CANDIDATE'
     };
 
-    this.auth.register(user).subscribe({
+    this.auth.registerUser(user).subscribe({
       next: () => {
-        alert('Registro exitoso. Inicia sesión para continuar.');
+        alert('✅ Registro exitoso. Inicia sesión para continuar.');
         this.router.navigate(['/login']);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(err);
-        alert('Error al registrar el candidato. Intenta nuevamente.');
+        alert('❌ Error al registrar el candidato.');
       }
     });
   }

@@ -1,0 +1,30 @@
+<!-- ============================================
+📂 src/app/pages/ofertas-laborales/ofertas-list/ofertas-list.html
+============================================ -->
+<section class="jobs-container">
+  <h2>🌿 Ofertas Laborales Disponibles</h2>
+
+  <div class="filters">
+    <input type="text" placeholder="🔍 Buscar empleo..." [(ngModel)]="filtro" />
+  </div>
+
+  <div *ngIf="cargando" class="loading">Cargando ofertas...</div>
+
+  <div class="jobs-grid">
+    <div
+      *ngFor="let empleo of empleos"
+      class="job-card"
+      (click)="verDetalle(empleo.idJob)"
+    >
+      <img
+        [src]="empleo.company?.logo || 'assets/img/default-job.png'"
+        alt="logo empresa"
+      />
+      <h3>{{ empleo.title }}</h3>
+    </div>
+  </div>
+
+  <p *ngIf="!cargando && empleos.length === 0" class="no-jobs">
+    No hay ofertas disponibles por el momento.
+  </p>
+</section>

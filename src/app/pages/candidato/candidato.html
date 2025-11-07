@@ -1,1 +1,35 @@
-<p>candidato works!</p>
+<!-- ============================================
+📂 src/app/pages/candidato/candidato.html
+============================================ -->
+<section class="perfil-container" *ngIf="!loading && userData">
+  <div class="perfil-card">
+    <h2>👤 Perfil del Candidato</h2>
+    <p><strong>Nombre:</strong> {{ userData.name }}</p>
+    <p *ngIf="userData.emailEntity">
+      <strong>Correo:</strong> {{ userData.emailEntity.email }}
+    </p>
+    <p *ngIf="userData.location">
+      <strong>Ubicación:</strong> {{ userData.location }}</p>
+    <p *ngIf="userData.description">
+      <strong>Descripción:</strong> {{ userData.description }}</p>
+  </div>
+</section>
+
+<section class="postulaciones-container">
+  <h3>🧾 Mis Postulaciones</h3>
+
+  <div *ngIf="postulaciones.length === 0" class="no-data">
+    <p>No tienes postulaciones registradas aún.</p>
+  </div>
+
+  <div *ngFor="let p of postulaciones" class="postulacion-card">
+    <h4>{{ p.job?.title }}</h4>
+    <p>{{ p.job?.description }}</p>
+    <p><strong>Estado:</strong> {{ p.status }}</p>
+    <p><strong>Empresa:</strong> {{ p.job?.company?.name }}</p>
+  </div>
+</section>
+
+<section *ngIf="loading" class="loading">
+  <p>Cargando información...</p>
+</section>

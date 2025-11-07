@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+// ============================================
+// 📂 src/app/components/navbar/navbar.ts
+// ============================================
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -10,20 +13,38 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  role: string | null = null;
+  isLoggedIn = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  logout() {
-    this.auth.logout();             // limpia token y sesión
-    this.router.navigate(['/login']); // redirige al login
+  ngOnInit(): void {
+    this.updateNavbar();
   }
 
-  isAuthenticated(): boolean {
-    return this.auth.isAuthenticated(); // útil para mostrar u ocultar botones
+  // 🔹 Refresca el estado del navbar según la sesión actual
+  updateNavbar(): void {
+    this.role = this.auth.getRole();
+    this.isLoggedIn = this.auth.isAuthenticated();
   }
 
-  getRole(): string | null {
-    return this.auth.getRole();
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+    this.updateNavbar();
+  }
+
+  // ✅ Helpers opcionales para mostrar condicionalmente en el HTML
+  isAdmin(): boolean {
+    return this.role === 'ADMIN';
+  }
+
+  isCompany(): boolean {
+    return this.role === 'COMPANY';
+  }
+
+  isUser(): boolean {
+    return this.role === 'USER';
   }
 }

@@ -1,0 +1,31 @@
+.empresa-container {
+  padding: 30px;
+}
+.new-job {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  background: #f6fff6;
+}
+.new-job input, textarea {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+}
+button {
+  background: #3a8d3a;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+}
+.job-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}

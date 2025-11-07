@@ -1,0 +1,19 @@
+<section class="perfil-container" *ngIf="!loading && userData; else cargando">
+  <div class="perfil-card">
+    <h2>👤 Bienvenido, {{ userData.name }}</h2>
+    <p><strong>Correo:</strong> {{ userData.emailEntity?.email }}</p>
+    <p><strong>Rol:</strong> {{ userData.role }}</p>
+
+    <div *ngIf="userData.company">
+      <p><strong>Empresa:</strong> {{ userData.company.name }}</p>
+    </div>
+
+    <div *ngIf="!userData.company">
+      <p><strong>Cuenta de candidato</strong></p>
+    </div>
+  </div>
+</section>
+
+<ng-template #cargando>
+  <p class="loading">Cargando datos del perfil...</p>
+</ng-template>

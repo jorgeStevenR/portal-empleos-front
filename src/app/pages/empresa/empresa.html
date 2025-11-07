@@ -1,1 +1,18 @@
-<p>empresa works!</p>
+<section class="empresa-container">
+  <h2>🏢 Panel de Empresa</h2>
+
+  <div class="new-job">
+    <h3>📋 Publicar nueva oferta</h3>
+    <input [(ngModel)]="newJob.title" placeholder="Título" />
+    <textarea [(ngModel)]="newJob.description" placeholder="Descripción"></textarea>
+    <input [(ngModel)]="newJob.location" placeholder="Ubicación" />
+    <button (click)="createJob()">Publicar</button>
+  </div>
+
+  <h3>🧾 Mis ofertas publicadas</h3>
+  <div *ngFor="let job of jobs" class="job-card">
+    <h4>{{ job.title }}</h4>
+    <p>{{ job.description }}</p>
+    <small>{{ job.location }}</small>
+  </div>
+</section>

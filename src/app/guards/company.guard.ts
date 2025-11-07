@@ -1,15 +1,17 @@
-import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 export const companyGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  if (auth.isAuthenticated() && auth.getRole() === 'COMPANY') {
+  const role = auth.getRole();
+  if (role === 'COMPANY') {
     return true;
   } else {
-    router.navigate(['/login']);
+    alert('Acceso restringido. Solo empresas.');
+    router.navigate(['/home']);
     return false;
   }
 };

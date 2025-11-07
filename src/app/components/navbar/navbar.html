@@ -1,15 +1,43 @@
+<!-- ============================================
+📂 src/app/components/navbar/navbar.html
+============================================ -->
 <nav class="navbar">
-  <h1 class="logo">Portal Empleos</h1>
+  <div class="navbar-logo">
+    <a routerLink="/">🌿 Portal Empleos</a>
+  </div>
 
-  <ul class="menu">
+  <ul class="navbar-links">
+    <!-- 🔹 Menú siempre visible -->
     <li><a routerLink="/home">Inicio</a></li>
-    <li><a routerLink="/login" *ngIf="!isAuthenticated()">Login</a></li>
-    <li><a routerLink="/empresa" *ngIf="getRole() === 'COMPANY'">Empresa</a></li>
-    <li><a routerLink="/candidato" *ngIf="getRole() === 'CANDIDATE'">Candidato</a></li>
-    <li><a routerLink="/admin" *ngIf="getRole() === 'ADMIN'">Admin</a></li>
+    <li><a routerLink="/ofertas-laborales">Ver Ofertas</a></li>
 
-    <li *ngIf="isAuthenticated()">
-      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    <!-- 🔹 Rol: CANDIDATO -->
+    <li *ngIf="isUser()">
+      <a routerLink="/candidato">Mi Panel</a>
+    </li>
+
+    <!-- 🔹 Rol: EMPRESA -->
+    <li *ngIf="isCompany()">
+      <a routerLink="/empresa">Mis Ofertas</a>
+    </li>
+
+    <!-- 🔹 Rol: ADMIN -->
+    <li *ngIf="isAdmin()">
+      <a routerLink="/admin">Panel Admin</a>
+    </li>
+
+    <!-- 🔹 Mostrar perfil y cerrar sesión solo si está logueado -->
+    <li *ngIf="isLoggedIn">
+      <a routerLink="/perfil">Mi Perfil</a>
+    </li>
+
+    <li *ngIf="isLoggedIn">
+      <button (click)="logout()">Cerrar sesión</button>
+    </li>
+
+    <!-- 🔹 Mostrar login si NO ha iniciado sesión -->
+    <li *ngIf="!isLoggedIn">
+      <a routerLink="/login">Login</a>
     </li>
   </ul>
 </nav>

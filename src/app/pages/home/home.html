@@ -1,16 +1,21 @@
-<section class="jobs-container">
-  <h2>Ofertas Laborales del Corredor Ecológico</h2>
+<section class="home-container">
+  <h1>🌿 Portal de Empleo del Corredor Ecológico</h1>
+  <p>Conectando talento con oportunidades sostenibles.</p>
 
-  <div *ngFor="let empleo of empleos" class="job-card">
-    <h3>{{ empleo.titulo }}</h3>
-    <p>{{ empleo.descripcion }}</p>
+  <input type="text" placeholder="Buscar empleo..." [(ngModel)]="filtro" class="search-box" />
 
-    <button *ngIf="auth.isAuthenticated()" (click)="postular(empleo.id)">
-      Postularme
-    </button>
+  <div *ngIf="cargando" class="loading">Cargando empleos...</div>
 
-    <p *ngIf="!auth.isAuthenticated()" class="login-warning">
-      🔒 Inicia sesión para postularte
-    </p>
+  <div class="job-list" *ngIf="!cargando">
+    <div *ngFor="let job of empleos | jobFilter:filtro" class="job-card">
+      <h3>{{ job.title }}</h3>
+      <p>{{ job.description }}</p>
+      <small>📍 {{ job.location }}</small>
+
+      <button *ngIf="auth.isAuthenticated() && auth.getRole() === 'CANDIDATE'"
+              (click)="postular(job.idJob)">
+        Postularme
+      </button>
+    </div>
   </div>
 </section>

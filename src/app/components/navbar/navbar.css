@@ -1,32 +1,54 @@
 .navbar {
-  background-color: #2e7d32;
-  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  background-color: #2e8b57;
+  padding: 0.8rem 2rem;
+  color: white;
+  font-family: "Inter", sans-serif;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.3rem;
+.navbar-logo a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
-.menu {
+.navbar-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
   margin: 0;
   padding: 0;
 }
 
-.menu a {
+.navbar-links li {
+  margin-left: 1.2rem;
+}
+
+.navbar-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.2s;
 }
 
-.menu a.active,
-.menu a:hover {
-  border-bottom: 2px solid white;
+.navbar-links a:hover {
+  color: #c8f5d0;
+}
+
+button {
+  background: white;
+  color: #2e8b57;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #eafaea;
 }

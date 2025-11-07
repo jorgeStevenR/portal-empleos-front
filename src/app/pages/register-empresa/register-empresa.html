@@ -1,20 +1,9 @@
-<section class="register-container">
-  <h2>Registro de Empresa</h2>
-
+<section class="form-container">
+  <h2>🏢 Registro de Empresa</h2>
   <form (ngSubmit)="onRegister()">
-    <label>Nombre de la Empresa:</label>
-    <input [(ngModel)]="name" name="name" required />
-
-    <label>Correo:</label>
-    <input [(ngModel)]="email" name="email" type="email" required />
-
-    <label>Contraseña:</label>
-    <input [(ngModel)]="password" name="password" type="password" required />
-
+    <input type="text" [(ngModel)]="name" name="name" placeholder="Nombre de la empresa" required />
+    <input type="email" [(ngModel)]="email" name="email" placeholder="Correo electrónico" required />
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
     <button type="submit">Registrar</button>
   </form>
-
-  <div class="back-login">
-    <a routerLink="/login">← Volver al inicio de sesión</a>
-  </div>
 </section>

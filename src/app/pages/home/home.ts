@@ -1,44 +1,52 @@
+// ============================================
+// 📂 src/app/pages/home/home.ts
+// ============================================
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JobService } from '../../services/job.service';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { JobService } from '../../services/job.service';
+import { JobFilterPipe } from '../../pipes/job-filter.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, JobFilterPipe],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrls: ['./home.css']
 })
 export class HomeComponent implements OnInit {
   empleos: any[] = [];
   cargando = true;
+  filtro: string = '';
 
-  constructor(
-    public auth: AuthService,
-    private jobService: JobService
-  ) {}
+  constructor(public auth: AuthService, private jobService: JobService) {}
 
   ngOnInit(): void {
-    // 🔹 Llamar a la API para traer todos los empleos
     this.jobService.getAllJobs().subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.empleos = data;
         this.cargando = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al cargar empleos', err);
         this.cargando = false;
       }
     });
   }
 
-  postular(id: number) {
-    const token = localStorage.getItem('token') || '';
-    this.jobService.postular(id, token).subscribe({
+  postular(idJob: number): void {
+    const token = this.auth.getToken() || '';
+    const userId = this.auth.getUserId();
+
+    if (!token || !userId) {
+      alert('Debes iniciar sesión para postularte.');
+      return;
+    }
+
+    this.jobService.postular(idJob, userId, token).subscribe({
       next: () => alert('✅ Postulación enviada correctamente'),
-      error: (err) =>
-        alert('⚠️ No se pudo postular: ' + (err.error?.message || 'Error desconocido'))
+      error: (err: any) => alert('⚠️ No se pudo postular: ' + err.error?.message)
     });
   }
 }

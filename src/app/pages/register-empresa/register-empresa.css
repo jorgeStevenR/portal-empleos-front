@@ -1,69 +1,24 @@
-.register-container {
-  max-width: 420px;
-  margin: 8vh auto;
-  padding: 2rem;
-  border-radius: 12px;
-  background: #f5fbf5;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Inter", sans-serif;
-}
-
-h2 {
+.form-container {
+  width: 400px;
+  margin: 40px auto;
   text-align: center;
-  color: #2e7d32;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+  background: #f9fff9;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-
-label {
-  display: block;
-  margin-top: 0.8rem;
-  font-weight: 600;
-}
-
 input {
   width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.95rem;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
 }
-
-input:focus {
-  outline: none;
-  border-color: #2e7d32;
-}
-
 button {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #2e7d32;
+  background: #3a8d3a;
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 8px;
-  margin-top: 1.5rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-button:hover {
-  background-color: #256028;
-}
-
-/* 🔙 Enlace de regreso */
-.back-login {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.back-login a {
-  color: #2e7d32;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.back-login a:hover {
-  text-decoration: underline;
-  color: #1b5e20;
 }

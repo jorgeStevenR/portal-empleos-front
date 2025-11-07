@@ -1,1 +1,24 @@
-<p>admin works!</p>
+<section class="admin-container">
+  <h2>👨‍💼 Panel de Administración</h2>
+
+  <div class="table-container">
+    <h3>Usuarios registrados</h3>
+    <ul>
+      <li *ngFor="let u of users">{{ u.name }} - {{ u.email }}</li>
+    </ul>
+  </div>
+
+  <div class="table-container">
+    <h3>Empresas registradas</h3>
+    <ul>
+      <li *ngFor="let c of companies">{{ c.name }} - {{ c.email }}</li>
+    </ul>
+  </div>
+
+  <div class="table-container">
+    <h3>Ofertas laborales</h3>
+    <ul>
+      <li *ngFor="let j of jobs">{{ j.title }} - {{ j.location }}</li>
+    </ul>
+  </div>
+</section>

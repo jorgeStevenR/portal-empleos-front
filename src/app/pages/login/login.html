@@ -1,43 +1,55 @@
+<!-- ============================================
+📂 src/app/pages/login/login.html
+============================================ -->
 <section class="login-container">
-  <h2>Iniciar Sesión</h2>
+  <div class="login-card">
+    <h2>🔐 Iniciar Sesión</h2>
+    <p class="subtitle">Accede con tu cuenta para continuar</p>
 
-  <form (ngSubmit)="onLogin()">
-    <div class="form-group">
-      <label for="email">Correo electrónico:</label>
-      <input
-        type="email"
-        id="email"
-        [(ngModel)]="email"
-        name="email"
-        required
-      />
+    <!-- Formulario -->
+    <form (ngSubmit)="onLogin()" autocomplete="off">
+      <!-- Correo -->
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="ejemplo@correo.com"
+          required
+        />
+      </div>
+
+      <!-- Contraseña -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="********"
+          required
+        />
+      </div>
+
+      <!-- Botón de envío -->
+      <button type="submit" [disabled]="loading" class="login-btn">
+        {{ loading ? 'Ingresando...' : 'Entrar' }}
+      </button>
+
+      <!-- Mensaje de error -->
+      <p class="error-message" *ngIf="errorMessage">
+        ⚠️ {{ errorMessage }}
+      </p>
+    </form>
+
+    <!-- Enlaces inferiores -->
+    <div class="register-links">
+      <p>¿No tienes cuenta?</p>
+      <a routerLink="/register-candidato">🧑‍💼 Registro Candidato</a>
+      <a routerLink="/register-empresa">🏢 Registro Empresa</a>
     </div>
-
-    <div class="form-group">
-      <label for="password">Contraseña:</label>
-      <input
-        type="password"
-        id="password"
-        [(ngModel)]="password"
-        name="password"
-        required
-      />
-    </div>
-
-    <button type="submit" class="btn-login">Ingresar</button>
-
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  </form>
-
-  <div class="register-links">
-    <p>¿No tienes cuenta?</p>
-    <a routerLink="/register-candidato">Crear cuenta de Candidato</a>
-    <span> | </span>
-    <a routerLink="/register-empresa">Registrar Empresa</a>
-  </div>
-
-  <!-- 🔹 Nuevo enlace para regresar al home -->
-  <div class="back-home">
-    <a routerLink="/home">← Volver al inicio</a>
   </div>
 </section>
