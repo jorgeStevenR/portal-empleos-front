@@ -1,13 +1,18 @@
 {
   "name": "portal-empleos-front",
   "version": "0.0.0",
+  "private": true,
+
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "start:prod": "ng serve --configuration production",
+    "build": "ng build --configuration production",
+    "build:dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
@@ -20,7 +25,7 @@
       }
     ]
   },
-  "private": true,
+
   "dependencies": {
     "@angular/common": "^20.3.10",
     "@angular/compiler": "^20.3.0",
@@ -34,6 +39,7 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
+
   "devDependencies": {
     "@angular/build": "^20.3.8",
     "@angular/cli": "^20.3.8",
