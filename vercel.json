@@ -1,15 +1,24 @@
 {
   "version": 2,
-  "public": true,
   "buildCommand": "npm install -g @angular/cli@20.3.9 && npm run build",
   "outputDirectory": "dist/portal-empleos-front",
   "framework": "none",
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    { "source": "/", "destination": "/index.html" }
+  "builds": [
+    {
+      "src": "dist/portal-empleos-front/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/portal-empleos-front/index.html"
+    }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
