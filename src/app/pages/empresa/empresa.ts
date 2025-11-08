@@ -6,89 +6,82 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { JobService } from '../../services/job.service';
 import { AuthService } from '../../services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-empresa',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './empresa.html',
   styleUrls: ['./empresa.css']
 })
 export class EmpresaComponent implements OnInit {
-  ofertas: any[] = [];
-  nuevaOferta = {
+  empresaId!: number;
+  vacantes: any[] = [];
+  nuevaVacante = {
     title: '',
     description: '',
     location: '',
+    type: 'Remoto'
   };
-  cargando = true;
+  mostrandoFormulario = false;
 
   constructor(private jobService: JobService, private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.cargarOfertas();
+    this.empresaId = this.auth.getUserId()!;
+    this.cargarVacantes();
   }
 
-  /** 🟢 Cargar todas las ofertas de la empresa actual */
-  cargarOfertas(): void {
-    const idEmpresa = this.auth.getUserId();
-
-    if (!idEmpresa) {
-      console.warn('⚠️ No hay empresa logueada.');
-      return;
-    }
-
-    this.jobService.getByCompany(idEmpresa).subscribe({
+  /** 🔹 Cargar vacantes de la empresa */
+  cargarVacantes(): void {
+    this.jobService.getByCompany(this.empresaId).subscribe({
       next: (data) => {
-        this.ofertas = data;
-        this.cargando = false;
+        this.vacantes = data || [];
+        console.log('✅ Vacantes cargadas:', this.vacantes);
       },
       error: (err) => {
-        console.error('❌ Error al cargar ofertas:', err);
-        this.cargando = false;
-      },
+        console.error('❌ Error cargando vacantes:', err);
+      }
     });
   }
 
-  /** 🟢 Publicar una nueva oferta */
-  publicarOferta(): void {
-    const idEmpresa = this.auth.getUserId();
-
-    if (!idEmpresa) {
-      alert('⚠️ No se detectó la empresa logueada.');
+  /** 🔹 Crear nueva vacante */
+  crearVacante(): void {
+    if (!this.nuevaVacante.title || !this.nuevaVacante.description) {
+      alert('Por favor completa los campos obligatorios.');
       return;
     }
 
-    const nueva = {
-      ...this.nuevaOferta,
-      company: { idCompany: idEmpresa },
+    const vacante = {
+      ...this.nuevaVacante,
+      company: { idCompany: this.empresaId }
     };
 
-    this.jobService.create(nueva).subscribe({
-      next: () => {
-        alert('✅ Oferta publicada correctamente.');
-        this.nuevaOferta = { title: '', description: '', location: '' };
-        this.cargarOfertas();
+    this.jobService.create(vacante).subscribe({
+      next: (res) => {
+        console.log('Vacante creada:', res);
+        alert('✅ Vacante creada con éxito.');
+        this.mostrandoFormulario = false;
+        this.cargarVacantes();
+        this.nuevaVacante = { title: '', description: '', location: '', type: 'Remoto' };
       },
       error: (err) => {
-        console.error('❌ Error al publicar oferta:', err);
-        alert('Ocurrió un error al publicar la oferta.');
-      },
+        console.error('Error al crear vacante:', err);
+      }
     });
   }
 
-  /** 🔴 Eliminar oferta */
-  eliminarOferta(id: number): void {
-    if (!confirm('¿Seguro que deseas eliminar esta oferta?')) return;
-
-    this.jobService.delete(id).subscribe({
-      next: () => {
-        alert('🗑️ Oferta eliminada correctamente.');
-        this.cargarOfertas();
-      },
-      error: (err) => {
-        console.error('❌ Error al eliminar oferta:', err);
-      },
-    });
+  /** 🔹 Eliminar vacante */
+  eliminarVacante(id: number): void {
+    if (confirm('¿Estás seguro de eliminar esta vacante?')) {
+      this.jobService.delete(id).subscribe({
+        next: () => {
+          alert('🗑️ Vacante eliminada.');
+          this.cargarVacantes();
+        },
+        error: (err) => console.error('❌ Error al eliminar:', err)
+      });
+    }
   }
 }

@@ -4,19 +4,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // 🌍 URLs principales (ajusta si despliegas en Render)
-  private apiUrl = 'http://localhost:8080/api/auth';
-  private usersUrl = 'http://localhost:8080/api/users';
-  private companiesUrl = 'http://localhost:8080/api/companies';
+  private baseUrl = environment.apiBaseUrl;
+  private apiUrl = `${this.baseUrl}/auth`;
+  private usersUrl = `${this.baseUrl}/users`;
+  private companiesUrl = `${this.baseUrl}/companies`;
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 LOGIN general (usuarios, empresas o admin)
+  // 🔹 LOGIN general
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
@@ -44,23 +45,23 @@ export class AuthService {
     console.log('✅ Sesión guardada:', { token, role, userId });
   }
 
-  // 🔹 OBTENER token actual
+  // 🔹 Obtener token
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // 🔹 OBTENER rol actual
+  // 🔹 Obtener rol
   getRole(): string | null {
     return localStorage.getItem('role');
   }
 
-  // 🔹 OBTENER ID del usuario o empresa
+  // 🔹 Obtener ID usuario / empresa
   getUserId(): number | null {
     const id = localStorage.getItem('userId');
     return id ? Number(id) : null;
   }
 
-  // 🔹 VERIFICAR si hay sesión activa
+  // 🔹 Verificar sesión activa
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token && token.trim() !== '';

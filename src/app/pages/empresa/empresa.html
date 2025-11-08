@@ -2,61 +2,60 @@
 📂 src/app/pages/empresa/empresa.html
 ============================================ -->
 <section class="empresa-container">
-  <div class="empresa-header">
-    <h2>🏢 Panel de Empresa</h2>
-    <p>Bienvenida/o, aquí puedes gestionar tus ofertas laborales</p>
+  <h2>Panel de Empresa</h2>
+  <p class="subtitle">Administra tus vacantes y postulaciones</p>
+
+  <div class="acciones">
+    <button class="btn-crear" (click)="mostrandoFormulario = !mostrandoFormulario">
+      {{ mostrandoFormulario ? 'Cancelar' : '➕ Crear nueva vacante' }}
+    </button>
   </div>
 
-  <!-- ✅ Formulario para publicar nueva oferta -->
-  <div class="nueva-oferta">
-    <h3>📝 Publicar nueva oferta</h3>
-    <form (ngSubmit)="publicarOferta()" #form="ngForm">
-      <input
-        type="text"
-        placeholder="Título del empleo"
-        [(ngModel)]="nuevaOferta.title"
-        name="title"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Ubicación"
-        [(ngModel)]="nuevaOferta.location"
-        name="location"
-        required
-      />
-      <textarea
-        placeholder="Descripción del empleo"
-        [(ngModel)]="nuevaOferta.description"
-        name="description"
-        rows="4"
-        required
-      ></textarea>
+  <!-- 🧩 Formulario de nueva vacante -->
+  <form *ngIf="mostrandoFormulario" class="form-vacante" #form="ngForm" (ngSubmit)="crearVacante()">
+    <input
+      type="text"
+      placeholder="Título de la vacante"
+      [(ngModel)]="nuevaVacante.title"
+      name="title"
+      required
+    />
+    <textarea
+      placeholder="Descripción"
+      [(ngModel)]="nuevaVacante.description"
+      name="description"
+      required
+    ></textarea>
+    <input
+      type="text"
+      placeholder="Ubicación"
+      [(ngModel)]="nuevaVacante.location"
+      name="location"
+    />
+    <select [(ngModel)]="nuevaVacante.type" name="type">
+      <option>Remoto</option>
+      <option>Presencial</option>
+      <option>Híbrido</option>
+    </select>
+    <button type="submit" class="btn-guardar">Guardar vacante</button>
+  </form>
 
-      <button type="submit" class="btn-publicar" [disabled]="form.invalid">
-        ➕ Publicar Oferta
-      </button>
-    </form>
-  </div>
+  <!-- 📋 Lista de vacantes -->
+  <div class="vacantes-lista" *ngIf="vacantes.length > 0; else sinVacantes">
+    <div *ngFor="let v of vacantes" class="vacante-card">
+      <h3>{{ v.title }}</h3>
+      <p>{{ v.description }}</p>
+      <span class="location">{{ v.location || 'No especificada' }} • {{ v.type }}</span>
 
-  <!-- 📋 Listado de ofertas -->
-  <div class="ofertas-list">
-    <h3>📂 Mis Ofertas Publicadas</h3>
-
-    <div *ngIf="cargando">Cargando ofertas...</div>
-    <div *ngIf="!cargando && ofertas.length === 0" class="no-results">
-      Aún no has publicado ninguna oferta.
-    </div>
-
-    <div class="oferta-card" *ngFor="let o of ofertas">
-      <div class="oferta-info">
-        <h4>{{ o.title }}</h4>
-        <p>{{ o.description }}</p>
-        <p><strong>Ubicación:</strong> {{ o.location }}</p>
+      <div class="acciones-card">
+        <button class="btn-ver">👀 Ver postulaciones</button>
+        <button class="btn-eliminar" (click)="eliminarVacante(v.idJob)">🗑️ Eliminar</button>
       </div>
-      <button class="btn-eliminar" (click)="eliminarOferta(o.idJob)">
-        🗑️ Eliminar
-      </button>
     </div>
   </div>
+
+  <!-- 💤 Mensaje si no hay vacantes -->
+  <ng-template #sinVacantes>
+    <p class="no-data">No tienes vacantes registradas aún.</p>
+  </ng-template>
 </section>

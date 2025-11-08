@@ -5,12 +5,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
-  private apiUrl = 'http://localhost:8080/api/applications';
+  private apiUrl = `${environment.apiBaseUrl}/applications`;
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -19,7 +20,7 @@ export class ApplicationService {
     return this.http.post(this.apiUrl, application, { headers: this._headers() });
   }
 
-  /** 🟢 Obtener todas las postulaciones (requiere token) */
+  /** 🟢 Obtener todas las postulaciones */
   getAll(): Observable<any> {
     return this.http.get(this.apiUrl, { headers: this._headers() });
   }
@@ -44,7 +45,7 @@ export class ApplicationService {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this._headers() });
   }
 
-  /** 🧩 Método privado para generar encabezados con token */
+  /** 🧩 Headers con token */
   private _headers(): HttpHeaders {
     return new HttpHeaders({
       Authorization: `Bearer ${this.auth.getToken()}`,
