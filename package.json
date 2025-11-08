@@ -5,10 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "ng serve --configuration production",
-    "build": "ng build --configuration production",
-    "build:dev": "ng build --configuration development",
-    "vercel-build": "ng build --configuration production",
+    "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "test": "ng test"
   },
   "dependencies": {
@@ -17,10 +15,10 @@
     "@angular/compiler": "^20.3.10",
     "@angular/core": "^20.3.10",
     "@angular/forms": "^20.3.10",
-    "@angular/material": "^20.2.12",
     "@angular/platform-browser": "^20.3.10",
     "@angular/platform-browser-dynamic": "^20.3.10",
     "@angular/router": "^20.3.10",
+    "@angular/material": "^20.2.12",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -48,5 +46,8 @@
         "options": { "parser": "angular" }
       }
     ]
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
