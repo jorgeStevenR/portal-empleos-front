@@ -1,21 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/portal-empleos-front/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
+  "buildCommand": "npm install -g @angular/cli@20.3.9 && npm run build",
+  "outputDirectory": "dist/portal-empleos-front",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
