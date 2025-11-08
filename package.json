@@ -17,10 +17,10 @@
     "@angular/compiler": "^20.3.10",
     "@angular/core": "^20.3.10",
     "@angular/forms": "^20.3.10",
+    "@angular/material": "^20.2.12",
     "@angular/platform-browser": "^20.3.10",
     "@angular/platform-browser-dynamic": "^20.3.10",
     "@angular/router": "^20.3.10",
-    "@angular/material": "^20.2.12",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -45,9 +45,7 @@
     "overrides": [
       {
         "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
+        "options": { "parser": "angular" }
       }
     ]
   }
