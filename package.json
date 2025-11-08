@@ -1,14 +1,15 @@
 {
   "name": "portal-empleos-front",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
 
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "start:prod": "ng serve --configuration production",
-    "build": "ng build --configuration production",
-    "build:dev": "ng build --configuration development",
+    "build": "ng build --configuration production --output-path=dist/portal-empleos-front",
+    "build:dev": "ng build --configuration development --output-path=dist/portal-empleos-front",
+    "vercel-build": "npm run build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
