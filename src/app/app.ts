@@ -26,3 +26,4 @@ export class App {
     return this.currentRoute === '/login';
   }
 }
+ 
