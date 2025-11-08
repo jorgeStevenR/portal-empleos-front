@@ -1,9 +1,42 @@
-<section class="detalle-container" *ngIf="job">
-  <h2>{{ job.title }}</h2>
-  <p>{{ job.description }}</p>
-  <p><strong>Ubicación:</strong> {{ job.location }}</p>
+<section class="detalle-container" *ngIf="!cargando && job">
+  <div class="detalle-card">
+    <img
+      [src]="job.company?.urlImg || 'assets/img/default-job.png'"
+      alt="Logo de empresa"
+      class="empresa-logo"
+    />
 
-  <button *ngIf="auth.getRole() === 'USER'" (click)="postular()" class="btn-postular">
-  Postular
-  </button>
+    <h2>{{ job.title }}</h2>
+    <h4>{{ job.company?.name }}</h4>
+    <p class="ubicacion">📍 {{ job.location }}</p>
+
+    <p class="descripcion">{{ job.description }}</p>
+
+    <hr />
+    <p><strong>Publicado por:</strong> {{ job.company?.name }}</p>
+
+    <div class="botones">
+      <button
+        *ngIf="auth.getRole() === 'USER' && !yaPostulado"
+        (click)="postular()"
+        class="btn-postular"
+      >
+        Postularme
+      </button>
+
+      <button
+        *ngIf="auth.getRole() === 'USER' && yaPostulado"
+        class="btn-ya-postulado"
+        disabled
+      >
+        Ya te has postulado
+      </button>
+
+      <button class="btn-volver" routerLink="/ofertas-laborales">
+        ⬅ Volver a ofertas
+      </button>
+    </div>
+  </div>
 </section>
+
+<div *ngIf="cargando" class="loading">Cargando oferta...</div>

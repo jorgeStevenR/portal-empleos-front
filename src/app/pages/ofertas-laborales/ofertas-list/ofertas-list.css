@@ -1,70 +1,96 @@
-/* ============================================
-📂 src/app/pages/ofertas-laborales/ofertas-list/ofertas-list.css
-============================================ */
-.jobs-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 12px;
+.ofertas-container {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 1500px;
+  padding: 30px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #f1fff1;
 }
 
 h2 {
-  text-align: center;
-  color: #2e7d32;
-  margin-bottom: 20px;
-}
-
-.filters {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.filters input {
-  width: 300px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.jobs-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-}
-
-.job-card {
-  background: #f8fdf8;
-  border-radius: 10px;
-  padding: 20px;
-  width: 220px;
-  text-align: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.job-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-
-.job-card img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.job-card h3 {
-  font-size: 16px;
   color: #1b5e20;
-  font-weight: 600;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
 }
 
-.no-jobs {
-  text-align: center;
-  margin-top: 30px;
-  color: #777;
+.search-input {
+  width: 50%;
+  max-width: 400px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #b5d7b3;
+  margin: 0 auto 40px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #388e3c;
+  box-shadow: 0 0 4px rgba(56, 142, 60, 0.4);
+}
+
+.ofertas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 25px;
+  justify-items: center;
+}
+
+.oferta-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 320px;
+  height: 300px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.oferta-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.empresa-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.empresa-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: #f0f8f0;
+  border: 1px solid #c8e6c9;
+}
+
+.empresa-nombre {
+  font-weight: 600;
+  color: #2e7d32;
+  margin: 0;
+}
+
+.btn-ver {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-ver:hover {
+  background-color: #1b5e20;
 }

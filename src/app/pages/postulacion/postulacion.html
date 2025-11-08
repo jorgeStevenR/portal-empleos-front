@@ -1,0 +1,35 @@
+<section class="postulacion-container">
+  <h2>📝 Formulario de Postulación</h2>
+  <p class="info">
+    Redacta una breve carta de presentación y adjunta un enlace o imagen si
+    deseas complementar tu perfil.
+  </p>
+
+  <form (ngSubmit)="enviarPostulacion()" class="postulacion-form">
+    <label for="carta">Carta de presentación:</label>
+    <textarea
+      id="carta"
+      [(ngModel)]="carta"
+      name="carta"
+      rows="6"
+      placeholder="Cuéntanos por qué eres el candidato ideal..."
+      required
+    ></textarea>
+
+    <label for="urlImg">Enlace o imagen (opcional):</label>
+    <input
+      type="text"
+      id="urlImg"
+      [(ngModel)]="urlImg"
+      name="urlImg"
+      placeholder="https://ejemplo.com/portafolio.png"
+    />
+
+    <div class="buttons">
+      <button type="submit" class="btn-enviar">Enviar postulación</button>
+      <button type="button" class="btn-volver" routerLink="/ofertas-laborales">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</section>

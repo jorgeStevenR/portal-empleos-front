@@ -11,11 +11,6 @@
       <h3>{{ job.title }}</h3>
       <p>{{ job.description }}</p>
       <small>📍 {{ job.location }}</small>
-
-      <button *ngIf="auth.isAuthenticated() && auth.getRole() === 'CANDIDATE'"
-              (click)="postular(job.idJob)">
-        Postularme
-      </button>
     </div>
   </div>
 </section>

@@ -29,6 +29,11 @@ export class ApplicationService {
     return this.http.get(`${this.apiUrl}/${id}`, { headers: this._headers() });
   }
 
+  /** 🟢 Buscar postulaciones por usuario */
+  getByUserId(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${userId}`, { headers: this._headers() });
+  }
+
   /** 🟢 Actualizar postulación */
   update(id: number, application: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, application, { headers: this._headers() });

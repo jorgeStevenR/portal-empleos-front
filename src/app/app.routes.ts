@@ -10,52 +10,65 @@ import { RegisterEmpresaComponent } from './pages/register-empresa/register-empr
 import { OfertasListComponent } from './pages/ofertas-laborales/ofertas-list/ofertas-list';
 import { OfertaDetalleComponent } from './pages/ofertas-laborales/oferta-detalle/oferta-detalle';
 import { PerfilComponent } from './pages/perfil/perfil';
+import { PostulacionComponent } from './pages/postulacion/postulacion';
 
 // 🏢 Páginas privadas
+import { AdminComponent } from './pages/admin/admin';
 import { EmpresaComponent } from './pages/empresa/empresa';
 import { CandidatoComponent } from './pages/candidato/candidato';
-import { AdminComponent } from './pages/admin/admin';
 
 // 🛡️ Guards
 import { adminGuard } from './guards/admin.guard';
 import { companyGuard } from './guards/company.guard';
-import { candidateGuard } from './guards/candidate.guard';
+import { userGuard } from './guards/user.guard';
 
-// 🧭 Rutas principales
+// 🧭 Angular Router
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // Página inicial
+  // 🏠 Página inicial
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
 
-  // Autenticación
+  // 🔐 Autenticación
   { path: 'login', component: LoginComponent },
 
-  // Registro
+  // 🧾 Registro
   { path: 'register-candidato', component: RegisterCandidatoComponent },
   { path: 'register-empresa', component: RegisterEmpresaComponent },
 
-  // Ofertas públicas
+  // 🌿 Ofertas laborales (públicas)
   { path: 'ofertas-laborales', component: OfertasListComponent },
   { path: 'oferta/:id', component: OfertaDetalleComponent },
 
-  // Perfil (💡 mover antes del wildcard)
+  // 📝 Postulación (solo usuario logueado)
+  {
+    path: 'postulacion/:idJob',
+    component: PostulacionComponent,
+    canActivate: [userGuard],
+    data: { expectedRole: 'USER' }
+  },
+
+  // 👤 Perfil
   { path: 'perfil', component: PerfilComponent },
 
-  // Áreas protegidas
+  // 👷 Panel de usuario (tu antiguo “candidato”)
+  {
+    path: 'candidato',
+    component: CandidatoComponent,
+    canActivate: [userGuard],
+    data: { expectedRole: 'USER' }
+  },
+
+  // 🏢 Panel de empresa
   {
     path: 'empresa',
     component: EmpresaComponent,
     canActivate: [companyGuard],
     data: { expectedRole: 'COMPANY' }
   },
-  {
-    path: 'candidato',
-    component: CandidatoComponent,
-    canActivate: [candidateGuard],
-    data: { expectedRole: 'CANDIDATE' }
-  },
+
+  // 🛠️ Panel admin
   {
     path: 'admin',
     component: AdminComponent,
@@ -63,6 +76,6 @@ export const routes: Routes = [
     data: { expectedRole: 'ADMIN' }
   },
 
-  // Catch-all (⬅️ ahora al final)
+  // 🚫 Fallback
   { path: '**', redirectTo: 'home' }
 ];
