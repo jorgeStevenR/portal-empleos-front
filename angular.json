@@ -13,8 +13,6 @@
           "builder": "@angular/build:application",
           "options": {
             "outputPath": "dist/portal-empleos-front",
-            "index": "src/index.html",
-            "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
