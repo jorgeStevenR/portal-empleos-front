@@ -1,9 +1,14 @@
 {
   "version": 2,
+  "public": true,
   "buildCommand": "npm install -g @angular/cli@20.3.9 && npm run build",
   "outputDirectory": "dist/portal-empleos-front",
   "framework": "none",
-  "public": false,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/", "destination": "/index.html" }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
