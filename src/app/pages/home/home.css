@@ -1,36 +1,117 @@
+/* ===================================================
+   🌿 HOME PORTAL EMPLEOS (sin selector de país)
+   =================================================== */
+
+body {
+  background-color: #f4fff4;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+/* Contenedor principal */
 .home-container {
-  padding: 30px;
   text-align: center;
-  color: #2f4f2f;
+  padding: 60px 20px 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.search-box {
-  width: 60%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #aaa;
-  margin: 20px auto;
-  display: block;
+
+/* Encabezado */
+.home-header h1 {
+  color: #1b5e20;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
-.job-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+
+.home-header p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 2.5rem;
 }
-.job-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 15px;
-  background: #f6fff6;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+/* Sección de opciones */
+.options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
-button {
-  background: #3a8d3a;
+
+.option-card {
+  width: 280px;
+  height: 320px;
+  border-radius: 18px;
+  padding: 25px;
   color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
+  text-align: center;
   cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-button:hover {
-  background: #2e6f2e;
+
+.option-card .icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.option-card h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.option-card p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Colores diferenciados */
+.option-card.empleo {
+  background: linear-gradient(160deg, #2e7d32, #66bb6a);
+}
+
+.option-card.empresa {
+  background: linear-gradient(160deg, #004d40, #26a69a);
+}
+
+/* Efecto hover */
+.option-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen inferior */
+.eco-footer {
+  width: 100%;
+  background: #e8f5e9;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.eco-footer img {
+  max-width: 100%;
+  height: 180px;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .option-card {
+    width: 90%;
+    height: auto;
+    padding: 40px 25px;
+  }
+
+  .home-header h1 {
+    font-size: 1.9rem;
+  }
 }

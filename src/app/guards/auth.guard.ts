@@ -9,12 +9,13 @@ export const authGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  // Verificamos si hay sesión activa (token válido en localStorage)
+  // Si hay token → dejar pasar
   if (auth.isAuthenticated()) {
     return true;
-  } else {
-    alert('⚠️ Debes iniciar sesión para acceder a esta sección');
-    router.navigate(['/login']);
-    return false;
   }
+
+  // Si no → redirigir al login
+  alert('⚠️ Debes iniciar sesión para acceder a esta sección.');
+  router.navigate(['/login']);
+  return false;
 };

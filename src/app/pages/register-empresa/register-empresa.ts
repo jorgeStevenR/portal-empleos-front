@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-empresa',
@@ -15,29 +15,49 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register-empresa.css']
 })
 export class RegisterEmpresaComponent {
+  nit = '';
   name = '';
   email = '';
   password = '';
+  website = '';
+  location = '';
+  description = '';
+  loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  private apiUrl = 'http://localhost:8080/api/companies';
 
-  onRegister(): void {
-    const company = {
+  constructor(private http: HttpClient, private router: Router) {}
+
+  onRegister() {
+    if (!this.name || !this.email || !this.password || !this.nit) {
+      alert('⚠️ Por favor completa los campos obligatorios.');
+      return;
+    }
+
+    this.loading = true;
+
+    const newCompany = {
+      nit: this.nit,
       name: this.name,
-      email: this.email,
+      website: this.website || null,
+      location: this.location || 'Sin especificar',
+      description: this.description || 'Sin descripción',
       password: this.password,
-      role: 'COMPANY'
+      emailEntity: {
+        email: this.email
+      }
     };
 
-    this.auth.registerCompany(company).subscribe({
+    this.http.post(this.apiUrl, newCompany).subscribe({
       next: () => {
-        alert('✅ Empresa registrada exitosamente. Inicia sesión para continuar.');
+        alert('✅ Empresa registrada correctamente.');
         this.router.navigate(['/login']);
       },
-      error: (err: any) => {
-        console.error(err);
+      error: (err) => {
+        console.error('❌ Error al registrar empresa:', err);
         alert('❌ Error al registrar la empresa.');
-      }
+      },
+      complete: () => (this.loading = false)
     });
   }
 }

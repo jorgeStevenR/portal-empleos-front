@@ -1,18 +1,62 @@
+<!-- ============================================
+📂 src/app/pages/empresa/empresa.html
+============================================ -->
 <section class="empresa-container">
-  <h2>🏢 Panel de Empresa</h2>
-
-  <div class="new-job">
-    <h3>📋 Publicar nueva oferta</h3>
-    <input [(ngModel)]="newJob.title" placeholder="Título" />
-    <textarea [(ngModel)]="newJob.description" placeholder="Descripción"></textarea>
-    <input [(ngModel)]="newJob.location" placeholder="Ubicación" />
-    <button (click)="createJob()">Publicar</button>
+  <div class="empresa-header">
+    <h2>🏢 Panel de Empresa</h2>
+    <p>Bienvenida/o, aquí puedes gestionar tus ofertas laborales</p>
   </div>
 
-  <h3>🧾 Mis ofertas publicadas</h3>
-  <div *ngFor="let job of jobs" class="job-card">
-    <h4>{{ job.title }}</h4>
-    <p>{{ job.description }}</p>
-    <small>{{ job.location }}</small>
+  <!-- ✅ Formulario para publicar nueva oferta -->
+  <div class="nueva-oferta">
+    <h3>📝 Publicar nueva oferta</h3>
+    <form (ngSubmit)="publicarOferta()" #form="ngForm">
+      <input
+        type="text"
+        placeholder="Título del empleo"
+        [(ngModel)]="nuevaOferta.title"
+        name="title"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Ubicación"
+        [(ngModel)]="nuevaOferta.location"
+        name="location"
+        required
+      />
+      <textarea
+        placeholder="Descripción del empleo"
+        [(ngModel)]="nuevaOferta.description"
+        name="description"
+        rows="4"
+        required
+      ></textarea>
+
+      <button type="submit" class="btn-publicar" [disabled]="form.invalid">
+        ➕ Publicar Oferta
+      </button>
+    </form>
+  </div>
+
+  <!-- 📋 Listado de ofertas -->
+  <div class="ofertas-list">
+    <h3>📂 Mis Ofertas Publicadas</h3>
+
+    <div *ngIf="cargando">Cargando ofertas...</div>
+    <div *ngIf="!cargando && ofertas.length === 0" class="no-results">
+      Aún no has publicado ninguna oferta.
+    </div>
+
+    <div class="oferta-card" *ngFor="let o of ofertas">
+      <div class="oferta-info">
+        <h4>{{ o.title }}</h4>
+        <p>{{ o.description }}</p>
+        <p><strong>Ubicación:</strong> {{ o.location }}</p>
+      </div>
+      <button class="btn-eliminar" (click)="eliminarOferta(o.idJob)">
+        🗑️ Eliminar
+      </button>
+    </div>
   </div>
 </section>

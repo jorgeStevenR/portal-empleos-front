@@ -1,16 +1,27 @@
 <section class="home-container">
-  <h1>🌿 Portal de Empleo del Corredor Ecológico</h1>
-  <p>Conectando talento con oportunidades sostenibles.</p>
+  <!-- 🌿 Encabezado principal -->
+  <div class="home-header">
+    <h1>Portal de Empleo del Corredor Ecológico</h1>
+    <p>Conectando talento con oportunidades sostenibles.</p>
+  </div>
 
-  <input type="text" placeholder="Buscar empleo..." [(ngModel)]="filtro" class="search-box" />
-
-  <div *ngIf="cargando" class="loading">Cargando empleos...</div>
-
-  <div class="job-list" *ngIf="!cargando">
-    <div *ngFor="let job of empleos | jobFilter:filtro" class="job-card">
-      <h3>{{ job.title }}</h3>
-      <p>{{ job.description }}</p>
-      <small>📍 {{ job.location }}</small>
+  <!-- 💼 Opciones principales -->
+  <div class="options">
+    <div class="option-card empleo" (click)="irAOfertas()">
+      <div class="icon">💼</div>
+      <h2>Busco empleo</h2>
+      <p>Miles de oportunidades para ti.</p>
     </div>
+
+    <div class="option-card empresa" (click)="irARegistroEmpresa()">
+      <div class="icon">🏢</div>
+      <h2>Busco candidatos</h2>
+      <p>Encuentra el mejor talento sostenible.</p>
+    </div>
+  </div>
+
+  <!-- 🌳 Imagen decorativa inferior -->
+  <div class="eco-footer">
+    <img src="assets/img/ecologico-banner.jpg" alt="Corredor Ecológico" />
   </div>
 </section>

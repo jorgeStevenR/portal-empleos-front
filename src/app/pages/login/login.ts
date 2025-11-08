@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
   email = '';
@@ -35,21 +35,28 @@ export class LoginComponent {
       next: (res: any) => {
         console.log('🔐 Respuesta del login:', res);
 
-        // ✅ Aseguramos compatibilidad con ambos tipos de respuesta
         const token = res.token;
-        const role = res.role;
-        const userId = res.userId || res.idUser || res.idCompany || null;
+        const role = res.role || 'USER';
+        const id = res.userId || res.idUser || res.idCompany || null;
 
-        this.auth.saveSession(token, role, userId);
+        console.log(`🧭 Rol detectado: ${role} | ID: ${id}`);
 
-        // 🔁 Redirección según rol
-        if (role === 'ADMIN') {
-          this.router.navigate(['/admin']);
-        } else if (role === 'COMPANY') {
-          this.router.navigate(['/empresa']);
-        } else {
-          // USER → representa al candidato
-          this.router.navigate(['/candidato']);
+        this.auth.saveSession(token, role, id);
+
+        // 🔁 Redirigir según el rol
+        switch (role) {
+          case 'ADMIN':
+            this.router.navigate(['/admin']);
+            break;
+          case 'COMPANY':
+            this.router.navigate(['/empresa']);
+            break;
+          case 'USER':
+            this.router.navigate(['/candidato']);
+            break;
+          default:
+            this.router.navigate(['/home']);
+            break;
         }
 
         this.loading = false;
@@ -65,5 +72,9 @@ export class LoginComponent {
         }
       }
     });
+  }
+
+  volverAlInicio() {
+    this.router.navigate(['/home']);
   }
 }

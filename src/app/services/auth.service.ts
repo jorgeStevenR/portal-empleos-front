@@ -66,6 +66,19 @@ export class AuthService {
     return !!token && token.trim() !== '';
   }
 
+  // 🔹 Helpers de rol
+  isUser(): boolean {
+    return this.getRole() === 'USER';
+  }
+
+  isCompany(): boolean {
+    return this.getRole() === 'COMPANY';
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'ADMIN';
+  }
+
   // 🔹 CERRAR SESIÓN
   logout(): void {
     localStorage.clear();

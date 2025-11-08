@@ -3,7 +3,7 @@
 ============================================ -->
 <section class="login-container">
   <div class="login-card">
-    <h2>🔐 Iniciar Sesión</h2>
+    <h2>Iniciar Sesión</h2>
     <p class="subtitle">Accede con tu cuenta para continuar</p>
 
     <!-- Formulario -->
@@ -48,8 +48,13 @@
     <!-- Enlaces inferiores -->
     <div class="register-links">
       <p>¿No tienes cuenta?</p>
-      <a routerLink="/register-candidato">🧑‍💼 Registro Candidato</a>
-      <a routerLink="/register-empresa">🏢 Registro Empresa</a>
+      <a routerLink="/register-candidato">Registro Candidato</a>
+      <a routerLink="/register-empresa">Registro Empresa</a>
+
+      <!-- 🔙 Nuevo botón de regreso -->
+      <button type="button" class="back-btn" (click)="volverAlInicio()">
+        Volver al inicio
+      </button>
     </div>
   </div>
 </section>

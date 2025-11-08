@@ -15,30 +15,41 @@ export class JobService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  getAllJobs(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  /** 🔹 Obtener todas las ofertas */
+  getAllJobs(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
+  /** 🔹 Obtener oferta por ID */
   getById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
+  /** 🔹 Crear una nueva oferta (empresa) */
   create(job: any): Observable<any> {
     const headers = this._headers();
-    return this.http.post(this.apiUrl, job, { headers });
+    return this.http.post<any>(this.apiUrl, job, { headers });
   }
 
+  /** 🔹 Actualizar una oferta */
   update(id: number, job: any): Observable<any> {
     const headers = this._headers();
-    return this.http.put(`${this.apiUrl}/${id}`, job, { headers });
+    return this.http.put<any>(`${this.apiUrl}/${id}`, job, { headers });
   }
 
+  /** 🔹 Eliminar oferta */
   delete(id: number): Observable<any> {
     const headers = this._headers();
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers });
   }
 
-  // 🔹 Postularse (candidato)
+  /** 🆕 🔹 Obtener ofertas de una empresa específica */
+  getByCompany(idCompany: number): Observable<any[]> {
+    const headers = this._headers();
+    return this.http.get<any[]>(`${this.apiUrl}/company/${idCompany}`, { headers });
+  }
+
+  /** 🔹 Postularse (candidato) */
   postular(idJob: number, idUser: number, token: string): Observable<any> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     const body = {
@@ -48,12 +59,14 @@ export class JobService {
       urlImg: 'https://imgur.com/mi_cv.png',
       status: 'ENVIADA'
     };
-    return this.http.post(this.applyUrl, body, { headers });
+    return this.http.post<any>(this.applyUrl, body, { headers });
   }
 
+  /** 🔹 Headers con token */
   private _headers(): HttpHeaders {
     return new HttpHeaders({
-      Authorization: `Bearer ${this.auth.getToken()}`
+      Authorization: `Bearer ${this.auth.getToken()}`,
+      'Content-Type': 'application/json'
     });
   }
 }

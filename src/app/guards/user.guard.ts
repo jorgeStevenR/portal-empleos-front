@@ -15,6 +15,7 @@ export const userGuard: CanActivateFn = () => {
   if (token && role === 'USER') {
     return true;
   } else {
+    alert('⚠️ Solo los usuarios pueden acceder a esta sección.');
     router.navigate(['/login']);
     return false;
   }

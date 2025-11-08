@@ -1,11 +1,8 @@
-// ============================================
-// 📂 src/app/pages/register-candidato/register-candidato.ts
-// ============================================
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-candidato',
@@ -18,26 +15,39 @@ export class RegisterCandidatoComponent {
   name = '';
   email = '';
   password = '';
+  loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  private apiUrl = 'http://localhost:8080/api/users';
 
-  onRegister(): void {
-    const user = {
+  constructor(private http: HttpClient, private router: Router) {}
+
+  onRegister() {
+    if (!this.name || !this.email || !this.password) {
+      alert('⚠️ Por favor completa todos los campos');
+      return;
+    }
+
+    this.loading = true;
+
+    const nuevoUsuario = {
       name: this.name,
-      email: this.email,
       password: this.password,
-      role: 'CANDIDATE'
+      role: 'USER',
+      emailEntity: {
+        email: this.email
+      }
     };
 
-    this.auth.registerUser(user).subscribe({
+    this.http.post(this.apiUrl, nuevoUsuario).subscribe({
       next: () => {
-        alert('✅ Registro exitoso. Inicia sesión para continuar.');
+        alert('✅ Candidato registrado correctamente');
         this.router.navigate(['/login']);
       },
-      error: (err: any) => {
-        console.error(err);
+      error: (err) => {
+        console.error('❌ Error al registrar candidato:', err);
         alert('❌ Error al registrar el candidato.');
-      }
+      },
+      complete: () => (this.loading = false)
     });
   }
 }

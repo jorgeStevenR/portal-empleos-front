@@ -15,44 +15,80 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./empresa.css']
 })
 export class EmpresaComponent implements OnInit {
-  jobs: any[] = [];
-  newJob = { title: '', description: '', location: '' };
-  idCompany!: number;
+  ofertas: any[] = [];
+  nuevaOferta = {
+    title: '',
+    description: '',
+    location: '',
+  };
+  cargando = true;
 
   constructor(private jobService: JobService, private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.idCompany = this.auth.getUserId() ?? 0;
-    this.loadJobs();
+    this.cargarOfertas();
   }
 
-  loadJobs(): void {
-    this.jobService.getAllJobs().subscribe({
-      next: (data: any[]) => {
-        this.jobs = data.filter((j: any) => j.company?.idCompany === this.idCompany);
-      },
-      error: (err: any) => console.error('Error cargando empleos', err)
-    });
-  }
+  /** 🟢 Cargar todas las ofertas de la empresa actual */
+  cargarOfertas(): void {
+    const idEmpresa = this.auth.getUserId();
 
-  createJob(): void {
-    if (!this.newJob.title || !this.newJob.description) {
-      alert('Completa todos los campos');
+    if (!idEmpresa) {
+      console.warn('⚠️ No hay empresa logueada.');
       return;
     }
 
-    const job = {
-      ...this.newJob,
-      company: { idCompany: this.idCompany }
+    this.jobService.getByCompany(idEmpresa).subscribe({
+      next: (data) => {
+        this.ofertas = data;
+        this.cargando = false;
+      },
+      error: (err) => {
+        console.error('❌ Error al cargar ofertas:', err);
+        this.cargando = false;
+      },
+    });
+  }
+
+  /** 🟢 Publicar una nueva oferta */
+  publicarOferta(): void {
+    const idEmpresa = this.auth.getUserId();
+
+    if (!idEmpresa) {
+      alert('⚠️ No se detectó la empresa logueada.');
+      return;
+    }
+
+    const nueva = {
+      ...this.nuevaOferta,
+      company: { idCompany: idEmpresa },
     };
 
-    this.jobService.create(job).subscribe({
+    this.jobService.create(nueva).subscribe({
       next: () => {
-        alert('✅ Oferta publicada correctamente');
-        this.newJob = { title: '', description: '', location: '' };
-        this.loadJobs();
+        alert('✅ Oferta publicada correctamente.');
+        this.nuevaOferta = { title: '', description: '', location: '' };
+        this.cargarOfertas();
       },
-      error: (err: any) => console.error('❌ Error al crear oferta', err)
+      error: (err) => {
+        console.error('❌ Error al publicar oferta:', err);
+        alert('Ocurrió un error al publicar la oferta.');
+      },
+    });
+  }
+
+  /** 🔴 Eliminar oferta */
+  eliminarOferta(id: number): void {
+    if (!confirm('¿Seguro que deseas eliminar esta oferta?')) return;
+
+    this.jobService.delete(id).subscribe({
+      next: () => {
+        alert('🗑️ Oferta eliminada correctamente.');
+        this.cargarOfertas();
+      },
+      error: (err) => {
+        console.error('❌ Error al eliminar oferta:', err);
+      },
     });
   }
 }

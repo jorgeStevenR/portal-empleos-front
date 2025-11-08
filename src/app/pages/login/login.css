@@ -101,6 +101,24 @@ input:focus {
   color: #256d45;
 }
 
+/* 🔙 Nuevo botón volver al home */
+.back-btn {
+  background: transparent;
+  border: 2px solid #2e8b57;
+  color: #2e8b57;
+  padding: 0.6rem;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #e8f5e9;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
