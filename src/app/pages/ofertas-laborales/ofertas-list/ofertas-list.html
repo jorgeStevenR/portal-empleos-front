@@ -1,6 +1,7 @@
 <section class="ofertas-container">
-  <h2>Ofertas Laborales Disponibles</h2>
+  <h2>🌿 Ofertas Laborales Disponibles</h2>
 
+  <!-- 🔍 Barra de búsqueda -->
   <input
     type="text"
     placeholder="🔍 Buscar empleo..."
@@ -8,26 +9,35 @@
     class="search-input"
   />
 
-  <div *ngIf="cargando" class="loading">Cargando ofertas...</div>
+  <!-- ⏳ Mensaje de carga -->
+  <div *ngIf="cargando" class="loading">
+    <span class="spinner"></span> Cargando ofertas...
+  </div>
 
+  <!-- ❌ Sin resultados -->
   <div *ngIf="!cargando && empleos.length === 0" class="no-results">
     No hay ofertas disponibles en este momento.
   </div>
 
+  <!-- 💼 Grid de ofertas -->
   <div class="ofertas-grid" *ngIf="!cargando && empleos.length > 0">
     <div
       *ngFor="let job of empleos | filtroEmpleos:filtro"
       class="oferta-card"
     >
+      <!-- 🏢 Encabezado empresa -->
       <div class="empresa-header">
         <img
-          [src]="job.company?.urlImg && job.company?.urlImg.trim() !== '' 
-            ? job.company.urlImg 
-            : 'assets/img/default-job.png'"
+          [src]="
+            job.company?.urlImg && job.company?.urlImg.trim() !== ''
+              ? job.company.urlImg
+              : 'assets/img/default-job.png'
+          "
           alt="Logo de {{ job.company?.name || 'empresa' }}"
           class="empresa-logo"
           (error)="onImageError($event)"
         />
+
         <div class="empresa-info">
           <h4 class="empresa-nombre">
             {{ job.company?.name || 'Empresa no especificada' }}
@@ -36,17 +46,19 @@
         </div>
       </div>
 
+      <!-- 📝 Detalles de la oferta -->
       <div class="oferta-body">
         <h3 class="titulo">{{ job.title }}</h3>
         <p class="descripcion">
           {{
-            job.description.length > 100
+            job.description && job.description.length > 100
               ? (job.description | slice: 0:100) + '...'
-              : job.description
+              : job.description || 'Sin descripción disponible'
           }}
         </p>
       </div>
 
+      <!-- 🔘 Botón de acción -->
       <div class="oferta-footer">
         <button class="btn-ver" (click)="verDetalle(job.idJob)">
           Ver más

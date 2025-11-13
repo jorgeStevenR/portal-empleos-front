@@ -1,17 +1,17 @@
-/* Fondo general */
+/* 🌿 Fondo general */
 body {
   background-color: #f1fff1;
   font-family: "Inter", sans-serif;
   margin: 0;
 }
 
-/* Contenedor principal */
+/* 🧩 Contenedor principal */
 .ofertas-container {
   text-align: center;
   padding: 40px 20px;
 }
 
-/* Título principal */
+/* 🏷️ Título principal */
 .ofertas-container h2 {
   color: #1b5e20;
   font-size: 2rem;
@@ -27,7 +27,7 @@ body {
   font-size: 1.5rem;
 }
 
-/* Barra de búsqueda */
+/* 🔍 Barra de búsqueda */
 .search-input {
   width: 50%;
   max-width: 400px;
@@ -44,23 +44,24 @@ body {
   box-shadow: 0 0 4px rgba(46, 125, 50, 0.4);
 }
 
-/* Contenedor del grid de ofertas */
+/* 💼 Contenedor del grid de ofertas */
 .ofertas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* más fluido */
+  gap: 30px;
   margin-top: 2.5rem;
   padding: 0 40px;
-  justify-items: center;
+  justify-content: center; /* 🔥 evita huecos al centro */
+  align-items: start;
 }
 
-/* Tarjeta individual */
+/* 🗂️ Tarjeta individual */
 .oferta-card {
   background-color: #ffffff;
   border-radius: 14px;
   padding: 25px;
   width: 100%;
-  max-width: 320px;
+  max-width: 100%; /* 🔥 evita restricción central */
   text-align: left;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
@@ -73,7 +74,7 @@ body {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* Encabezado con logo y empresa */
+/* 🏢 Encabezado con logo y empresa */
 .empresa-header {
   display: flex;
   align-items: center;
@@ -102,7 +103,7 @@ body {
   color: #555;
 }
 
-/* Cuerpo de la oferta */
+/* 📋 Cuerpo de la oferta */
 .oferta-body h3 {
   color: #1b5e20;
   font-size: 1.1rem;
@@ -118,7 +119,7 @@ body {
   text-overflow: ellipsis;
 }
 
-/* Pie de tarjeta */
+/* 🔘 Pie de tarjeta */
 .oferta-footer {
   display: flex;
   justify-content: center;
@@ -140,25 +141,28 @@ body {
   background-color: #1b5e20;
 }
 
-/* Sin resultados */
+/* 🕳️ Sin resultados */
 .no-results {
   color: #555;
   margin-top: 30px;
   font-style: italic;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* 📱 Responsive */
+@media (max-width: 1024px) {
   .search-input {
-    width: 80%;
+    width: 70%;
   }
 
   .ofertas-grid {
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     padding: 0 20px;
   }
+}
 
-  .oferta-card {
-    max-width: 280px;
+@media (max-width: 768px) {
+  .ofertas-grid {
+    grid-template-columns: 1fr; /* una columna en móvil */
+    gap: 20px;
   }
 }
