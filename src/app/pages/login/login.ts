@@ -1,80 +1,59 @@
-// ============================================
-// 📂 src/app/pages/login/login.ts
-// ============================================
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
 export class LoginComponent {
   email = '';
   password = '';
-  errorMessage = '';
   loading = false;
+  errorMessage = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
+  login(): void {
     if (!this.email || !this.password) {
-      this.errorMessage = 'Por favor ingresa tus credenciales.';
+      this.errorMessage = 'Por favor ingrese correo y contraseña.';
       return;
     }
 
     this.loading = true;
     this.errorMessage = '';
 
-    this.auth.login(this.email, this.password).subscribe({
-      next: (res: any) => {
-        console.log('🔐 Respuesta del login:', res);
+    this.authService.login(this.email, this.password).subscribe({
+      next: (resp) => {
+        console.log('✅ Login exitoso:', resp);
 
-        const token = res.token;
-        const role = res.role || 'USER';
-        const id = res.userId || res.idUser || res.idCompany || null;
+        this.authService.saveSession(resp.token, resp.role, resp.userId);
 
-        console.log(`🧭 Rol detectado: ${role} | ID: ${id}`);
-
-        this.auth.saveSession(token, role, id);
-
-        // 🔁 Redirigir según el rol
-        switch (role) {
-          case 'ADMIN':
-            this.router.navigate(['/admin']);
+        // 🔁 Redirección según el rol
+        switch (resp.role) {
+          case 'USER':
+            this.router.navigate(['/candidato']);
             break;
           case 'COMPANY':
             this.router.navigate(['/empresa']);
             break;
-          case 'USER':
-            this.router.navigate(['/candidato']);
+          case 'ADMIN':
+            this.router.navigate(['/admin']);
             break;
           default:
             this.router.navigate(['/home']);
-            break;
         }
-
-        this.loading = false;
       },
       error: (err) => {
-        console.error('❌ Error al iniciar sesión:', err);
+        console.error('❌ Error en login:', err);
+        this.errorMessage = 'Credenciales incorrectas o error del servidor.';
         this.loading = false;
-
-        if (err.status === 401 || err.status === 403) {
-          this.errorMessage = 'Credenciales incorrectas.';
-        } else {
-          this.errorMessage = 'Error en el servidor. Intenta nuevamente.';
-        }
       }
     });
-  }
-
-  volverAlInicio() {
-    this.router.navigate(['/home']);
   }
 }

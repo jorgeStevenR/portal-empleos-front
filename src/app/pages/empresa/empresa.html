@@ -1,61 +1,29 @@
-<!-- ============================================
-📂 src/app/pages/empresa/empresa.html
-============================================ -->
-<section class="empresa-container">
-  <h2>Panel de Empresa</h2>
-  <p class="subtitle">Administra tus vacantes y postulaciones</p>
+<div class="empresa-container">
+  <h2>Mis Ofertas Laborales</h2>
 
-  <div class="acciones">
-    <button class="btn-crear" (click)="mostrandoFormulario = !mostrandoFormulario">
-      {{ mostrandoFormulario ? 'Cancelar' : '➕ Crear nueva vacante' }}
-    </button>
-  </div>
-
-  <!-- 🧩 Formulario de nueva vacante -->
-  <form *ngIf="mostrandoFormulario" class="form-vacante" #form="ngForm" (ngSubmit)="crearVacante()">
-    <input
-      type="text"
-      placeholder="Título de la vacante"
-      [(ngModel)]="nuevaVacante.title"
-      name="title"
-      required
-    />
-    <textarea
-      placeholder="Descripción"
-      [(ngModel)]="nuevaVacante.description"
-      name="description"
-      required
-    ></textarea>
-    <input
-      type="text"
-      placeholder="Ubicación"
-      [(ngModel)]="nuevaVacante.location"
-      name="location"
-    />
-    <select [(ngModel)]="nuevaVacante.type" name="type">
-      <option>Remoto</option>
-      <option>Presencial</option>
-      <option>Híbrido</option>
+  <form (ngSubmit)="createJob()" class="job-form">
+    <input [(ngModel)]="newJob.title" name="title" placeholder="Título del empleo" required />
+    <textarea [(ngModel)]="newJob.description" name="description" placeholder="Descripción" required></textarea>
+    <input [(ngModel)]="newJob.location" name="location" placeholder="Ubicación" />
+    <select [(ngModel)]="newJob.mode" name="mode">
+      <option value="ONSITE">Presencial</option>
+      <option value="REMOTE">Remoto</option>
+      <option value="HYBRID">Híbrido</option>
     </select>
-    <button type="submit" class="btn-guardar">Guardar vacante</button>
+    <button type="submit">Publicar oferta</button>
   </form>
 
-  <!-- 📋 Lista de vacantes -->
-  <div class="vacantes-lista" *ngIf="vacantes.length > 0; else sinVacantes">
-    <div *ngFor="let v of vacantes" class="vacante-card">
-      <h3>{{ v.title }}</h3>
-      <p>{{ v.description }}</p>
-      <span class="location">{{ v.location || 'No especificada' }} • {{ v.type }}</span>
-
-      <div class="acciones-card">
-        <button class="btn-ver">👀 Ver postulaciones</button>
-        <button class="btn-eliminar" (click)="eliminarVacante(v.idJob)">🗑️ Eliminar</button>
-      </div>
+  <div class="job-list" *ngIf="jobs.length; else noJobs">
+    <div class="job-item" *ngFor="let job of jobs">
+      <h3>{{ job.title }}</h3>
+      <p>{{ job.description }}</p>
+      <p><strong>Ubicación:</strong> {{ job.location }}</p>
+      <p><strong>Modalidad:</strong> {{ job.mode }}</p>
+      <button (click)="deleteJob(job.idJob)">🗑 Eliminar</button>
     </div>
   </div>
 
-  <!-- 💤 Mensaje si no hay vacantes -->
-  <ng-template #sinVacantes>
-    <p class="no-data">No tienes vacantes registradas aún.</p>
+  <ng-template #noJobs>
+    <p>No has publicado ofertas aún.</p>
   </ng-template>
-</section>
+</div>

@@ -1,24 +1,92 @@
-<section class="admin-container">
-  <h2>👨‍💼 Panel de Administración</h2>
+<div class="admin-container">
+  <h2>Panel de Administración</h2>
 
-  <div class="table-container">
+  <div class="tabs">
+    <button (click)="activeTab = 'users'" [class.active]="activeTab === 'users'">Usuarios</button>
+    <button (click)="activeTab = 'companies'" [class.active]="activeTab === 'companies'">Empresas</button>
+    <button (click)="activeTab = 'jobs'" [class.active]="activeTab === 'jobs'">Ofertas</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Cargando datos...</div>
+
+  <!-- 🔹 Usuarios -->
+  <div *ngIf="activeTab === 'users'" class="table-container">
     <h3>Usuarios registrados</h3>
-    <ul>
-      <li *ngFor="let u of users">{{ u.name }} - {{ u.email }}</li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Correo</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.idUser }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.emailEntity?.email }}</td>
+          <td>
+            <button (click)="deleteUser(user.idUser)">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="table-container">
+  <!-- 🔹 Empresas -->
+  <div *ngIf="activeTab === 'companies'" class="table-container">
     <h3>Empresas registradas</h3>
-    <ul>
-      <li *ngFor="let c of companies">{{ c.name }} - {{ c.email }}</li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>NIT</th>
+          <th>Correo</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of companies">
+          <td>{{ company.idCompany }}</td>
+          <td>{{ company.name }}</td>
+          <td>{{ company.nit }}</td>
+          <td>{{ company.emailEntity?.email }}</td>
+          <td>
+            <button (click)="deleteCompany(company.idCompany)">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="table-container">
+  <!-- 🔹 Ofertas -->
+  <div *ngIf="activeTab === 'jobs'" class="table-container">
     <h3>Ofertas laborales</h3>
-    <ul>
-      <li *ngFor="let j of jobs">{{ j.title }} - {{ j.location }}</li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Empresa</th>
+          <th>Ubicación</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs">
+          <td>{{ job.idJob }}</td>
+          <td>{{ job.title }}</td>
+          <td>{{ job.company?.name }}</td>
+          <td>{{ job.location }}</td>
+          <td>
+            <button (click)="deleteJob(job.idJob)">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</section>
+</div>

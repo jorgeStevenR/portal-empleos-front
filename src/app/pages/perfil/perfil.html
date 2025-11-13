@@ -1,19 +1,103 @@
-<section class="perfil-container" *ngIf="!loading && userData; else cargando">
-  <div class="perfil-card">
-    <h2>👤 Bienvenido, {{ userData.name }}</h2>
-    <p><strong>Correo:</strong> {{ userData.emailEntity?.email }}</p>
-    <p><strong>Rol:</strong> {{ userData.role }}</p>
+<div class="perfil-container" *ngIf="!loading; else loadingTpl">
+  <h2 class="perfil-title">
+    {{ isCompany ? 'Perfil de Empresa' : 'Perfil de Usuario' }}
+  </h2>
 
-    <div *ngIf="userData.company">
-      <p><strong>Empresa:</strong> {{ userData.company.name }}</p>
+  <!-- 🔹 Bloque de imagen o CV -->
+  <div class="perfil-file-section">
+    <div *ngIf="isCompany; else candidatoTpl">
+      <h3>Logo de la Empresa</h3>
+      <div class="logo-preview">
+        <img
+          *ngIf="userData.logoUrl; else noLogo"
+          [src]="userData.logoUrl"
+          alt="Logo de la empresa"
+        />
+        <ng-template #noLogo>
+          <p class="no-file">Sin logo cargado</p>
+        </ng-template>
+      </div>
     </div>
 
-    <div *ngIf="!userData.company">
-      <p><strong>Cuenta de candidato</strong></p>
+    <ng-template #candidatoTpl>
+      <h3>Currículum (PDF)</h3>
+      <div class="cv-preview">
+        <a
+          *ngIf="userData.cvUrl; else noCv"
+          [href]="userData.cvUrl"
+          target="_blank"
+          class="cv-link"
+        >
+          📄 Ver CV cargado
+        </a>
+        <ng-template #noCv>
+          <p class="no-file">Sin CV cargado</p>
+        </ng-template>
+      </div>
+    </ng-template>
+
+    <div class="upload-actions">
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        [accept]="isCompany ? 'image/*' : '.pdf'"
+        id="fileInput"
+      />
+      <button (click)="uploadFile()" [disabled]="loading">Subir archivo</button>
     </div>
   </div>
-</section>
 
-<ng-template #cargando>
-  <p class="loading">Cargando datos del perfil...</p>
+  <hr />
+
+  <!-- 🔹 Formulario de edición general -->
+  <form class="perfil-form" (ngSubmit)="saveChanges()">
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input
+        type="text"
+        [(ngModel)]="userData.name"
+        name="name"
+        required
+        [readonly]="isCompany"
+      />
+    </div>
+
+    <div *ngIf="isCompany" class="form-group">
+      <label>NIT:</label>
+      <input type="text" [(ngModel)]="userData.nit" name="nit" required />
+    </div>
+
+    <div class="form-group">
+      <label>Correo electrónico:</label>
+      <input
+        type="email"
+        [(ngModel)]="userData.emailEntity?.email || userData.email"
+        name="email"
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Ubicación:</label>
+      <input type="text" [(ngModel)]="userData.location" name="location" />
+    </div>
+
+    <div class="form-group">
+      <label>Descripción:</label>
+      <textarea
+        [(ngModel)]="userData.description"
+        name="description"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <button type="submit" [disabled]="loading">Guardar cambios</button>
+  </form>
+</div>
+
+<!-- 🔹 Estado de carga -->
+<ng-template #loadingTpl>
+  <div class="loading">
+    <p>Cargando perfil...</p>
+  </div>
 </ng-template>

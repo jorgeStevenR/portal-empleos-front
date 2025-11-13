@@ -1,60 +1,40 @@
-<!-- ============================================
-📂 src/app/pages/login/login.html
-============================================ -->
-<section class="login-container">
-  <div class="login-card">
-    <h2>Iniciar Sesión</h2>
-    <p class="subtitle">Accede con tu cuenta para continuar</p>
+<div class="login-container">
+  <h2>Iniciar sesión</h2>
 
-    <!-- Formulario -->
-    <form (ngSubmit)="onLogin()" autocomplete="off">
-      <!-- Correo -->
-      <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          [(ngModel)]="email"
-          placeholder="ejemplo@correo.com"
-          required
-        />
-      </div>
-
-      <!-- Contraseña -->
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          placeholder="********"
-          required
-        />
-      </div>
-
-      <!-- Botón de envío -->
-      <button type="submit" [disabled]="loading" class="login-btn">
-        {{ loading ? 'Ingresando...' : 'Entrar' }}
-      </button>
-
-      <!-- Mensaje de error -->
-      <p class="error-message" *ngIf="errorMessage">
-        ⚠️ {{ errorMessage }}
-      </p>
-    </form>
-
-    <!-- Enlaces inferiores -->
-    <div class="register-links">
-      <p>¿No tienes cuenta?</p>
-      <a routerLink="/register-candidato">Registro Candidato</a>
-      <a routerLink="/register-empresa">Registro Empresa</a>
-
-      <!-- 🔙 Nuevo botón de regreso -->
-      <button type="button" class="back-btn" (click)="volverAlInicio()">
-        Volver al inicio
-      </button>
+  <form (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="correo@ejemplo.com"
+        required
+      />
     </div>
-  </div>
-</section>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="********"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Cargando...' : 'Ingresar' }}
+    </button>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+    <div class="extra-links">
+      <a routerLink="/register-candidato">Registrar Candidato</a> |
+      <a routerLink="/register-empresa">Registrar Empresa</a>
+    </div>
+  </form>
+</div>

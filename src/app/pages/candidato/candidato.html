@@ -1,35 +1,39 @@
-<!-- ============================================
-📂 src/app/pages/candidato/candidato.html
-============================================ -->
-<section class="perfil-container" *ngIf="!loading && userData">
-  <div class="perfil-card">
-    <h2>👤 Perfil del Candidato</h2>
-    <p><strong>Nombre:</strong> {{ userData.name }}</p>
-    <p *ngIf="userData.emailEntity">
-      <strong>Correo:</strong> {{ userData.emailEntity.email }}
-    </p>
-    <p *ngIf="userData.location">
-      <strong>Ubicación:</strong> {{ userData.location }}</p>
-    <p *ngIf="userData.description">
-      <strong>Descripción:</strong> {{ userData.description }}</p>
-  </div>
-</section>
+<div class="candidato-container">
+  <h2>Ofertas disponibles</h2>
 
-<section class="postulaciones-container">
-  <h3>🧾 Mis Postulaciones</h3>
+  <div *ngIf="loading">Cargando vacantes...</div>
 
-  <div *ngIf="postulaciones.length === 0" class="no-data">
-    <p>No tienes postulaciones registradas aún.</p>
+  <div *ngIf="!loading && jobs.length > 0; else noJobs">
+    <div class="job-card" *ngFor="let job of jobs">
+      <h3>{{ job.title }}</h3>
+      <p>{{ job.description }}</p>
+      <p><strong>Ubicación:</strong> {{ job.location }}</p>
+      <p><strong>Modalidad:</strong> {{ job.mode }}</p>
+      <p><strong>Empresa:</strong> {{ job.company?.name }}</p>
+
+      <button
+        [disabled]="isApplied(job.idJob)"
+        (click)="apply(job.idJob)"
+      >
+        {{ isApplied(job.idJob) ? 'Ya postulado' : 'Postularme' }}
+      </button>
+    </div>
   </div>
 
-  <div *ngFor="let p of postulaciones" class="postulacion-card">
-    <h4>{{ p.job?.title }}</h4>
-    <p>{{ p.job?.description }}</p>
-    <p><strong>Estado:</strong> {{ p.status }}</p>
-    <p><strong>Empresa:</strong> {{ p.job?.company?.name }}</p>
-  </div>
-</section>
+  <ng-template #noJobs>
+    <p>No hay vacantes disponibles por el momento.</p>
+  </ng-template>
 
-<section *ngIf="loading" class="loading">
-  <p>Cargando información...</p>
-</section>
+  <h2>Mis postulaciones</h2>
+  <div *ngIf="applications.length > 0; else noApps">
+    <div class="app-card" *ngFor="let app of applications">
+      <p><strong>Puesto:</strong> {{ app.job.title }}</p>
+      <p><strong>Empresa:</strong> {{ app.job.company.name }}</p>
+      <p><strong>Estado:</strong> {{ app.status }}</p>
+    </div>
+  </div>
+
+  <ng-template #noApps>
+    <p>No te has postulado a ninguna oferta aún.</p>
+  </ng-template>
+</div>

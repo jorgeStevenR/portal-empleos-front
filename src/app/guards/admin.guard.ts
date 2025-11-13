@@ -1,22 +1,11 @@
-// ============================================
-// 📂 src/app/guards/admin.guard.ts
-// ============================================
-import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 export const adminGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
-
-  const token = auth.getToken();
-  const role = auth.getRole();
-
-  if (token && role === 'ADMIN') {
-    return true;
-  } else {
-    alert('⚠️ Solo los administradores pueden acceder.');
-    router.navigate(['/login']);
-    return false;
-  }
+  if (auth.isAdmin()) return true;
+  router.navigate(['/login']);
+  return false;
 };

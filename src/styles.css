@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+/* === TOASTS (Notificaciones flotantes) === */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  min-width: 220px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Colores */
+.toast-success { background-color: #43a047; }
+.toast-error { background-color: #d32f2f; }
+.toast-warning { background-color: #fbc02d; color: #222; }
+.toast-info { background-color: #0288d1; }
