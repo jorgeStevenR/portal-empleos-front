@@ -1,58 +1,115 @@
-.login-container {
-  max-width: 400px;
-  margin: 80px auto;
-  background: #ffffff;
-  padding: 25px 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Fondo de la página de login */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  font-family: "Inter", sans-serif;
 }
 
-h2 {
+/* Tarjeta central */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 28px 32px 26px;
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* Título y subtítulo */
+.login-title {
   text-align: center;
   color: #2e7d32;
-  margin-bottom: 20px;
+  margin-bottom: 6px;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
+.login-subtitle {
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+}
+
+/* Formulario */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 label {
   font-weight: 600;
   color: #333;
+  display: block;
+  margin-bottom: 5px;
 }
 
 input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 10px 11px;
+  border: 1px solid #d0d7d3;
+  border-radius: 8px;
   font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
 }
 
+input:focus {
+  border-color: #43a047;
+  box-shadow: 0 0 0 2px rgba(67, 160, 71, 0.15);
+}
+
+/* Botón */
 button {
   width: 100%;
-  padding: 10px;
-  background: #388e3c;
+  padding: 11px;
+  margin-top: 6px;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
-button:hover {
-  background: #2e7d32;
+button:hover:not([disabled]) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.35);
+  background: linear-gradient(135deg, #256d3a, #388e3c);
 }
 
+button[disabled] {
+  background: #a5d6a7;
+  cursor: not-allowed;
+}
+
+/* Error */
 .error {
   color: #d32f2f;
   text-align: center;
   margin-top: 10px;
+  font-size: 0.9rem;
 }
 
+/* Links inferiores */
 .extra-links {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.extra-links a {
+  color: #2e7d32;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
 }

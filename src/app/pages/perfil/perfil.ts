@@ -1,3 +1,4 @@
+// 📂 src/app/pages/perfil/perfil.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -55,7 +56,6 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  // 🔹 Guardar cambios generales del perfil
   saveChanges(): void {
     const id = this.auth.getUserId();
     if (!id) return;
@@ -78,12 +78,10 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  // 🔹 Cuando se selecciona un archivo (CV o logo)
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
 
-  // 🔹 Subir archivo (con validación y actualización automática en BD)
   uploadFile(): void {
     if (!this.selectedFile) {
       this.toast.show('Por favor selecciona un archivo primero.', 'warning');
@@ -92,7 +90,10 @@ export class PerfilComponent implements OnInit {
 
     const maxSize = 5 * 1024 * 1024; // 5 MB
     if (this.selectedFile.size > maxSize) {
-      this.toast.show('⚠️ El archivo excede el tamaño máximo permitido (5 MB).', 'warning');
+      this.toast.show(
+        '⚠️ El archivo excede el tamaño máximo permitido (5 MB).',
+        'warning'
+      );
       this.selectedFile = null;
       return;
     }

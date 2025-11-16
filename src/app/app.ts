@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // 👇 importa los módulos necesarios
-  imports: [CommonModule, NgIf, RouterOutlet, NavbarComponent],
+  imports: [CommonModule, NgIf, RouterOutlet, NavbarComponent, LoadingComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -26,4 +26,3 @@ export class App {
     return this.currentRoute === '/login';
   }
 }
- 

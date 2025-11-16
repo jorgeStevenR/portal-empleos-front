@@ -1,7 +1,7 @@
 // ============================================
 // 📂 src/app/components/navbar/navbar.ts
 // ============================================
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -13,38 +13,30 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
-export class NavbarComponent implements OnInit {
-  role: string | null = null;
-  isLoggedIn = false;
+export class NavbarComponent {
+  constructor(public auth: AuthService, private router: Router) {}
 
-  constructor(private auth: AuthService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.updateNavbar();
+  // 🔹 Se calcula SIEMPRE contra el AuthService (no se queda viejo)
+  get isLoggedIn(): boolean {
+    return this.auth.isAuthenticated();
   }
 
-  // 🔹 Refresca el estado del navbar según la sesión actual
-  updateNavbar(): void {
-    this.role = this.auth.getRole();
-    this.isLoggedIn = this.auth.isAuthenticated();
-  }
-
-  logout(): void {
-    this.auth.logout();
-    this.router.navigate(['/login']);
-    this.updateNavbar();
-  }
-
-  // ✅ Helpers opcionales para mostrar condicionalmente en el HTML
+  // 🔹 Helpers por rol (usan el servicio directamente)
   isAdmin(): boolean {
-    return this.role === 'ADMIN';
+    return this.auth.isAdmin();
   }
 
   isCompany(): boolean {
-    return this.role === 'COMPANY';
+    return this.auth.isCompany();
   }
 
   isUser(): boolean {
-    return this.role === 'USER';
+    return this.auth.isUser();
+  }
+
+  // 🔹 Cerrar sesión
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

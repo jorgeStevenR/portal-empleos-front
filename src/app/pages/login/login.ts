@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -32,6 +32,7 @@ export class LoginComponent {
       next: (resp) => {
         console.log('✅ Login exitoso:', resp);
 
+        // Asegúrate de que el backend devuelve { token, role, userId }
         this.authService.saveSession(resp.token, resp.role, resp.userId);
 
         // 🔁 Redirección según el rol
@@ -48,6 +49,8 @@ export class LoginComponent {
           default:
             this.router.navigate(['/home']);
         }
+
+        this.loading = false;
       },
       error: (err) => {
         console.error('❌ Error en login:', err);

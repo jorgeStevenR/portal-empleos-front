@@ -1,3 +1,4 @@
+<!-- 📂 src/app/pages/perfil/perfil.html -->
 <div class="perfil-container" *ngIf="!loading; else loadingTpl">
   <h2 class="perfil-title">
     {{ isCompany ? 'Perfil de Empresa' : 'Perfil de Usuario' }}
@@ -69,9 +70,10 @@
 
     <div class="form-group">
       <label>Correo electrónico:</label>
+      <!-- 👇 SOLO LECTURA, SIN two-way binding -->
       <input
         type="email"
-        [(ngModel)]="userData.emailEntity?.email || userData.email"
+        [value]="userData.emailEntity?.email || userData.email"
         name="email"
         readonly
       />

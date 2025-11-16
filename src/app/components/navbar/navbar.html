@@ -1,6 +1,4 @@
-<!-- ============================================
-📂 src/app/components/navbar/navbar.html
-============================================ -->
+<!-- 📂 src/app/components/navbar/navbar.html -->
 <nav class="navbar">
   <div class="navbar-logo">
     <a routerLink="/">🌿 Portal Empleos</a>
@@ -13,7 +11,8 @@
 
     <!-- 🔹 Rol: CANDIDATO -->
     <li *ngIf="isUser()">
-      <a routerLink="/candidato">Mi Panel</a>
+      <!-- 👇 Antes decía 'Mi Panel' -->
+      <a routerLink="/candidato">Mis postulaciones</a>
     </li>
 
     <!-- 🔹 Rol: EMPRESA -->
