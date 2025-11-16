@@ -1,7 +1,4 @@
-// ============================================
-// 📂 src/app/components/navbar/navbar.ts
-// ============================================
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -11,30 +8,38 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrls: ['./navbar.css']
 })
 export class NavbarComponent {
+
+  @Input() navbarOffset: boolean = true;
+
+  isDark = false;
+
   constructor(public auth: AuthService, private router: Router) {}
 
-  // 🔹 Se calcula SIEMPRE contra el AuthService (no se queda viejo)
+  toggleTheme() {
+    this.isDark = !this.isDark;
+
+    const body = document.querySelector('body');
+
+    if (this.isDark) {
+      body?.classList.add('dark-theme');
+    } else {
+      body?.classList.remove('dark-theme');
+    }
+
+    console.log("DARK MODE?", this.isDark);
+  }
+
   get isLoggedIn(): boolean {
     return this.auth.isAuthenticated();
   }
 
-  // 🔹 Helpers por rol (usan el servicio directamente)
-  isAdmin(): boolean {
-    return this.auth.isAdmin();
-  }
+  isAdmin() { return this.auth.isAdmin(); }
+  isCompany() { return this.auth.isCompany(); }
+  isUser() { return this.auth.isUser(); }
 
-  isCompany(): boolean {
-    return this.auth.isCompany();
-  }
-
-  isUser(): boolean {
-    return this.auth.isUser();
-  }
-
-  // 🔹 Cerrar sesión
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/login']);

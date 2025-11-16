@@ -1,27 +1,29 @@
+<!-- 🔝 Barra negra solo en Home -->
+<app-topbar></app-topbar>
+
 <section class="home-container">
-  <!-- 🌿 Encabezado principal -->
+
   <div class="home-header">
     <h1>Portal de Empleo del Corredor Ecológico</h1>
-    <p>Conectando talento con oportunidades sostenibles.</p>
+    <p>Conectamos talento con empresas comprometidas con el desarrollo sostenible.</p>
   </div>
 
-  <!-- 💼 Opciones principales -->
   <div class="options">
     <div class="option-card empleo" (click)="irAOfertas()">
       <div class="icon">💼</div>
       <h2>Busco empleo</h2>
-      <p>Miles de oportunidades para ti.</p>
+      <p>Descubre ofertas actualizadas y oportunidades para crecer profesionalmente.</p>
     </div>
 
     <div class="option-card empresa" (click)="irARegistroEmpresa()">
       <div class="icon">🏢</div>
       <h2>Busco candidatos</h2>
-      <p>Encuentra el mejor talento sostenible.</p>
+      <p>Publica tus ofertas y encuentra colaboradores ideales para tu empresa.</p>
     </div>
   </div>
 
-  <!-- 🌳 Imagen decorativa inferior -->
   <div class="eco-footer">
     <img src="assets/img/ecologico-banner.jpg" alt="Corredor Ecológico" />
   </div>
+
 </section>

@@ -1,42 +1,45 @@
-<!-- 📂 src/app/components/navbar/navbar.html -->
-<nav class="navbar">
-  <div class="navbar-logo">
-    <a routerLink="/">🌿 Portal Empleos</a>
+<nav class="navbar-container" [class.with-offset]="navbarOffset">
+
+  <!-- IZQUIERDA -->
+  <div class="navbar-left">
+    🌿 <span class="logo-text">Portal Empleos</span>
   </div>
 
+  <!-- CENTRO -->
   <ul class="navbar-links">
-    <!-- 🔹 Menú siempre visible -->
     <li><a routerLink="/home">Inicio</a></li>
-    <li><a routerLink="/ofertas-laborales">Ver Ofertas</a></li>
+    <li><a routerLink="/ofertas-laborales">Ofertas</a></li>
 
-    <!-- 🔹 Rol: CANDIDATO -->
     <li *ngIf="isUser()">
-      <!-- 👇 Antes decía 'Mi Panel' -->
       <a routerLink="/candidato">Mis postulaciones</a>
     </li>
 
-    <!-- 🔹 Rol: EMPRESA -->
     <li *ngIf="isCompany()">
-      <a routerLink="/empresa">Mis Ofertas</a>
+      <a routerLink="/empresa">Mis ofertas</a>
     </li>
 
-    <!-- 🔹 Rol: ADMIN -->
     <li *ngIf="isAdmin()">
-      <a routerLink="/admin">Panel Admin</a>
-    </li>
-
-    <!-- 🔹 Mostrar perfil y cerrar sesión solo si está logueado -->
-    <li *ngIf="isLoggedIn">
-      <a routerLink="/perfil">Mi Perfil</a>
+      <a routerLink="/admin">Administración</a>
     </li>
 
     <li *ngIf="isLoggedIn">
-      <button (click)="logout()">Cerrar sesión</button>
-    </li>
-
-    <!-- 🔹 Mostrar login si NO ha iniciado sesión -->
-    <li *ngIf="!isLoggedIn">
-      <a routerLink="/login">Login</a>
+      <a routerLink="/perfil">Perfil</a>
     </li>
   </ul>
+
+  <!-- DERECHA -->
+  <div class="navbar-right">
+
+    <!-- 🔥 Switch Día/Noche -->
+    <button class="mode-btn" (click)="toggleTheme()">
+      <div class="toggle-ball" [class.dark]="isDark"></div>
+    </button>
+
+    <!-- Login / Logout -->
+    <a *ngIf="!isLoggedIn" class="login-btn" routerLink="/login">Iniciar sesión</a>
+
+    <button *ngIf="isLoggedIn" class="logout-btn" (click)="logout()">Cerrar sesión</button>
+
+  </div>
+
 </nav>

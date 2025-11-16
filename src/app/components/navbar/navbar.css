@@ -1,54 +1,157 @@
-.navbar {
+/* ========================
+   NAVBAR GLASS PREMIUM
+======================== */
+.navbar-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1300px;
+
+  padding: 14px 28px;
+  border-radius: 40px;
+
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2e8b57;
-  padding: 0.8rem 2rem;
-  color: white;
-  font-family: "Inter", sans-serif;
+
+  z-index: 9000;
+  transition: top 0.3s ease;
 }
 
-.navbar-logo a {
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.2rem;
+/* ⭐ AJUSTE EXACTO COMO CIFRATO */
+.navbar-container.with-offset {
+  top: 60px; /* ⭐ ANTES 78px — AHORA PERFECTO */
+}
+
+/* ⭐ AJUSTE CUANDO EL TOPBAR DESAPARECE */
+.navbar-container:not(.with-offset) {
+  top: 12px; /* ⭐ ANTES 20px — AHORA SE VE MÁS PREMIUM */
+}
+
+/* --------------------------
+   LOGO Y LINKS
+-------------------------- */
+.navbar-left {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1b5e20;
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  margin-left: 6px;
 }
 
 .navbar-links {
-  list-style: none;
   display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-links li {
-  margin-left: 1.2rem;
+  list-style: none;
+  gap: 30px;
 }
 
 .navbar-links a {
-  color: white;
-  text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
 }
 
 .navbar-links a:hover {
-  color: #c8f5d0;
+  color: #1b5e20;
 }
 
-button {
-  background: white;
-  color: #2e8b57;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  font-weight: 600;
+/* --------------------------
+   DERECHA (switch + botones)
+-------------------------- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* LOGIN */
+.login-btn {
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: #1b5e20;
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+}
+.login-btn:hover {
+  background: #2e7d32;
+}
+
+/* LOGOUT */
+.logout-btn {
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 1px solid #c62828;
+  background: transparent;
+  color: #c62828;
   cursor: pointer;
-  transition: background 0.2s;
+}
+.logout-btn:hover {
+  background: #ffebee;
 }
 
-button:hover {
-  background: #eafaea;
+/* --------------------------
+   SWITCH Día/Noche
+-------------------------- */
+.mode-btn {
+  width: 46px;
+  height: 26px;
+  border-radius: 20px;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+}
+
+.toggle-ball {
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+.toggle-ball.dark {
+  left: 22px;
+  background: #00c853;
+}
+
+/* --------------------------
+   MODO OSCURO aplicando SOBRE NAVBAR
+-------------------------- */
+body.dark-theme .navbar-container {
+  background: rgba(20,20,20,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+body.dark-theme .navbar-left,
+body.dark-theme .navbar-links a {
+  color: #ddd !important;
+}
+
+body.dark-theme .navbar-links a:hover {
+  color: #00e676 !important;
+}
+
+body.dark-theme .logout-btn {
+  border-color: #ff5252;
+  color: #ff5252;
 }

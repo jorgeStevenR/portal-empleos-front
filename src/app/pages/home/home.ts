@@ -1,24 +1,25 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TopbarComponent } from '../../components/topbar/topbar';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TopbarComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 export class HomeComponent {
+
   constructor(private router: Router) {}
 
-  /** 🔹 Redirige a ofertas laborales */
   irAOfertas(): void {
     this.router.navigate(['/ofertas-laborales']);
   }
 
-  /** 🔹 Redirige al registro de empresa */
   irARegistroEmpresa(): void {
     this.router.navigate(['/register-empresa']);
   }
+
 }
