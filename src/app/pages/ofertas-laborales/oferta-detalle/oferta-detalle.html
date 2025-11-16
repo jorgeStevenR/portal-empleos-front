@@ -1,8 +1,8 @@
+<div class="page-container">
 <section class="detalle-container" *ngIf="!cargando && job">
   <div class="detalle-card">
     <img
       [src]="job.company?.urlImg || 'assets/img/default-job.png'"
-      alt="Logo de empresa"
       class="empresa-logo"
     />
 
@@ -13,7 +13,6 @@
     <p class="descripcion">{{ job.description }}</p>
 
     <hr />
-    <p><strong>Publicado por:</strong> {{ job.company?.name }}</p>
 
     <div class="botones">
       <button
@@ -33,10 +32,9 @@
       </button>
 
       <button class="btn-volver" routerLink="/ofertas-laborales">
-        ⬅ Volver a ofertas
+        ⬅ Volver
       </button>
     </div>
   </div>
 </section>
-
-<div *ngIf="cargando" class="loading">Cargando oferta...</div>
+</div>

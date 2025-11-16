@@ -5,6 +5,7 @@ import { NavbarComponent } from './components/navbar/navbar';
 import { LoadingComponent } from './components/loading/loading.component';
 import { TopbarComponent } from './components/topbar/topbar';
 import { filter } from 'rxjs/operators';
+import { FooterComponent } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { filter } from 'rxjs/operators';
     RouterOutlet,
     NavbarComponent,
     LoadingComponent,
-    TopbarComponent
+    TopbarComponent,
+    FooterComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

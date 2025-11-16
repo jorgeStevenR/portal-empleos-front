@@ -1,5 +1,5 @@
 /* =============================
-   MODO OSCURO GLOBAL
+   🌙 MODO OSCURO GLOBAL
 ============================= */
 
 body.dark-theme {
@@ -27,4 +27,20 @@ body.dark-theme .navbar-links a:hover {
 body.dark-theme .logout-btn {
   border-color: #ff5252 !important;
   color: #ff5252 !important;
+}
+
+/* =============================
+   🌿 ESPACIADO PARA TODAS LAS PÁGINAS
+============================= */
+
+.page-container {
+  padding-top: 140px; /* espacio para topbar + navbar */
+  min-height: 100vh;
+}
+
+/* Fondo global */
+body {
+  background-color: #f1fff1;
+  font-family: "Inter", sans-serif;
+  margin: 0;
 }

@@ -1,3 +1,4 @@
+<div class="page-container">
 <section class="ofertas-container">
   <h2>🌿 Ofertas Laborales Disponibles</h2>
 
@@ -33,7 +34,7 @@
               ? job.company.urlImg
               : 'assets/img/default-job.png'
           "
-          alt="Logo de {{ job.company?.name || 'empresa' }}"
+          alt="Logo empresa"
           class="empresa-logo"
           (error)="onImageError($event)"
         />
@@ -46,19 +47,19 @@
         </div>
       </div>
 
-      <!-- 📝 Detalles de la oferta -->
+      <!-- 📝 Detalles -->
       <div class="oferta-body">
         <h3 class="titulo">{{ job.title }}</h3>
         <p class="descripcion">
           {{
             job.description && job.description.length > 100
               ? (job.description | slice: 0:100) + '...'
-              : job.description || 'Sin descripción disponible'
+              : job.description
           }}
         </p>
       </div>
 
-      <!-- 🔘 Botón de acción -->
+      <!-- 🔘 Botón -->
       <div class="oferta-footer">
         <button class="btn-ver" (click)="verDetalle(job.idJob)">
           Ver más
@@ -67,3 +68,4 @@
     </div>
   </div>
 </section>
+</div>

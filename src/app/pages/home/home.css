@@ -6,6 +6,9 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+/* ===============================
+   CONTENEDOR PRINCIPAL
+================================ */
 .home-container {
   text-align: center;
   padding: 0 20px;
@@ -14,38 +17,43 @@ body {
   flex-direction: column;
 }
 
-/* HEADER */
+/* ===============================
+   TITULO PRINCIPAL
+================================ */
 .home-header h1 {
   font-size: 2.8rem;
   color: #1b5e20;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .home-header p {
   font-size: 1.2rem;
   color: #444;
-  max-width: 600px;
+  max-width: 650px;
   margin: auto;
   opacity: 0.9;
+  line-height: 1.5;
 }
 
-/* TARJETAS */
+/* ===============================
+   TARJETAS
+================================ */
 .options {
   display: flex;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
-  margin-top: 50px;
-  margin-bottom: 60px;
+  margin: 60px 0;
 }
 
 .option-card {
-  width: 310px;
+  width: 320px;
   height: 350px;
   border-radius: 22px;
   padding: 30px;
   color: white;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
 
   display: flex;
   flex-direction: column;
@@ -57,19 +65,20 @@ body {
 }
 
 .option-card .icon {
-  font-size: 3.2rem;
+  font-size: 3.3rem;
   margin-bottom: 18px;
 }
 
 .option-card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .option-card p {
   font-size: 1rem;
-  max-width: 240px;
   opacity: 0.95;
+  max-width: 240px;
 }
 
 /* GRADIENTES */
@@ -83,23 +92,42 @@ body {
 
 /* HOVER */
 .option-card:hover {
-  transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.13);
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* FOOTER */
-.eco-footer img {
-  height: 210px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 14px 14px 0 0;
+/* ===============================
+   NUEVA SECCIÓN DE TEXTO
+================================ */
+.info-section {
+  margin: 40px auto 80px;
+  max-width: 800px;
+  background: #ffffffee;
+  padding: 35px 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.info-section h3 {
+  font-size: 1.7rem;
+  margin-bottom: 18px;
+  color: #1b5e20;
+}
+
+.info-section p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.6;
   opacity: 0.95;
 }
 
-/* RESPONSIVE */
+/* ===============================
+   RESPONSIVE
+================================ */
 @media (max-width: 768px) {
   .home-header h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .option-card {
@@ -109,8 +137,10 @@ body {
   }
 }
 
-/* ⭐⭐⭐ ESPACIO REAL PARA TOPBAR + NAVBAR */
+/* ===============================
+   ESPACIO PARA TOPBAR + NAVBAR
+================================ */
 :host {
   display: block;
-  padding-top: 120px; /* AJUSTE PERFECTO */
+  padding-top: 120px;
 }
