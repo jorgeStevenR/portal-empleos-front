@@ -4,8 +4,8 @@ import { CommonModule, NgIf } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar';
 import { LoadingComponent } from './components/loading/loading.component';
 import { TopbarComponent } from './components/topbar/topbar';
-import { filter } from 'rxjs/operators';
 import { FooterComponent } from './components/footer/footer';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ export class App {
   currentRoute = '';
   showTopbar = false;
 
-  // ⭐ ESTA ES LA PROPIEDAD QUE FALTABA
+  /** ⭐ Controla si la navbar baja o sube */
   navbarOffset = true;
 
   constructor(private router: Router) {
@@ -41,14 +41,21 @@ export class App {
         // ⭐ Mostrar topbar SOLO en /home
         this.showTopbar = this.currentRoute === '/home';
 
-        // ⭐ Si hay topbar → navbar baja
-        // ⭐ Si NO hay topbar → navbar sube
+        // ⭐ Mover navbar cuando hay topbar
         this.navbarOffset = this.showTopbar;
       });
   }
 
+  /** ⭐ OCULTAR NAVBAR EN LOGIN Y REGISTROS */
   isLoginPage(): boolean {
-    return this.currentRoute === '/login';
+
+    const noNavbarRoutes = [
+      '/login',
+      '/register-candidato',
+      '/register-empresa'
+    ];
+
+    return noNavbarRoutes.includes(this.currentRoute);
   }
 
 }

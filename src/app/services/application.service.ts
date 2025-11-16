@@ -1,55 +1,39 @@
-// ============================================
-// 📂 src/app/services/application.service.ts
-// ============================================
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
+
   private apiUrl = `${environment.apiBaseUrl}/applications`;
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
 
-  /** 🟢 Crear nueva postulación */
-  create(application: any): Observable<any> {
-    return this.http.post(this.apiUrl, application, { headers: this._headers() });
+  create(data: any): Observable<any> {
+    return this.http.post(this.apiUrl, data);
   }
 
-  /** 🟢 Obtener todas las postulaciones */
   getAll(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this._headers() });
+    return this.http.get(this.apiUrl);
   }
 
-  /** 🟢 Buscar postulación por ID */
   getById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`, { headers: this._headers() });
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  /** 🟢 Buscar postulaciones por usuario */
   getByUserId(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/${userId}`, { headers: this._headers() });
+    return this.http.get(`${this.apiUrl}/user/${userId}`);
   }
 
-  /** 🟢 Actualizar postulación */
-  update(id: number, application: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, application, { headers: this._headers() });
+  update(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
   }
 
-  /** 🟢 Eliminar postulación */
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this._headers() });
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  /** 🧩 Headers con token */
-  private _headers(): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: `Bearer ${this.auth.getToken()}`,
-      'Content-Type': 'application/json'
-    });
-  }
 }

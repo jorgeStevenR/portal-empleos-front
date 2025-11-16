@@ -1,11 +1,12 @@
 <app-topbar *ngIf="showTopbar"></app-topbar>
 
 <app-navbar 
-  *ngIf="!isLoginPage()" 
+  *ngIf="!isLoginPage()"
   [navbarOffset]="navbarOffset">
 </app-navbar>
 
 <app-loading-bar></app-loading-bar>
 
 <router-outlet></router-outlet>
+
 <app-footer></app-footer>

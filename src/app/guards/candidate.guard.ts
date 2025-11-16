@@ -1,17 +1,14 @@
-import { CanActivateFn, Router } from '@angular/router';
+// src/app/guards/candidate.guard.ts
 import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 export const candidateGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  const role = auth.getRole();
-  if (role === 'USER') {
-    return true;
-  } else {
-    alert('Acceso restringido. Solo candidatos.');
-    router.navigate(['/home']);
-    return false;
-  }
+  if (auth.getRole() === 'ROLE_USER') return true;
+
+  router.navigate(['/home']);
+  return false;
 };

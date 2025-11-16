@@ -1,3 +1,6 @@
+// ============================================
+// 📂 src/app/pages/login/login.ts
+// ============================================
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +15,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.css']
 })
 export class LoginComponent {
+
   email = '';
   password = '';
   loading = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  goHome() {
+    this.router.navigate(['/home']);
+  }
 
   login(): void {
     if (!this.email || !this.password) {
@@ -30,20 +41,23 @@ export class LoginComponent {
 
     this.authService.login(this.email, this.password).subscribe({
       next: (resp) => {
-        console.log('✅ Login exitoso:', resp);
 
-        // Asegúrate de que el backend devuelve { token, role, userId }
-        this.authService.saveSession(resp.token, resp.role, resp.userId);
+        console.log("TOKEN:", resp.token);
+        console.log("ROLE:", resp.role);
+        console.log("ID:", resp.id);
 
-        // 🔁 Redirección según el rol
+        // 🔥 GUARDAR SESIÓN CORRECTA
+        this.authService.saveSession(resp.token, resp.role, resp.id);
+
+        // 🔥 REDIRECCIÓN SEGÚN ROL BACKEND
         switch (resp.role) {
-          case 'USER':
-            this.router.navigate(['/candidato']);
+          case 'ROLE_USER':
+            this.router.navigate(['/perfil']);
             break;
-          case 'COMPANY':
+          case 'ROLE_COMPANY':
             this.router.navigate(['/empresa']);
             break;
-          case 'ADMIN':
+          case 'ROLE_ADMIN':
             this.router.navigate(['/admin']);
             break;
           default:
@@ -52,9 +66,8 @@ export class LoginComponent {
 
         this.loading = false;
       },
-      error: (err) => {
-        console.error('❌ Error en login:', err);
-        this.errorMessage = 'Credenciales incorrectas o error del servidor.';
+      error: () => {
+        this.errorMessage = 'Credenciales incorrectas.';
         this.loading = false;
       }
     });

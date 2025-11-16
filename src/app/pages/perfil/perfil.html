@@ -1,105 +1,53 @@
-<!-- 📂 src/app/pages/perfil/perfil.html -->
-<div class="perfil-container" *ngIf="!loading; else loadingTpl">
-  <h2 class="perfil-title">
-    {{ isCompany ? 'Perfil de Empresa' : 'Perfil de Usuario' }}
-  </h2>
+<div class="perfil-container">
 
-  <!-- 🔹 Bloque de imagen o CV -->
-  <div class="perfil-file-section">
-    <div *ngIf="isCompany; else candidatoTpl">
-      <h3>Logo de la Empresa</h3>
-      <div class="logo-preview">
-        <img
-          *ngIf="userData.logoUrl; else noLogo"
-          [src]="userData.logoUrl"
-          alt="Logo de la empresa"
-        />
-        <ng-template #noLogo>
-          <p class="no-file">Sin logo cargado</p>
-        </ng-template>
-      </div>
-    </div>
+  <!-- ======================= DATOS DEL USUARIO ======================= -->
+  <div class="perfil-box">
+    <h2>👤 Información del Usuario</h2>
 
-    <ng-template #candidatoTpl>
-      <h3>Currículum (PDF)</h3>
-      <div class="cv-preview">
-        <a
-          *ngIf="userData.cvUrl; else noCv"
-          [href]="userData.cvUrl"
-          target="_blank"
-          class="cv-link"
-        >
-          📄 Ver CV cargado
-        </a>
-        <ng-template #noCv>
-          <p class="no-file">Sin CV cargado</p>
-        </ng-template>
-      </div>
-    </ng-template>
-
-    <div class="upload-actions">
-      <input
-        type="file"
-        (change)="onFileSelected($event)"
-        [accept]="isCompany ? 'image/*' : '.pdf'"
-        id="fileInput"
-      />
-      <button (click)="uploadFile()" [disabled]="loading">Subir archivo</button>
-    </div>
-  </div>
-
-  <hr />
-
-  <!-- 🔹 Formulario de edición general -->
-  <form class="perfil-form" (ngSubmit)="saveChanges()">
-    <div class="form-group">
+    <div class="campo">
       <label>Nombre:</label>
-      <input
-        type="text"
-        [(ngModel)]="userData.name"
-        name="name"
-        required
-        [readonly]="isCompany"
-      />
+      <div class="valor">{{ userData.name }}</div>
     </div>
 
-    <div *ngIf="isCompany" class="form-group">
-      <label>NIT:</label>
-      <input type="text" [(ngModel)]="userData.nit" name="nit" required />
-    </div>
-
-    <div class="form-group">
+    <div class="campo">
       <label>Correo electrónico:</label>
-      <!-- 👇 SOLO LECTURA, SIN two-way binding -->
-      <input
-        type="email"
-        [value]="userData.emailEntity?.email || userData.email"
-        name="email"
-        readonly
-      />
+      <div class="valor">{{ userData.emailEntity?.email }}</div>
     </div>
-
-    <div class="form-group">
-      <label>Ubicación:</label>
-      <input type="text" [(ngModel)]="userData.location" name="location" />
-    </div>
-
-    <div class="form-group">
-      <label>Descripción:</label>
-      <textarea
-        [(ngModel)]="userData.description"
-        name="description"
-        rows="3"
-      ></textarea>
-    </div>
-
-    <button type="submit" [disabled]="loading">Guardar cambios</button>
-  </form>
-</div>
-
-<!-- 🔹 Estado de carga -->
-<ng-template #loadingTpl>
-  <div class="loading">
-    <p>Cargando perfil...</p>
   </div>
-</ng-template>
+
+  <!-- ======================= CURRÍCULO ======================= -->
+  <div class="perfil-box">
+    <h2>📄 Currículum (PDF)</h2>
+
+    <!-- ========== VISOR DE PDF ========== -->
+    <div class="pdf-viewer" *ngIf="userData.cvUrl">
+      <iframe [src]="userData.cvUrl | safeUrl"></iframe>
+    </div>
+
+    <!-- Botones abajo del visor -->
+    <div class="botones-cv">
+
+      <!-- Ver CV -->
+      <button
+        class="btn-ver"
+        *ngIf="userData.cvUrl"
+        (click)="window.open(userData.cvUrl, '_blank')">
+        🔗 Ver CV en nueva pestaña
+      </button>
+
+      <!-- Actualizar -->
+      <button class="btn-actualizar" (click)="toggleUploader()">
+        🔄 Actualizar CV
+      </button>
+
+    </div>
+
+    <!-- Uploader -->
+    <div class="upload-area" *ngIf="mostrarUploader">
+      <input type="file" accept="application/pdf" (change)="onFileSelected($event)" />
+      <button class="btn-upload" (click)="uploadFile()">Subir CV</button>
+    </div>
+
+  </div>
+
+</div>

@@ -1,115 +1,145 @@
-/* Fondo de la página de login */
-.login-page {
-  min-height: 100vh;
+/* ============ TOPBAR SOLO LOGO (ESTILO CIFRATO) ============ */
+.login-topbar {
+  width: 100%;
+  padding: 20px 45px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-  font-family: "Inter", sans-serif;
+  gap: 10px;
+  cursor: pointer;
 }
 
-/* Tarjeta central */
-.login-card {
-  width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  padding: 28px 32px 26px;
-  border-radius: 18px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+.topbar-logo {
+  width: 45px;
 }
 
-/* Título y subtítulo */
-.login-title {
-  text-align: center;
-  color: #2e7d32;
-  margin-bottom: 6px;
-  font-size: 1.8rem;
+.topbar-title {
+  font-size: 1.4rem;
+  color: #1b5e20;
   font-weight: 700;
 }
 
-.login-subtitle {
-  text-align: center;
-  color: #555;
-  font-size: 0.95rem;
-  margin-bottom: 22px;
+/* ============ FONDO GRADIENTE ============ */
+.login-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: linear-gradient(180deg, #e8f5e9, #d7f4d9, #f3fff3);
+  overflow-x: hidden;
 }
 
-/* Formulario */
-.form-group {
-  margin-bottom: 14px;
+/* ============ CAJA CENTRAL ============ */
+.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+/* TÍTULOS */
+.login-title {
+  font-size: 1.9rem;
+  color: #1b5e20;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.login-text {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* FORMULARIO */
+.login-form {
+  text-align: left;
 }
 
 label {
   font-weight: 600;
   color: #333;
+  margin-bottom: 6px;
   display: block;
-  margin-bottom: 5px;
 }
 
 input {
   width: 100%;
-  padding: 10px 11px;
-  border: 1px solid #d0d7d3;
+  padding: 12px;
   border-radius: 8px;
-  font-size: 14px;
+  border: 1px solid #cddccd;
+  background: #fafafa;
+  font-size: 15px;
   outline: none;
-  transition: all 0.25s ease;
+  transition: 0.25s;
 }
 
 input:focus {
   border-color: #43a047;
-  box-shadow: 0 0 0 2px rgba(67, 160, 71, 0.15);
+  box-shadow: 0 0 4px rgba(67, 160, 71, 0.25);
 }
 
-/* Botón */
+/* PASSWORD BOX */
+.password-box {
+  position: relative;
+}
+
+.password-box .eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* BOTÓN */
 button {
   width: 100%;
-  padding: 11px;
-  margin-top: 6px;
-  background: linear-gradient(135deg, #2e7d32, #43a047);
-  color: white;
+  margin-top: 15px;
+  padding: 12px;
+  background: #2e7d32;
   border: none;
   border-radius: 8px;
+  color: white;
   font-size: 16px;
-  cursor: pointer;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover:not([disabled]) {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.35);
-  background: linear-gradient(135deg, #256d3a, #388e3c);
+  background: #256d3a;
 }
 
 button[disabled] {
   background: #a5d6a7;
-  cursor: not-allowed;
 }
 
-/* Error */
+/* ERROR */
 .error {
   color: #d32f2f;
-  text-align: center;
   margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-/* Links inferiores */
-.extra-links {
   text-align: center;
-  margin-top: 18px;
-  font-size: 0.9rem;
-  color: #444;
 }
 
-.extra-links a {
-  color: #2e7d32;
+/* REGISTRO */
+.register-text {
+  margin-top: 20px;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.register-text a {
+  color: #1b5e20;
   font-weight: 600;
   text-decoration: none;
+  margin: 0 4px;
 }
 
-.extra-links a:hover {
+.register-text a:hover {
   text-decoration: underline;
 }

@@ -38,6 +38,16 @@ body.dark-theme .logout-btn {
   min-height: 100vh;
 }
 
+/* =============================
+   🛑 FIX ABSOLUTO — NO MÁS SCROLL HORIZONTAL
+============================= */
+
+html, body {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100%;
+}
+
 /* Fondo global */
 body {
   background-color: #f1fff1;
