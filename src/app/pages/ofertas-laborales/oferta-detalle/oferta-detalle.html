@@ -1,40 +1,53 @@
 <div class="page-container">
-<section class="detalle-container" *ngIf="!cargando && job">
-  <div class="detalle-card">
-    <img
-      [src]="job.company?.urlImg || 'assets/img/default-job.png'"
-      class="empresa-logo"
-    />
+  <section class="detalle-container" *ngIf="!cargando && job">
+    
+    <div class="detalle-card">
 
-    <h2>{{ job.title }}</h2>
-    <h4>{{ job.company?.name }}</h4>
-    <p class="ubicacion">📍 {{ job.location }}</p>
+      <!-- LOGO -->
+      <img
+        [src]="job.company?.logoUrl || 'assets/img/default-job.png'"
+        class="empresa-logo"
+      />
 
-    <p class="descripcion">{{ job.description }}</p>
+      <!-- TITULO Y EMPRESA -->
+      <h2>{{ job.title }}</h2>
+      <h4>{{ job.company?.name }}</h4>
+      <p class="ubicacion">📍 {{ job.location }}</p>
 
-    <hr />
+      <!-- DESCRIPCIÓN -->
+      <p class="descripcion">{{ job.description }}</p>
 
-    <div class="botones">
-      <button
-        *ngIf="auth.getRole() === 'USER' && !yaPostulado"
-        (click)="postular()"
-        class="btn-postular"
-      >
-        Postularme
-      </button>
+      <hr />
 
-      <button
-        *ngIf="auth.getRole() === 'USER' && yaPostulado"
-        class="btn-ya-postulado"
-        disabled
-      >
-        Ya te has postulado
-      </button>
+      <!-- BOTONES -->
+      <div class="botones">
 
-      <button class="btn-volver" routerLink="/ofertas-laborales">
-        ⬅ Volver
-      </button>
+        <!-- ⭐ POSTULARME -->
+        <button
+          *ngIf="auth.getRole() === 'ROLE_USER' && !yaPostulado"
+          (click)="irAFormularioPostulacion()"
+          class="btn-postular"
+        >
+          ✔ Postularme
+        </button>
+
+        <!-- YA POSTULADO -->
+        <button
+          *ngIf="auth.getRole() === 'ROLE_USER' && yaPostulado"
+          class="btn-ya-postulado"
+          disabled
+        >
+          Ya te has postulado
+        </button>
+
+        <!-- VOLVER -->
+        <button class="btn-volver" routerLink="/ofertas-laborales">
+          ⬅ Volver
+        </button>
+
+      </div>
+
     </div>
-  </div>
-</section>
+
+  </section>
 </div>

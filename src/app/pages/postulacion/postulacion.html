@@ -1,23 +1,28 @@
-<div class="page-container">
-<section class="postulacion-container">
-  <h2>📝 Formulario de Postulación</h2>
-  <p class="info">
-    Adjunta una carta de presentación y una imagen o link opcional.
-  </p>
+<div class="postulacion-container">
+  <div class="postulacion-card">
 
-  <form (ngSubmit)="enviarPostulacion()" class="postulacion-form">
+    <h2>📝 Finalizar postulación</h2>
+
+    <p class="sub">
+      Estás aplicando a:
+      <strong>{{ job?.title }}</strong>
+      <br>
+      en <strong>{{ job?.company?.name }}</strong>
+    </p>
+
     <label>Carta de presentación:</label>
-    <textarea [(ngModel)]="carta" name="carta" rows="6" required></textarea>
+    <textarea
+      [(ngModel)]="coverLetter"
+      placeholder="Escribe un mensaje para la empresa..."
+    ></textarea>
 
-    <label>Enlace o imagen (opcional):</label>
-    <input [(ngModel)]="urlImg" name="urlImg" type="text" />
+    <button class="btn-enviar" (click)="enviarPostulacion()">
+      ✔ Enviar postulación
+    </button>
 
-    <div class="buttons">
-      <button type="submit" class="btn-enviar">Enviar postulación</button>
-      <button type="button" routerLink="/ofertas-laborales" class="btn-volver">
-        Cancelar
-      </button>
-    </div>
-  </form>
-</section>
+    <button class="btn-volver" routerLink="/oferta/{{ idJob }}">
+      ⬅ Volver
+    </button>
+
+  </div>
 </div>

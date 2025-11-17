@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { JobService } from '../../services/job.service';
 import { ApplicationService } from '../../services/application.service';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-postulacion',
@@ -12,46 +13,45 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './postulacion.html',
   styleUrls: ['./postulacion.css']
 })
-export class PostulacionComponent {
-  carta = '';
-  urlImg = '';
+export class PostulacionComponent implements OnInit {
+
   idJob!: number;
+  job: any;
+  coverLetter: string = "";
 
   constructor(
-    private appService: ApplicationService,
-    private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private jobService: JobService,
+    private appService: ApplicationService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this.idJob = Number(this.route.snapshot.paramMap.get('idJob'));
+
+    this.jobService.getById(this.idJob).subscribe({
+      next: (data) => this.job = data
+    });
   }
 
   enviarPostulacion(): void {
     const idUser = this.auth.getUserId();
 
-    if (!idUser) {
-      alert('Debes iniciar sesión para postularte.');
-      return;
-    }
-
-    const data = {
-      coverLetter: this.carta,
-      urlImg: this.urlImg,
-      status: 'ENVIADA',
+    const postulacion = {
+      coverLetter: this.coverLetter,
       user: { idUser },
       job: { idJob: this.idJob }
     };
 
-    this.appService.create(data).subscribe({
+    this.appService.create(postulacion).subscribe({
       next: () => {
-        alert('✅ ¡Postulación enviada con éxito!');
+        alert('✔ Postulación enviada con éxito');
         this.router.navigate(['/candidato']);
       },
       error: (err) => {
         console.error(err);
-        alert('❌ Error al enviar la postulación.');
+        alert('Hubo un error al enviar la postulación');
       }
     });
   }

@@ -1,93 +1,128 @@
-/* 🌿 Fondo */
+/* ====== CONTENEDOR GENERAL ====== */
 .ofertas-container {
   text-align: center;
-  padding: 40px 20px;
+  padding: 60px 20px 40px;
 }
 
-/* 🏷️ Título */
 .ofertas-container h2 {
-  color: #1b5e20;
-  font-size: 2rem;
+  color: #145a32;
+  font-size: 2.4rem;
   margin-bottom: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-/* 🔍 Buscador */
+/* ====== BUSCADOR ====== */
 .search-input {
-  width: 50%;
-  max-width: 400px;
-  padding: 10px 15px;
-  border: 2px solid #c8e6c9;
-  border-radius: 8px;
+  width: 55%;
+  max-width: 460px;
+  padding: 12px 16px;
+  border: 2px solid #cce8d5;
+  border-radius: 10px;
   outline: none;
-  transition: all 0.3s ease;
+  margin-top: 10px;
+  transition: 0.3s ease;
+  font-size: 1rem;
 }
 
 .search-input:focus {
-  border-color: #2e7d32;
-  box-shadow: 0 0 4px rgba(46, 125, 50, 0.4);
+  border-color: #1d8a45;
+  box-shadow: 0 0 6px rgba(29, 138, 69, 0.3);
 }
 
-/* 💼 Grid */
+/* ====== GRID ====== */
 .ofertas-grid {
+  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 2rem;
-  padding: 0 40px;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 35px;
+  padding: 0 25px;
 }
 
-/* 🗂️ Tarjeta */
+/* ====== TARJETA ====== */
 .oferta-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: 0.3s;
-}
-
-.oferta-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-}
-
-/* Empresa */
-.empresa-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.empresa-logo {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #c8e6c9;
-  margin-right: 10px;
-}
-
-.empresa-info h4 {
-  margin: 0;
-  font-size: 1rem;
-  color: #2e7d32;
-}
-
-/* Descripción */
-.descripcion {
-  color: #333;
-  font-size: 0.9rem;
-}
-
-/* Botón */
-.btn-ver {
-  background: #2e7d32;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  background: white;
+  border-radius: 16px;
+  padding: 28px 25px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  border: 1px solid #eef5f0;
+  transition: all 0.28s ease;
   cursor: pointer;
 }
 
+.oferta-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+/* ====== HEADER EMPRESA ====== */
+.empresa-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.empresa-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #f0f0f0;
+  padding: 4px;
+  border: 2px solid #dcefe2;
+}
+
+.empresa-info {
+  text-align: left;
+}
+
+.empresa-info .empresa-nombre {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d7c3a;
+  margin: 0;
+}
+
+.ubicacion {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* ====== TITULO DEL EMPLEO ====== */
+.titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0d3a20;
+  margin-bottom: 12px;
+}
+
+/* ====== DESCRIPCIÓN ====== */
+.descripcion {
+  color: #4b4b4b;
+  font-size: 0.95rem;
+  line-height: 1.45rem;
+  margin-bottom: 20px;
+  min-height: 48px;
+}
+
+/* ====== BOTÓN ====== */
+.btn-ver {
+  background: #1b8a3a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 600;
+}
+
 .btn-ver:hover {
-  background: #1b5e20;
+  background: #156b2c;
+  transform: translateY(-3px);
 }

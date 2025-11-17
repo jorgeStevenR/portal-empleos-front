@@ -1,71 +1,69 @@
 <div class="page-container">
-<section class="ofertas-container">
-  <h2>🌿 Ofertas Laborales Disponibles</h2>
+  <section class="ofertas-container">
+    
+    <h2>🌿 Ofertas Laborales Disponibles</h2>
 
-  <!-- 🔍 Barra de búsqueda -->
-  <input
-    type="text"
-    placeholder="🔍 Buscar empleo..."
-    [(ngModel)]="filtro"
-    class="search-input"
-  />
+    <input
+      type="text"
+      placeholder="🔍 Buscar empleo..."
+      [(ngModel)]="filtro"
+      class="search-input"
+    />
 
-  <!-- ⏳ Mensaje de carga -->
-  <div *ngIf="cargando" class="loading">
-    <span class="spinner"></span> Cargando ofertas...
-  </div>
+    <!-- Loading -->
+    <div *ngIf="cargando" class="loading">
+      <span class="spinner"></span> Cargando ofertas...
+    </div>
 
-  <!-- ❌ Sin resultados -->
-  <div *ngIf="!cargando && empleos.length === 0" class="no-results">
-    No hay ofertas disponibles en este momento.
-  </div>
+    <!-- Sin resultados -->
+    <div *ngIf="!cargando && empleos.length === 0" class="no-results">
+      No hay ofertas disponibles en este momento.
+    </div>
 
-  <!-- 💼 Grid de ofertas -->
-  <div class="ofertas-grid" *ngIf="!cargando && empleos.length > 0">
-    <div
-      *ngFor="let job of empleos | filtroEmpleos:filtro"
-      class="oferta-card"
-    >
-      <!-- 🏢 Encabezado empresa -->
-      <div class="empresa-header">
-        <img
-          [src]="
-            job.company?.urlImg && job.company?.urlImg.trim() !== ''
-              ? job.company.urlImg
-              : 'assets/img/default-job.png'
-          "
-          alt="Logo empresa"
-          class="empresa-logo"
-          (error)="onImageError($event)"
-        />
+    <!-- GRID -->
+    <div class="ofertas-grid" *ngIf="!cargando && empleos.length > 0">
+      
+      <div
+        class="oferta-card"
+        *ngFor="let job of empleos | filtroEmpleos:filtro"
+        (click)="verDetalle(job.idJob)"
+      >
+        
+        <!-- HEADER -->
+        <div class="empresa-header">
+          <img
+            [src]="job.company?.urlImg || 'assets/img/default-job.png'"
+            class="empresa-logo"
+            (error)="onImageError($event)"
+          />
 
-        <div class="empresa-info">
-          <h4 class="empresa-nombre">
-            {{ job.company?.name || 'Empresa no especificada' }}
-          </h4>
-          <span class="ubicacion">📍 {{ job.location || 'Remoto' }}</span>
+          <div class="empresa-info">
+            <h4 class="empresa-nombre">{{ job.company?.name }}</h4>
+            <span class="ubicacion">📍 {{ job.location }}</span>
+          </div>
         </div>
-      </div>
 
-      <!-- 📝 Detalles -->
-      <div class="oferta-body">
-        <h3 class="titulo">{{ job.title }}</h3>
-        <p class="descripcion">
-          {{
-            job.description && job.description.length > 100
-              ? (job.description | slice: 0:100) + '...'
-              : job.description
-          }}
-        </p>
-      </div>
+        <!-- BODY -->
+        <div class="oferta-body">
+          <h3 class="titulo">{{ job.title }}</h3>
 
-      <!-- 🔘 Botón -->
-      <div class="oferta-footer">
-        <button class="btn-ver" (click)="verDetalle(job.idJob)">
+          <p class="descripcion">
+            {{
+              job.description.length > 100
+                ? (job.description | slice: 0:100) + '...'
+                : job.description
+            }}
+          </p>
+        </div>
+
+        <!-- BOTÓN -->
+        <button class="btn-ver">
           Ver más
         </button>
+
       </div>
+
     </div>
-  </div>
-</section>
+
+  </section>
 </div>

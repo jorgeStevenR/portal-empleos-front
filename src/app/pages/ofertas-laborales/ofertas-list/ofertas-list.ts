@@ -13,7 +13,10 @@ import { FiltroEmpleosPipe } from '../../../pipes/filtro-empleos.pipe';
   styleUrls: ['./ofertas-list.css']
 })
 export class OfertasListComponent implements OnInit {
+
   empleos: any[] = [];
+  empleosFiltrados: any[] = [];
+
   filtro: string = '';
   cargando = true;
 
@@ -22,8 +25,8 @@ export class OfertasListComponent implements OnInit {
   ngOnInit(): void {
     this.jobService.getAllJobs().subscribe({
       next: (data: any[]) => {
-        console.log('✅ Empleos cargados:', data);
         this.empleos = data;
+        this.empleosFiltrados = data;  // inicial
         this.cargando = false;
       },
       error: (err: any) => {
@@ -33,15 +36,30 @@ export class OfertasListComponent implements OnInit {
     });
   }
 
+  // 🔍 Aplicar filtro sin usar el pipe en el ngFor
+  filtrar(): void {
+    const term = this.filtro.toLowerCase().trim();
+
+    if (!term) {
+      this.empleosFiltrados = this.empleos;
+      return;
+    }
+
+    this.empleosFiltrados = this.empleos.filter(job =>
+      job.title?.toLowerCase().includes(term) ||
+      job.description?.toLowerCase().includes(term) ||
+      job.company?.name?.toLowerCase().includes(term)
+    );
+  }
+
   verDetalle(id: number): void {
     if (id) {
-      console.log('🟢 Navegando al detalle con ID:', id);
       this.router.navigate(['/oferta', id]);
     }
   }
 
   onImageError(event: Event) {
-    const imgElement = event.target as HTMLImageElement;
-    imgElement.src = 'assets/img/default-job.png';
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/default-job.png';
   }
 }
