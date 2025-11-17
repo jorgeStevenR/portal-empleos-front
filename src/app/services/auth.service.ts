@@ -1,6 +1,3 @@
-// ============================================
-// 📂 src/app/services/auth.service.ts
-// ============================================
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,7 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  
+
   private baseUrl = environment.apiBaseUrl;
   private apiUrl = `${this.baseUrl}/auth`;
   private usersUrl = `${this.baseUrl}/users`;
@@ -18,69 +15,77 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // ============================================
-  // 🔹 LOGIN general
-  // ============================================
+  // ====================
+  // LOGIN GENERAL
+  // ====================
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  // ============================================
-  // 🔹 REGISTRO CANDIDATO
-  // ============================================
+  // ====================
+  // REGISTRO CANDIDATO
+  // ====================
   registerUser(user: any): Observable<any> {
     return this.http.post(this.usersUrl, user);
   }
 
-  // ============================================
-  // 🔹 REGISTRO EMPRESA
-  // ============================================
+  // ====================
+  // REGISTRO EMPRESA
+  // ====================
   registerCompany(company: any): Observable<any> {
     return this.http.post(this.companiesUrl, company);
   }
 
-  // ============================================
-  // 🔹 GUARDAR SESIÓN
-  // ============================================
-  saveSession(token: string, role: string, userId?: number): void {
-    localStorage.setItem('token', token);
-    localStorage.setItem('role', role);
+  // =====================================================
+  // GUARDAR SESIÓN (ARREGLADO PARA USERS Y COMPANIES)
+  // =====================================================
+  saveSession(token: string, role: string, id: number): void {
 
-    if (userId) {
-      localStorage.setItem('userId', userId.toString());
+    const normalizedRole = role.startsWith('ROLE_') ? role : `ROLE_${role}`;
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', normalizedRole);
+
+    // ✔ Usuario normal
+    if (normalizedRole === 'ROLE_USER') {
+      localStorage.setItem('userId', id.toString());
+    }
+
+    // ✔ Empresa
+    if (normalizedRole === 'ROLE_COMPANY') {
+      localStorage.setItem('companyId', id.toString());
     }
   }
 
-  // ============================================
-  // 🔹 Obtener token
-  // ============================================
+  // ====================
+  // GETTERS
+  // ====================
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // ============================================
-  // 🔹 Obtener rol
-  // ============================================
   getRole(): string | null {
     return localStorage.getItem('role');
   }
 
-  // ============================================
-  // 🔹 Obtener ID usuario autenticado
-  // ============================================
   getUserId(): number | null {
     const id = localStorage.getItem('userId');
     return id ? Number(id) : null;
   }
 
-  // ============================================
-  // 🔥 MÉTODOS DE VALIDACIÓN
-  // ============================================
+  getCompanyId(): number | null {
+    const id = localStorage.getItem('companyId');
+    return id ? Number(id) : null;
+  }
+
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token && token.trim() !== '';
   }
 
+  // ====================
+  // ROLES
+  // ====================
   isUser(): boolean {
     return this.getRole() === 'ROLE_USER';
   }
@@ -93,9 +98,9 @@ export class AuthService {
     return this.getRole() === 'ROLE_ADMIN';
   }
 
-  // ============================================
-  // 🔹 CERRAR SESIÓN
-  // ============================================
+  // ====================
+  // LOGOUT
+  // ====================
   logout(): void {
     localStorage.clear();
   }

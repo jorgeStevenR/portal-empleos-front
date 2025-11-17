@@ -1,0 +1,33 @@
+.empresa-container {
+  max-width: 900px;
+  margin: 120px auto 50px;
+  padding: 20px;
+}
+
+.empresa-box {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+}
+
+h2 {
+  font-size: 28px;
+  color: #1b5e20;
+  margin-bottom: 20px;
+}
+
+.campo {
+  margin-bottom: 18px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.valor {
+  background: #ecf7ec;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 5px;
+}

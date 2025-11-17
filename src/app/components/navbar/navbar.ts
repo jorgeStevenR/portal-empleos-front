@@ -1,47 +1,45 @@
 import { Component, Input } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
 export class NavbarComponent {
 
-  @Input() navbarOffset: boolean = true;
+  @Input() navbarOffset: boolean = false;
 
   isDark = false;
 
-  constructor(public auth: AuthService, private router: Router) {}
-
-  toggleTheme() {
-    this.isDark = !this.isDark;
-
-    const body = document.querySelector('body');
-
-    if (this.isDark) {
-      body?.classList.add('dark-theme');
-    } else {
-      body?.classList.remove('dark-theme');
-    }
-
-    console.log("DARK MODE?", this.isDark);
-  }
+  constructor(private auth: AuthService, private router: Router) {}
 
   get isLoggedIn(): boolean {
     return this.auth.isAuthenticated();
   }
 
-  isAdmin() { return this.auth.isAdmin(); }
-  isCompany() { return this.auth.isCompany(); }
-  isUser() { return this.auth.isUser(); }
+  isUser(): boolean {
+    return this.auth.isUser();
+  }
+
+  isCompany(): boolean {
+    return this.auth.isCompany();
+  }
+
+  isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
 
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleTheme(): void {
+    this.isDark = !this.isDark;
   }
 }

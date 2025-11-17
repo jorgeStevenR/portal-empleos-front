@@ -7,35 +7,44 @@
 
   <!-- CENTRO -->
   <ul class="navbar-links">
+
     <li><a routerLink="/home">Inicio</a></li>
     <li><a routerLink="/ofertas-laborales">Ofertas</a></li>
 
+    <!-- CANDIDATO -->
     <li *ngIf="isUser()">
       <a routerLink="/candidato">Mis postulaciones</a>
     </li>
 
+    <!-- EMPRESA -->
     <li *ngIf="isCompany()">
       <a routerLink="/empresa">Mis ofertas</a>
     </li>
 
+    <!-- PERFIL USUARIO -->
+    <li *ngIf="isUser()">
+      <a routerLink="/perfil">Perfil</a>
+    </li>
+
+    <!-- PERFIL EMPRESA -->
+    <li *ngIf="isCompany()">
+      <a routerLink="/perfil-empresa">Perfil Empresa</a>
+    </li>
+
+    <!-- ADMIN -->
     <li *ngIf="isAdmin()">
       <a routerLink="/admin">Administración</a>
     </li>
 
-    <li *ngIf="isLoggedIn">
-      <a routerLink="/perfil">Perfil</a>
-    </li>
   </ul>
 
   <!-- DERECHA -->
   <div class="navbar-right">
 
-    <!-- 🔥 Switch Día/Noche -->
     <button class="mode-btn" (click)="toggleTheme()">
       <div class="toggle-ball" [class.dark]="isDark"></div>
     </button>
 
-    <!-- Login / Logout -->
     <a *ngIf="!isLoggedIn" class="login-btn" routerLink="/login">Iniciar sesión</a>
 
     <button *ngIf="isLoggedIn" class="logout-btn" (click)="logout()">Cerrar sesión</button>

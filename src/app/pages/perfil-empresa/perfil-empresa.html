@@ -1,0 +1,33 @@
+<div class="empresa-container" *ngIf="!loading">
+
+  <div class="empresa-box">
+    <h2>🏢 Perfil de la Empresa</h2>
+
+    <div class="campo">
+      <label>Nombre:</label>
+      <div class="valor">{{ empresaData.name }}</div>
+    </div>
+
+    <div class="campo">
+      <label>NIT:</label>
+      <div class="valor">{{ empresaData.nit }}</div>
+    </div>
+
+    <div class="campo">
+      <label>Correo:</label>
+      <div class="valor">{{ empresaData.emailEntity?.email }}</div>
+    </div>
+
+    <div class="campo">
+      <label>Ubicación:</label>
+      <div class="valor">{{ empresaData.location || 'Sin especificar' }}</div>
+    </div>
+
+    <div class="campo">
+      <label>Descripción:</label>
+      <div class="valor">{{ empresaData.description || 'Sin descripción' }}</div>
+    </div>
+
+  </div>
+
+</div>
