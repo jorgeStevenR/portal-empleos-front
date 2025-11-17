@@ -1,39 +1,31 @@
 <div class="candidato-container">
-  <h2>Ofertas disponibles</h2>
-
-  <div *ngIf="loading">Cargando vacantes...</div>
-
-  <div *ngIf="!loading && jobs.length > 0; else noJobs">
-    <div class="job-card" *ngFor="let job of jobs">
-      <h3>{{ job.title }}</h3>
-      <p>{{ job.description }}</p>
-      <p><strong>Ubicación:</strong> {{ job.location }}</p>
-      <p><strong>Modalidad:</strong> {{ job.mode }}</p>
-      <p><strong>Empresa:</strong> {{ job.company?.name }}</p>
-
-      <button
-        [disabled]="isApplied(job.idJob)"
-        (click)="apply(job.idJob)"
-      >
-        {{ isApplied(job.idJob) ? 'Ya postulado' : 'Postularme' }}
-      </button>
-    </div>
-  </div>
-
-  <ng-template #noJobs>
-    <p>No hay vacantes disponibles por el momento.</p>
-  </ng-template>
-
+  
   <h2>Mis postulaciones</h2>
-  <div *ngIf="applications.length > 0; else noApps">
+
+  <div *ngIf="loading">Cargando tus postulaciones...</div>
+
+  <div *ngIf="!loading && applications.length > 0; else noApps">
+
     <div class="app-card" *ngFor="let app of applications">
-      <p><strong>Puesto:</strong> {{ app.job.title }}</p>
-      <p><strong>Empresa:</strong> {{ app.job.company.name }}</p>
+
+      <h3>{{ app.job.title }}</h3>
+
+      <p><strong>Empresa:</strong> {{ app.job.company?.name }}</p>
+      <p><strong>Ubicación:</strong> {{ app.job.location }}</p>
+      <p><strong>Modalidad:</strong> {{ app.job.mode }}</p>
       <p><strong>Estado:</strong> {{ app.status }}</p>
+
+      <!-- 🔥 Ahora abre el detalle completo -->
+      <button class="btn-ver" [routerLink]="['/postulacion-detalle', app.idApplication]">
+        Ver detalle
+      </button>
+
     </div>
+
   </div>
 
   <ng-template #noApps>
     <p>No te has postulado a ninguna oferta aún.</p>
   </ng-template>
+
 </div>

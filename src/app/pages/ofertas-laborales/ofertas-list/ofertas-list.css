@@ -51,11 +51,33 @@
   border: 1px solid #eef5f0;
   transition: all 0.28s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .oferta-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+/* ====== TARJETA POSTULADO (VERDE) ====== */
+.oferta-card.postulado {
+  background: #e9f8ef;
+  border: 2px solid #1b8a3a;
+  box-shadow: 0 12px 32px rgba(27, 138, 58, 0.12);
+}
+
+/* BADGE VERDE */
+.badge-postulado {
+  background: #1b8a3a;
+  color: white;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  border-radius: 14px;
+  font-weight: 600;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* ====== HEADER EMPRESA ====== */
@@ -76,6 +98,7 @@
   border: 2px solid #dcefe2;
 }
 
+/* ====== EMPRESA INFO ====== */
 .empresa-info {
   text-align: left;
 }
@@ -92,7 +115,7 @@
   color: #555;
 }
 
-/* ====== TITULO DEL EMPLEO ====== */
+/* ====== TITULO ====== */
 .titulo {
   font-size: 1.3rem;
   font-weight: 700;
@@ -125,4 +148,9 @@
 .btn-ver:hover {
   background: #156b2c;
   transform: translateY(-3px);
+}
+
+/* ====== BOTÓN EN TARJETA POSTULADO ====== */
+.btn-postulado {
+  background: #1b8a3a !important;
 }

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JobService } from '../../../services/job.service';
+import { ApplicationService } from '../../../services/application.service';
+import { AuthService } from '../../../services/auth.service';
 import { FiltroEmpleosPipe } from '../../../pipes/filtro-empleos.pipe';
 
 @Component({
@@ -15,41 +17,50 @@ import { FiltroEmpleosPipe } from '../../../pipes/filtro-empleos.pipe';
 export class OfertasListComponent implements OnInit {
 
   empleos: any[] = [];
-  empleosFiltrados: any[] = [];
+  postuladosIds: number[] = [];
 
   filtro: string = '';
   cargando = true;
 
-  constructor(private jobService: JobService, private router: Router) {}
+  constructor(
+    private jobService: JobService,
+    private applicationService: ApplicationService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+
+    // 1️⃣ Obtener ofertas
     this.jobService.getAllJobs().subscribe({
       next: (data: any[]) => {
         this.empleos = data;
-        this.empleosFiltrados = data;  // inicial
+
+        // 2️⃣ Obtener postulaciones del usuario
+        const userId = this.authService.getUserId();
+
+        if (userId) {
+          this.applicationService.getByUserId(userId).subscribe({
+            next: (apps: any[]) => {
+              this.postuladosIds = apps.map(a => a.job.idJob);
+              console.log('Postulados del usuario:', this.postuladosIds);
+            },
+            error: err => console.error('Error al traer postulaciones', err)
+          });
+        }
+
         this.cargando = false;
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('❌ Error al cargar empleos', err);
         this.cargando = false;
       }
     });
   }
 
-  // 🔍 Aplicar filtro sin usar el pipe en el ngFor
-  filtrar(): void {
-    const term = this.filtro.toLowerCase().trim();
-
-    if (!term) {
-      this.empleosFiltrados = this.empleos;
-      return;
-    }
-
-    this.empleosFiltrados = this.empleos.filter(job =>
-      job.title?.toLowerCase().includes(term) ||
-      job.description?.toLowerCase().includes(term) ||
-      job.company?.name?.toLowerCase().includes(term)
-    );
+  // 🔥 Saber si el usuario YA se postuló a este job
+  esPostulado(idJob: number): boolean {
+    return this.postuladosIds.includes(idJob);
   }
 
   verDetalle(id: number): void {

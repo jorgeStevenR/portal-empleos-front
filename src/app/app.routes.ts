@@ -21,6 +21,9 @@ import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa';
 // 🌿 Postulación
 import { PostulacionComponent } from './pages/postulacion/postulacion';
 
+// 🌿 NUEVO — Detalle de postulación
+import { PostulacionDetalleComponent } from './pages/postulacion-detalle/postulacion-detalle';
+
 // 🏢 Paneles privados
 import { AdminComponent } from './pages/admin/admin';
 import { EmpresaComponent } from './pages/empresa/empresa';
@@ -58,6 +61,13 @@ export const routes: Routes = [
   {
     path: 'postulacion/:idJob',
     component: PostulacionComponent,
+    canActivate: [userGuard]
+  },
+
+  // ⭐ NUEVA RUTA — DETALLE DE POSTULACIÓN
+  {
+    path: 'postulacion-detalle/:idApp',
+    component: PostulacionDetalleComponent,
     canActivate: [userGuard]
   },
 

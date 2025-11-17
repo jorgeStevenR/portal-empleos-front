@@ -1,0 +1,161 @@
+.detalle-container {
+  display: flex;
+  justify-content: center;
+  padding: 120px 20px 60px;
+}
+
+/* TARJETA GENERAL */
+.detalle-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 780px;
+  padding: 45px;
+  border-radius: 18px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* LOGO EMPRESA */
+.empresa-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 18px;
+  border: 2px solid #e8f5e9;
+  padding: 5px;
+}
+
+/* TÍTULO */
+.titulo-oferta {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1b5e20;
+  margin-bottom: 5px;
+}
+
+.empresa-nombre {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.ubicacion {
+  color: #666;
+  margin-bottom: 18px;
+}
+
+/* DIVISOR */
+.divider {
+  border: none;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 25px 0 35px;
+}
+
+/* SUBTÍTULO */
+.subtitulo {
+  color: #1b5e20;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* ESTADO */
+.estado-box {
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 200px;
+  margin: 0 auto 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.estado-box.pending {
+  background: #fff8e1;
+  color: #ff9800;
+  border: 1px solid #ffe0b2;
+}
+
+.estado-box.accepted {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.estado-box.rejected {
+  background: #ffebee;
+  color: #e53935;
+  border: 1px solid #ffcdd2;
+}
+
+/* CARTA */
+.carta {
+  background: #f7fff7;
+  border-left: 4px solid #2e7d32;
+  padding: 15px 18px;
+  border-radius: 8px;
+  color: #3b3b3b;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  text-align: left;
+  line-height: 1.5rem;
+}
+
+/* FECHA */
+.fecha {
+  color: #666;
+  margin-bottom: 35px;
+  font-size: 0.95rem;
+}
+
+/* CAJA CANDIDATO */
+.cand-box {
+  background: #f9fff9;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: left;
+  border: 1px solid #c8e6c9;
+  margin-bottom: 25px;
+}
+
+.cv-section {
+  margin-top: 10px;
+}
+
+.cv-link {
+  color: #1b5e20;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cv-link:hover {
+  text-decoration: underline;
+}
+
+/* BOTÓN VOLVER */
+.btn-volver {
+  padding: 12px 26px;
+  background: #ffffff;
+  border: 2px solid #1b5e20;
+  color: #1b5e20;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+
+.btn-volver:hover {
+  background: #e8f5e9;
+  transform: translateY(-3px);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

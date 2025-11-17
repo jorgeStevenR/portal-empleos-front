@@ -1,0 +1,73 @@
+<div class="detalle-container" *ngIf="!cargando && application">
+
+  <div class="detalle-card">
+
+    <!-- LOGO EMPRESA -->
+    <img
+      [src]="application.job.company?.logoUrl || 'assets/img/default-job.png'"
+      class="empresa-logo"
+    />
+
+    <!-- TÍTULO -->
+    <h2 class="titulo-oferta">{{ application.job.title }}</h2>
+
+    <h4 class="empresa-nombre">{{ application.job.company?.name }}</h4>
+
+    <p class="ubicacion">
+      📍 {{ application.job.location }}
+    </p>
+
+    <hr class="divider" />
+
+    <!-- ESTADO -->
+    <h3 class="subtitulo">Estado de tu postulación</h3>
+
+    <div class="estado-box" [ngClass]="application.status.toLowerCase()">
+      {{ application.status }}
+    </div>
+
+    <!-- CARTA -->
+    <h3 class="subtitulo">Tu carta de presentación</h3>
+
+    <div class="carta">
+      {{ application.coverLetter }}
+    </div>
+
+    <!-- FECHA -->
+    <p class="fecha">
+      <strong>Fecha de postulación:</strong><br>
+      {{ application.appliedAt | date:'longDate' }} — {{ application.appliedAt | date:'shortTime' }}
+    </p>
+
+    <!-- DATOS DEL CANDIDATO -->
+    <hr class="divider" />
+
+    <h3 class="subtitulo">Datos del candidato</h3>
+
+    <div class="cand-box">
+      <p><strong>Nombre:</strong> {{ candidato?.name }}</p>
+      <p><strong>Correo:</strong> {{ candidato?.emailEntity?.email }}</p>
+      <p><strong>Fecha de registro:</strong>
+        {{ candidato?.createdAt | date:'longDate' }}
+      </p>
+
+      <div class="cv-section" *ngIf="candidato?.cvUrl">
+        <strong>Currículum Vitae:</strong><br>
+        <a class="cv-link" [href]="candidato.cvUrl" target="_blank">
+          📄 Ver CV (PDF)
+        </a>
+      </div>
+    </div>
+
+    <!-- BOTÓN -->
+    <button class="btn-volver" routerLink="/candidato">
+      ⬅ Volver a mis postulaciones
+    </button>
+
+  </div>
+
+</div>
+
+<div *ngIf="cargando" class="loading">
+  Cargando información...
+</div>

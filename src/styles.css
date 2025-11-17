@@ -7,14 +7,12 @@ body.dark-theme {
   color: #ffffff !important;
 }
 
-/* NAVBAR en modo oscuro */
 body.dark-theme .navbar-container {
   background: rgba(20, 20, 20, 0.7) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: white !important;
 }
 
-/* Links del navbar */
 body.dark-theme .navbar-links a {
   color: #e8e8e8 !important;
 }
@@ -23,34 +21,56 @@ body.dark-theme .navbar-links a:hover {
   color: #00e676 !important;
 }
 
-/* Cerrar sesión */
 body.dark-theme .logout-btn {
   border-color: #ff5252 !important;
   color: #ff5252 !important;
 }
 
-/* =============================
-   🌿 ESPACIADO PARA TODAS LAS PÁGINAS
-============================= */
-
-.page-container {
-  padding-top: 140px; /* espacio para topbar + navbar */
-  min-height: 100vh;
-}
 
 /* =============================
-   🛑 FIX ABSOLUTO — NO MÁS SCROLL HORIZONTAL
+   🌿 LAYOUT GLOBAL (FIX DEFINITIVO)
 ============================= */
 
+/* Evitar scroll horizontal raro */
 html, body {
   overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  max-width: 100%;
 }
 
-/* Fondo global */
+/* Fondo y fuente */
 body {
   background-color: #f1fff1;
   font-family: "Inter", sans-serif;
-  margin: 0;
+}
+
+/* 🔥 CONTENEDOR GLOBAL PARA TODAS LAS PÁGINAS */
+.page-container {
+  width: 100%;
+  max-width: 1300px;   /* 🔥 CENTRADO GLOBAL */
+  margin: 0 auto;      /* Centra todo */
+  
+  padding-top: 140px;   /* espacio navbar + topbar */
+  padding-bottom: 60px; /* espacio antes del footer */
+
+  min-height: calc(100vh - 200px);
+  /* 100vh - (navbar + footer) evita huecos y pegadas */
+  
+  box-sizing: border-box;
+}
+
+
+/* =============================
+   🛑 FIX EXTRA — EL FOOTER SIEMPRE ABAJO
+============================= */
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+router-outlet + * {
+  flex-grow: 1; /* El contenido empuja al footer hacia abajo */
 }

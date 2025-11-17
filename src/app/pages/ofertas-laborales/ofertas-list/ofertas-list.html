@@ -25,39 +25,46 @@
       
       <div
         class="oferta-card"
+        [class.postulado]="esPostulado(job.idJob)"
         *ngFor="let job of empleos | filtroEmpleos:filtro"
         (click)="verDetalle(job.idJob)"
       >
+
+        <!-- BADGE POSTULADO -->
+        <div *ngIf="esPostulado(job.idJob)" class="badge-postulado">
+          ✔ Ya postulaste
+        </div>
         
         <!-- HEADER -->
         <div class="empresa-header">
           <img
-            [src]="job.company?.urlImg || 'assets/img/default-job.png'"
+            [src]="job.company?.logoUrl || 'assets/img/default-job.png'"
             class="empresa-logo"
             (error)="onImageError($event)"
           />
 
           <div class="empresa-info">
             <h4 class="empresa-nombre">{{ job.company?.name }}</h4>
-            <span class="ubicacion">📍 {{ job.location }}</span>
+            <span class="ubicacion">{{ job.location }}</span>
           </div>
         </div>
 
         <!-- BODY -->
-        <div class="oferta-body">
-          <h3 class="titulo">{{ job.title }}</h3>
+        <h3 class="titulo">{{ job.title }}</h3>
 
-          <p class="descripcion">
-            {{
-              job.description.length > 100
-                ? (job.description | slice: 0:100) + '...'
-                : job.description
-            }}
-          </p>
-        </div>
+        <p class="descripcion">
+          {{
+            job.description.length > 100
+              ? (job.description | slice: 0:100) + '...'
+              : job.description
+          }}
+        </p>
 
         <!-- BOTÓN -->
-        <button class="btn-ver">
+        <button
+          class="btn-ver"
+          [class.btn-postulado]="esPostulado(job.idJob)"
+        >
           Ver más
         </button>
 
