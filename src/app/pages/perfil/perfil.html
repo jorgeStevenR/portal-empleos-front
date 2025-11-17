@@ -19,19 +19,19 @@
   <div class="perfil-box">
     <h2>📄 Currículum (PDF)</h2>
 
-    <!-- ========== VISOR DE PDF ========== -->
+    <!-- Visor de PDF -->
     <div class="pdf-viewer" *ngIf="userData.cvUrl">
       <iframe [src]="userData.cvUrl | safeUrl"></iframe>
     </div>
 
-    <!-- Botones abajo del visor -->
+    <!-- Botones debajo -->
     <div class="botones-cv">
 
-      <!-- Ver CV -->
+      <!-- Ver -->
       <button
         class="btn-ver"
         *ngIf="userData.cvUrl"
-        (click)="window.open(userData.cvUrl, '_blank')">
+        (click)="verCV()">
         🔗 Ver CV en nueva pestaña
       </button>
 
@@ -42,10 +42,12 @@
 
     </div>
 
-    <!-- Uploader -->
+    <!-- Subir archivo -->
     <div class="upload-area" *ngIf="mostrarUploader">
       <input type="file" accept="application/pdf" (change)="onFileSelected($event)" />
-      <button class="btn-upload" (click)="uploadFile()">Subir CV</button>
+      <button class="btn-upload" (click)="uploadFile()">
+        Subir CV
+      </button>
     </div>
 
   </div>

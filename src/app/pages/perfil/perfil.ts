@@ -1,11 +1,17 @@
+// ============================================
+// 📂 src/app/pages/perfil/perfil.ts
+// ============================================
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { ToastService } from '../../services/toast.service';
 import { environment } from '../../../environments/environment';
+
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 
 @Component({
@@ -20,7 +26,6 @@ export class PerfilComponent implements OnInit {
   userData: any = {};
   loading = false;
   selectedFile: File | null = null;
-
   mostrarUploader = false;
 
   constructor(
@@ -52,12 +57,12 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  // 🔄 Mostrar/ocultar el uploader
-  toggleUploader() {
+  // Mostrar / Ocultar cargador de CV
+  toggleUploader(): void {
     this.mostrarUploader = !this.mostrarUploader;
   }
 
-  // 📄 Abrir CV en nueva pestaña
+  // Ver CV en nueva pestaña
   verCV(): void {
     if (this.userData?.cvUrl) {
       window.open(this.userData.cvUrl, '_blank');
@@ -66,10 +71,12 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  // Seleccionar archivo
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
 
+  // Subir archivo al backend
   uploadFile(): void {
     if (!this.selectedFile) {
       this.toast.show("Selecciona un archivo primero.", "warning");
@@ -87,8 +94,9 @@ export class PerfilComponent implements OnInit {
     this.http.post<any>(url, formData).subscribe({
       next: (resp) => {
         if (resp.cvUrl) this.userData.cvUrl = resp.cvUrl;
+
         this.toast.show("CV subido correctamente", "success");
-        this.mostrarUploader = false;  
+        this.mostrarUploader = false;
       },
       error: () => {
         this.toast.show("Error al subir CV", "error");
