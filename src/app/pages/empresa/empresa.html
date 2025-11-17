@@ -1,6 +1,8 @@
 <div class="empresa-container">
+
   <h2>Mis Ofertas Laborales</h2>
 
+  <!-- FORMULARIO -->
   <form (ngSubmit)="createJob()" class="job-form">
     <input [(ngModel)]="newJob.title" name="title" placeholder="Título del empleo" required />
     <textarea [(ngModel)]="newJob.description" name="description" placeholder="Descripción" required></textarea>
@@ -13,17 +15,43 @@
     <button type="submit">Publicar oferta</button>
   </form>
 
+  <!-- LISTA DE EMPLEOS -->
   <div class="job-list" *ngIf="jobs.length; else noJobs">
+
     <div class="job-item" *ngFor="let job of jobs">
       <h3>{{ job.title }}</h3>
       <p>{{ job.description }}</p>
       <p><strong>Ubicación:</strong> {{ job.location }}</p>
       <p><strong>Modalidad:</strong> {{ job.mode }}</p>
+
       <button (click)="deleteJob(job.idJob)">🗑 Eliminar</button>
+
+      <!-- 🔥 LISTA DE POSTULACIONES -->
+      <div class="postulaciones" *ngIf="postulaciones[job.idJob]?.length">
+        <h4>Postulantes:</h4>
+
+        <div class="postulante" *ngFor="let p of postulaciones[job.idJob]">
+          <p><strong>{{ p.user.name }}</strong> — {{ p.user.emailEntity.email }}</p>
+
+          <p><strong>Estado:</strong> {{ p.status }}</p>
+
+          <a 
+            *ngIf="p.user.cvUrl"
+            [href]="p.user.cvUrl"
+            target="_blank"
+            class="cv-btn"
+          >📄 Ver CV</a>
+
+          <p class="fecha">Postulado el: {{ p.appliedAt | date:'medium' }}</p>
+        </div>
+      </div>
+
     </div>
+
   </div>
 
   <ng-template #noJobs>
     <p>No has publicado ofertas aún.</p>
   </ng-template>
+
 </div>

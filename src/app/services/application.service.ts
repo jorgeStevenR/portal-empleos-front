@@ -35,5 +35,7 @@ export class ApplicationService {
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
-
+  getByJobId(jobId: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/job/${jobId}`);
+  }
 }

@@ -1,6 +1,6 @@
 .empresa-container {
   max-width: 700px;
-  margin: 30px auto;
+  margin: 140px auto 30px; /* 🔥 espaciado desde arriba */
   background: #fff;
   padding: 20px;
   border-radius: 12px;
@@ -28,4 +28,35 @@
 .job-item {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
+}
+
+.postulaciones {
+  background: #f4fff4;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  border: 1px solid #c8e6c9;
+}
+
+.postulante {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.postulante:last-child {
+  border-bottom: none;
+}
+
+.cv-btn {
+  background: #2e7d32;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.fecha {
+  color: #666;
+  font-size: 13px;
 }
