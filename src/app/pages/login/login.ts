@@ -21,6 +21,11 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
+  // --------------------------------------------------
+  // 👁️ NUEVO: CONTROLAR VISIBILIDAD DE LA CONTRASEÑA
+  // --------------------------------------------------
+  showPassword = false;
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -30,6 +35,24 @@ export class LoginComponent {
     this.router.navigate(['/home']);
   }
 
+  // --------------------------------------------------
+  // 👁️ NUEVO: FUNCIÓN PARA MOSTRAR/OCULTAR CONTRASEÑA
+  // --------------------------------------------------
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+
+    // Cambiar icono del ojo dinámicamente
+    const eye = document.querySelector('.eye') as HTMLElement;
+    if (eye) {
+      eye.style.backgroundImage = this.showPassword
+        ? 'url("assets/icons/eye-off.svg")'
+        : 'url("assets/icons/eye.svg")';
+    }
+  }
+
+  // --------------------------------------------------
+  // 🔐 LÓGICA DE LOGIN (NO SE MODIFICA NADA)
+  // --------------------------------------------------
   login(): void {
     if (!this.email || !this.password) {
       this.errorMessage = 'Por favor ingrese correo y contraseña.';

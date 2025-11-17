@@ -24,20 +24,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
   background: linear-gradient(180deg, #e8f5e9, #d7f4d9, #f3fff3);
-  overflow-x: hidden;
+  padding: 0;
 }
 
-/* ============ CAJA CENTRAL ============ */
+/* ============ CONTENEDOR CENTRAL ============ */
 .login-container {
-  background: white;
+  background: #ffffff;
   padding: 40px;
   border-radius: 14px;
   width: 100%;
   max-width: 450px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* TÍTULOS */
@@ -66,15 +65,18 @@ label {
   display: block;
 }
 
+/* INPUTS */
 input {
   width: 100%;
-  padding: 12px;
+  height: 46px;
+  padding: 12px 14px;
+  font-size: 15px;
   border-radius: 8px;
   border: 1px solid #cddccd;
   background: #fafafa;
-  font-size: 15px;
   outline: none;
   transition: 0.25s;
+  box-sizing: border-box;
 }
 
 input:focus {
@@ -82,7 +84,7 @@ input:focus {
   box-shadow: 0 0 4px rgba(67, 160, 71, 0.25);
 }
 
-/* PASSWORD BOX */
+/* ============ PASSWORD BOX ============ */
 .password-box {
   position: relative;
 }
@@ -92,43 +94,55 @@ input:focus {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background-image: url("assets/icons/eye.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
   cursor: pointer;
-  font-size: 18px;
+  opacity: 0.75;
+  transition: 0.2s ease-in-out;
 }
 
-/* BOTÓN */
+.password-box .eye:hover {
+  opacity: 1;
+}
+
+/* ============ BOTÓN LOGIN ============ */
 button {
   width: 100%;
-  margin-top: 15px;
   padding: 12px;
+  margin-top: 15px;
   background: #2e7d32;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
   border: none;
   border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 button:hover:not([disabled]) {
   background: #256d3a;
+  transform: translateY(-2px);
 }
 
 button[disabled] {
   background: #a5d6a7;
+  cursor: default;
 }
 
-/* ERROR */
+/* ============ ERROR MESSAGE ============ */
 .error {
-  color: #d32f2f;
   margin-top: 10px;
+  color: #d32f2f;
   text-align: center;
 }
 
-/* REGISTRO */
+/* ============ REGISTER TEXT ============ */
 .register-text {
-  margin-top: 20px;
+  margin-top: 22px;
   color: #444;
   font-size: 0.95rem;
 }
@@ -137,7 +151,6 @@ button[disabled] {
   color: #1b5e20;
   font-weight: 600;
   text-decoration: none;
-  margin: 0 4px;
 }
 
 .register-text a:hover {

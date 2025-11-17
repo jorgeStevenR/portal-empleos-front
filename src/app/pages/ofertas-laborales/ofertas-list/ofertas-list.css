@@ -1,3 +1,7 @@
+/* ==========================================================
+   🌿 DISEÑO COMPLETO DE LA LISTA DE OFERTAS (FINAL OPTIMIZADO)
+   ========================================================== */
+
 /* ====== CONTENEDOR GENERAL ====== */
 .ofertas-container {
   text-align: center;
@@ -33,16 +37,21 @@
   box-shadow: 0 0 6px rgba(29, 138, 69, 0.3);
 }
 
-/* ====== GRID ====== */
+/* =====================================================
+   🔥 AJUSTE IMPORTANTE — PARA QUE LAS CARDS NO SEAN GIGANTES
+   ===================================================== */
 .ofertas-grid {
   margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 35px;
   padding: 0 25px;
+  align-items: center; /* CENTRA LAS TARJETAS */
 }
 
-/* ====== TARJETA ====== */
+/* =====================================================
+   🔥 LIMITE DE ANCHO DE LA TARJETA (LA SOLUCIÓN)
+   ===================================================== */
 .oferta-card {
   background: white;
   border-radius: 16px;
@@ -52,8 +61,11 @@
   transition: all 0.28s ease;
   cursor: pointer;
   position: relative;
+  width: 100%;
+  max-width: 850px;  /* <----- AQUÍ SE ARREGLA EL PROBLEMA */
 }
 
+/* Hover */
 .oferta-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.12);
