@@ -44,28 +44,43 @@ export class LoginComponent {
 
         console.log("TOKEN:", resp.token);
         console.log("ROLE:", resp.role);
-        console.log("ID:", resp.id);
+        console.log("ID:", resp.id); // 🔥 ESTE ES EL ID DEL BACKEND
 
-        // 🔥 GUARDAR SESIÓN CORRECTA
+        // --------------------------------------------------
+        // 🔥 GUARDAR SESIÓN SIEMPRE COMO userId
+        // --------------------------------------------------
         this.authService.saveSession(resp.token, resp.role, resp.id);
 
-        // 🔥 REDIRECCIÓN SEGÚN ROL BACKEND
-        switch (resp.role) {
+        // --------------------------------------------------
+        // 🔥 NORMALIZAR ROL (por si backend manda COMPANY)
+        // --------------------------------------------------
+        const normalizedRole = resp.role.startsWith('ROLE_')
+          ? resp.role
+          : `ROLE_${resp.role}`;
+
+        // --------------------------------------------------
+        // 🔥 REDIRECCIÓN SEGÚN ROL
+        // --------------------------------------------------
+        switch (normalizedRole) {
           case 'ROLE_USER':
             this.router.navigate(['/perfil']);
             break;
+
           case 'ROLE_COMPANY':
-            this.router.navigate(['/empresa']);
+            this.router.navigate(['/perfil-empresa']);
             break;
+
           case 'ROLE_ADMIN':
             this.router.navigate(['/admin']);
             break;
+
           default:
             this.router.navigate(['/home']);
         }
 
         this.loading = false;
       },
+
       error: () => {
         this.errorMessage = 'Credenciales incorrectas.';
         this.loading = false;

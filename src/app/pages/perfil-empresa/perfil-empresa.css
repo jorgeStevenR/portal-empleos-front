@@ -1,18 +1,21 @@
+/* =====================================
+📂 src/app/pages/perfil-empresa/perfil-empresa.css
+===================================== */
+
 .empresa-container {
-  max-width: 900px;
-  margin: 120px auto 50px;
+  max-width: 950px;
+  margin: 140px auto 50px auto;
   padding: 20px;
 }
 
 .empresa-box {
   background: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 h2 {
-  font-size: 28px;
   color: #1b5e20;
   margin-bottom: 20px;
 }
@@ -22,12 +25,44 @@ h2 {
 }
 
 label {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .valor {
-  background: #ecf7ec;
-  padding: 12px;
+  background: #e8f5e9;
+  padding: 10px;
   border-radius: 8px;
   margin-top: 5px;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid #c8e6c9;
+  background: #f9f9f9;
+}
+
+.upload-controls {
+  margin-top: 10px;
+}
+
+.btn-upload {
+  background: #2e7d32;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.btn-upload:hover {
+  background: #1b5e20;
 }

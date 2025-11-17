@@ -1,7 +1,28 @@
+<!-- =====================================
+📂 src/app/pages/perfil-empresa/perfil-empresa.html
+===================================== -->
+
 <div class="empresa-container" *ngIf="!loading">
 
   <div class="empresa-box">
     <h2>🏢 Perfil de la Empresa</h2>
+
+    <!-- LOGO -->
+    <div class="logo-section">
+      <img
+        class="logo-img"
+        [src]="empresaData.logoUrl && empresaData.logoUrl.trim() !== '' 
+              ? empresaData.logoUrl 
+              : 'assets/img/icono.jpg'"
+        alt="Logo empresa"
+        (error)="onLogoError($event)"
+      />
+
+      <div class="upload-controls">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+        <button class="btn-upload" (click)="subirLogo()">Subir logo</button>
+      </div>
+    </div>
 
     <div class="campo">
       <label>Nombre:</label>

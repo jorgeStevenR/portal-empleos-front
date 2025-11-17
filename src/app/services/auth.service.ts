@@ -37,23 +37,19 @@ export class AuthService {
   }
 
   // =====================================================
-  // GUARDAR SESIÓN (ARREGLADO PARA USERS Y COMPANIES)
+  // ⭐ GUARDAR SESIÓN (FUNCIONA PARA USERS Y COMPANIES)
   // =====================================================
   saveSession(token: string, role: string, id: number): void {
 
+    // Normalizar rol (ROLE_USER, ROLE_COMPANY)
     const normalizedRole = role.startsWith('ROLE_') ? role : `ROLE_${role}`;
 
     localStorage.setItem('token', token);
     localStorage.setItem('role', normalizedRole);
 
-    // ✔ Usuario normal
-    if (normalizedRole === 'ROLE_USER') {
+    // Guardamos SIEMPRE en userId sin importar si es USER o COMPANY
+    if (id != null) {
       localStorage.setItem('userId', id.toString());
-    }
-
-    // ✔ Empresa
-    if (normalizedRole === 'ROLE_COMPANY') {
-      localStorage.setItem('companyId', id.toString());
     }
   }
 
@@ -70,11 +66,6 @@ export class AuthService {
 
   getUserId(): number | null {
     const id = localStorage.getItem('userId');
-    return id ? Number(id) : null;
-  }
-
-  getCompanyId(): number | null {
-    const id = localStorage.getItem('companyId');
     return id ? Number(id) : null;
   }
 
