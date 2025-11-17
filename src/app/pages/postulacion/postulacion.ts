@@ -1,7 +1,12 @@
+// ============================================
+// 📂 src/app/pages/postulacion/postulacion.ts
+// ============================================
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';   // 🔥 IMPORTANTE!!!
 import { JobService } from '../../services/job.service';
 import { ApplicationService } from '../../services/application.service';
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +14,11 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-postulacion',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule   // 🔥 NECESARIO PARA routerLink
+  ],
   templateUrl: './postulacion.html',
   styleUrls: ['./postulacion.css']
 })

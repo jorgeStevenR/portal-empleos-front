@@ -20,7 +20,8 @@
       ✔ Enviar postulación
     </button>
 
-    <button class="btn-volver" routerLink="/oferta/{{ idJob }}">
+    <!-- 🔥 FIX REAL AQUÍ -->
+    <button class="btn-volver" [routerLink]="['/oferta', idJob]">
       ⬅ Volver
     </button>
 
