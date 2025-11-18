@@ -39,16 +39,16 @@ export class LoginComponent {
   // 👁️ NUEVO: FUNCIÓN PARA MOSTRAR/OCULTAR CONTRASEÑA
   // --------------------------------------------------
   togglePassword() {
-    this.showPassword = !this.showPassword;
+  this.showPassword = !this.showPassword;
 
-    // Cambiar icono del ojo dinámicamente
-    const eye = document.querySelector('.eye') as HTMLElement;
-    if (eye) {
-      eye.style.backgroundImage = this.showPassword
-        ? 'url("assets/icons/eye-off.svg")'
-        : 'url("assets/icons/eye.svg")';
-    }
+  const eye = document.querySelector('.eye') as HTMLElement;
+  if (eye) {
+    eye.style.backgroundImage = this.showPassword
+      ? 'url("assets/img/eye-off.svg")'   // 🔥 RUTA CORREGIDA
+      : 'url("assets/img/eye.svg")';       // 🔥 RUTA CORREGIDA
   }
+}
+
 
   // --------------------------------------------------
   // 🔐 LÓGICA DE LOGIN (NO SE MODIFICA NADA)
