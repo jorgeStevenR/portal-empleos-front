@@ -27,7 +27,7 @@
 
     <!-- SELECT ESTILIZADO -->
     <select class="estado-select"
-            (change)="cambiarEstado(p.idApplication, $event.target.value)"
+            (change)="cambiarEstado(p.idApplication, ($event.target as HTMLSelectElement).value)"
             [value]="p.status">
 
       <option value="IN_PROGRESS">En revisión</option>
