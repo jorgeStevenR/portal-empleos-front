@@ -1,7 +1,8 @@
 // ============================================
 // 📂 src/app/pages/login/login.ts
 // ============================================
-import { Component } from '@angular/core';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -14,14 +15,12 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
 
   email = '';
   password = '';
   loading = false;
   errorMessage = '';
-
-  // 👁️ Control mostrar/ocultar contraseña
   showPassword = false;
 
   constructor(
@@ -29,7 +28,15 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  // 👁️ Cambiar entre text/password
+  // ⛔ Aplica FIX: Evita que el style.css global dañe el login
+  ngOnInit() {
+    document.body.classList.add('login-page-active');
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('login-page-active');
+  }
+
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
@@ -49,11 +56,6 @@ export class LoginComponent {
 
     this.authService.login(this.email, this.password).subscribe({
       next: (resp) => {
-
-        console.log("TOKEN:", resp.token);
-        console.log("ROLE:", resp.role);
-        console.log("ID:", resp.id);
-
         this.authService.saveSession(resp.token, resp.role, resp.id);
 
         const normalizedRole = resp.role.startsWith('ROLE_')
@@ -64,15 +66,12 @@ export class LoginComponent {
           case 'ROLE_USER':
             this.router.navigate(['/perfil']);
             break;
-
           case 'ROLE_COMPANY':
             this.router.navigate(['/perfil-empresa']);
             break;
-
           case 'ROLE_ADMIN':
             this.router.navigate(['/admin']);
             break;
-
           default:
             this.router.navigate(['/home']);
         }

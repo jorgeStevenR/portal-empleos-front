@@ -1,44 +1,50 @@
-/* ======== FONDO DEGRADADO Y POSICIÓN ======== */
+/* ============================================
+   FONDO DEGRADADO Y POSICIÓN
+============================================ */
 .login-page {
   min-height: calc(100vh - 80px);
   display: flex;
-  justify-content: center;     /* 👈 centra horizontal */
-  align-items: flex-start;     /* 👈 baja un poco */
+  justify-content: center;
+  align-items: flex-start;
   padding-top: 60px;
   background: linear-gradient(180deg, #e8f5e9, #d7f4d9, #f3fff3);
   overflow-x: hidden;
 }
 
-/* ======== CARD CENTRAL (ANCHO PERFECTO) ======== */
+/* ============================================
+   CARD CENTRAL
+============================================ */
 .login-container {
   background: white;
-  padding: 32px;               /* 👈 buen padding */
+  padding: 40px 45px; /* 👈 igual al login/candidato */
   border-radius: 16px;
   width: 100%;
-  max-width: 430px;            /* 👈 tamaño ideal (ni muy grande ni muy pequeño) */
+  max-width: 550px; /* 👈 ancho estándar */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   text-align: center;
+  box-sizing: border-box;
   animation: fadeIn 0.4s ease-in-out;
-  margin-left: auto;           /* 👈 ensures perfect centering */
-  margin-right: auto;
 }
 
-/* ======== TITULO ======== */
+/* ============================================
+   TÍTULO Y SUBTÍTULO
+============================================ */
 .login-title {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   color: #1b5e20;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-/* ======== SUBTÍTULO ======== */
 .login-text {
   font-size: 0.95rem;
   color: #666;
   margin-bottom: 22px;
 }
 
-/* ======== FORMULARIO ======== */
+/* ============================================
+   FORMULARIO
+============================================ */
 .login-form {
   text-align: left;
 }
@@ -52,7 +58,9 @@ label {
   display: block;
 }
 
-/* ======== INPUTS ======== */
+/* ============================================
+   INPUTS
+============================================ */
 input,
 textarea {
   width: 100%;
@@ -63,7 +71,8 @@ textarea {
   font-size: 14px;
   outline: none;
   transition: 0.25s;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
 input:focus,
@@ -72,7 +81,9 @@ textarea:focus {
   box-shadow: 0 0 4px rgba(67, 160, 71, 0.25);
 }
 
-/* ======== TEXTAREA ======== */
+/* ============================================
+   TEXTAREA
+============================================ */
 .empresa-textarea {
   min-height: 110px;
   max-height: 200px;
@@ -80,14 +91,54 @@ textarea:focus {
   resize: vertical;
 }
 
-/* ======== VALIDACIONES ANGULAR ======== */
+/* ============================================
+   PASSWORD BOX CON OJO CENTRADO PERFECTO
+============================================ */
+.password-box {
+  position: relative;
+}
+
+/* deja espacio para el ojo */
+.password-box input {
+  padding-right: 46px !important;
+}
+
+/* Ojo centrado EXACTAMENTE como en login/candidato */
+.password-box .eye {
+  position: absolute;
+  right: 14px;
+  top: 37%;               /* 👈 ESTE es el ajuste exacto */
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 100%;
+}
+
+.password-box img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: 0.2s ease;
+}
+
+.password-box img:hover {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+/* ============================================
+   VALIDACIONES ANGULAR
+============================================ */
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
   border-color: #888 !important;
   background: #f4f4f4 !important;
 }
 
-/* ======== MENSAJE ERROR ======== */
+/* ============================================
+   MENSAJE ERROR
+============================================ */
 .error {
   color: #444;
   font-size: 0.82rem;
@@ -97,7 +148,9 @@ textarea.ng-invalid.ng-touched {
   padding-left: 6px;
 }
 
-/* ======== BOTÓN ======== */
+/* ============================================
+   BOTÓN
+============================================ */
 button {
   width: 100%;
   padding: 12px;
@@ -120,11 +173,14 @@ button[disabled] {
   background: #a5d6a7;
 }
 
-/* ======== TEXTO FINAL ======== */
+/* ============================================
+   TEXTO FINAL
+============================================ */
 .register-text {
   margin-top: 20px;
   color: #444;
   font-size: 0.9rem;
+  text-align: center;
 }
 
 .register-text a {
@@ -136,7 +192,9 @@ button[disabled] {
   text-decoration: underline;
 }
 
-/* ======== ANIMACIÓN ======== */
+/* ============================================
+   ANIMACIÓN
+============================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }

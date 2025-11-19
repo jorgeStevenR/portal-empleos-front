@@ -19,7 +19,13 @@ export class RegisterCandidatoComponent {
   password = '';
   loading = false;
 
+  showPassword = false;  // 👁️ Control del ojo
+
   constructor(private auth: AuthService, private router: Router) {}
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   onRegister(): void {
     if (this.loading) return;

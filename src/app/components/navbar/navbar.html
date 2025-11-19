@@ -1,8 +1,13 @@
 <nav class="navbar-container" [class.with-offset]="navbarOffset">
 
-  <!-- IZQUIERDA -->
-  <div class="navbar-left">
-    🌿 <span class="logo-text">Portal Empleos</span>
+  <!-- IZQUIERDA (LOGO) -->
+  <div class="navbar-left"
+       (click)="goHome()"
+       [class.logo-zoom]="logoZoom">
+
+    <img src="assets/img/icono.jpg" class="logo-img" alt="Logo" />
+    <span class="logo-text">Portal Empleos</span>
+
   </div>
 
   <!-- CENTRO -->
@@ -11,27 +16,22 @@
     <li><a routerLink="/home">Inicio</a></li>
     <li><a routerLink="/ofertas-laborales">Ofertas</a></li>
 
-    <!-- CANDIDATO -->
     <li *ngIf="isUser()">
       <a routerLink="/candidato">Mis postulaciones</a>
     </li>
 
-    <!-- EMPRESA -->
     <li *ngIf="isCompany()">
       <a routerLink="/empresa">Mis ofertas</a>
     </li>
 
-    <!-- PERFIL USUARIO -->
     <li *ngIf="isUser()">
       <a routerLink="/perfil">Perfil</a>
     </li>
 
-    <!-- PERFIL EMPRESA -->
     <li *ngIf="isCompany()">
       <a routerLink="/perfil-empresa">Perfil Empresa</a>
     </li>
 
-    <!-- ADMIN -->
     <li *ngIf="isAdmin()">
       <a routerLink="/admin">Administración</a>
     </li>
@@ -41,13 +41,13 @@
   <!-- DERECHA -->
   <div class="navbar-right">
 
-    <button class="mode-btn" (click)="toggleTheme()">
-      <div class="toggle-ball" [class.dark]="isDark"></div>
+    <a *ngIf="!isLoggedIn" class="login-btn" routerLink="/login">
+      Iniciar sesión
+    </a>
+
+    <button *ngIf="isLoggedIn" class="logout-btn" (click)="logout()">
+      Cerrar sesión
     </button>
-
-    <a *ngIf="!isLoggedIn" class="login-btn" routerLink="/login">Iniciar sesión</a>
-
-    <button *ngIf="isLoggedIn" class="logout-btn" (click)="logout()">Cerrar sesión</button>
 
   </div>
 

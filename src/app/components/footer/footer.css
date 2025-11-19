@@ -26,16 +26,23 @@
   opacity: 0.85;
 }
 
-/* ICONOS */
-.footer-icons span {
-  font-size: 22px;
-  margin-right: 14px;
-  cursor: pointer;
-  transition: 0.3s;
+/* ICONOS PNG */
+.footer-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
 }
 
-.footer-icons span:hover {
-  opacity: 0.6;
+.social-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.12);
+  opacity: 0.85;
 }
 
 /* BOTÓN */

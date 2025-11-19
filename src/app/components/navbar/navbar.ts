@@ -1,3 +1,7 @@
+// ============================================
+// 📂 src/app/components/navbar/navbar.ts
+// ============================================
+
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
@@ -14,9 +18,32 @@ export class NavbarComponent {
 
   @Input() navbarOffset: boolean = false;
 
-  isDark = false;
+  logoZoom = false; // ⭐ Estado animación
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
+
+  // ⭐ Animación al clicar + redirección al home
+  animateLogo() {
+    this.logoZoom = true;
+
+    setTimeout(() => {
+      this.logoZoom = false;
+    }, 220);
+  }
+
+  goHome() {
+    this.animateLogo();
+
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 120);
+  }
+
+  // -----------------------------------------------------
 
   get isLoggedIn(): boolean {
     return this.auth.isAuthenticated();
@@ -37,9 +64,5 @@ export class NavbarComponent {
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/login']);
-  }
-
-  toggleTheme(): void {
-    this.isDark = !this.isDark;
   }
 }

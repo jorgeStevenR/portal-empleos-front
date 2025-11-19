@@ -1,4 +1,6 @@
-/* FONDO DEGRADADO - IGUAL AL LOGIN */
+/* ============================================
+   FONDO DEGRADADO (IGUAL AL LOGIN)
+============================================ */
 .login-page {
   min-height: calc(100vh - 80px);
   display: flex;
@@ -8,18 +10,23 @@
   padding: 0;
 }
 
-/* CARD */
+/* ============================================
+   CARD / CONTENEDOR
+============================================ */
 .login-container {
   background: white;
-  padding: 40px;
+  padding: 40px 45px;        /* 👈 equilibrio perfecto izquierda/derecha */
   border-radius: 14px;
   width: 100%;
-  max-width: 450px;
+  max-width: 550px;          /* 👈 Igual al login */
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   text-align: center;
+  box-sizing: border-box;
 }
 
-/* TITULO */
+/* ============================================
+   TÍTULO
+============================================ */
 .login-title {
   font-size: 1.9rem;
   color: #1b5e20;
@@ -27,14 +34,16 @@
   margin-bottom: 10px;
 }
 
-/* SUBTITULO */
+/* SUBTÍTULO */
 .login-text {
   font-size: 0.95rem;
   color: #666;
   margin-bottom: 25px;
 }
 
-/* FORM */
+/* ============================================
+   FORMULARIO
+============================================ */
 .login-form {
   text-align: left;
 }
@@ -47,7 +56,7 @@ label {
   display: block;
 }
 
-/* INPUTS */
+/* INPUTS GENERALES */
 input,
 textarea {
   width: 100%;
@@ -59,6 +68,7 @@ textarea {
   outline: none;
   transition: 0.25s;
   margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
 input:focus,
@@ -67,27 +77,45 @@ textarea:focus {
   box-shadow: 0 0 4px rgba(67, 160, 71, 0.25);
 }
 
-/* TEXTAREA ESPECIAL EMPRESA */
-.empresa-textarea {
-  min-height: 120px;
-  max-height: 200px;
-  overflow-y: auto;
-  resize: vertical;
+/* ============================================
+   PASSWORD BOX (OJO CENTRADO PERFECTAMENTE)
+============================================ */
+.password-box {
+  position: relative;
 }
 
-/* ANGULAR STATES */
-input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched {
-  border-color: #e53935 !important;
-  background: #ffeaea !important;
+/* Dejar espacio para el icono */
+.password-box input {
+  padding-right: 46px !important;
 }
 
-input.ng-valid.ng-touched,
-textarea.ng-valid.ng-touched {
-  border-color: #2e7d32 !important;
+/* 👇 OJO TOTALMENTE CENTRADO – FIX DEFINITIVO */
+.password-box .eye {
+  position: absolute;
+  right: 14px;
+  top: 37%;
+  transform: translateY(-50%);   /* 👈 CENTRADO REAL */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-/* ERROR */
+.password-box img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.password-box img:hover {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+/* ============================================
+   ERRORES
+============================================ */
 .error {
   color: #d32f2f;
   margin-top: -5px;
@@ -95,7 +123,9 @@ textarea.ng-valid.ng-touched {
   font-size: 0.85rem;
 }
 
-/* BOTÓN */
+/* ============================================
+   BOTÓN
+============================================ */
 button {
   width: 100%;
   padding: 12px;
@@ -118,11 +148,14 @@ button[disabled] {
   background: #a5d6a7;
 }
 
-/* LINKS */
+/* ============================================
+   LINKS INFERIORES
+============================================ */
 .register-text {
   margin-top: 20px;
   color: #444;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 .register-text a {

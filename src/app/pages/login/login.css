@@ -29,18 +29,19 @@
   overflow-x: hidden;
 }
 
-/* ============ CAJA CENTRAL ============ */
+/* ============ CAJA CENTRAL CENTRADA PERFECTAMENTE ============ */
 .login-container {
   background: white;
-  padding: 40px;
+  padding: 40px 45px;     /* ⭐ Ajustado: mismo margen izq/der */
   border-radius: 14px;
   width: 100%;
-  max-width: 450px;
+  max-width: 550px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   text-align: center;
+  box-sizing: border-box; /* ⭐ Evita que el padding rompa el ancho */
 }
 
-/* TÍTULOS */
+/* ============ TÍTULOS ============ */
 .login-title {
   font-size: 1.9rem;
   color: #1b5e20;
@@ -54,7 +55,7 @@
   margin-bottom: 25px;
 }
 
-/* FORMULARIO */
+/* ============ FORMULARIO ============ */
 .login-form {
   text-align: left;
 }
@@ -66,6 +67,7 @@ label {
   display: block;
 }
 
+/* Inputs alineados perfectamente */
 input {
   width: 100%;
   padding: 12px;
@@ -75,6 +77,7 @@ input {
   font-size: 15px;
   outline: none;
   transition: 0.25s;
+  box-sizing: border-box; /* ⭐ Fix para NO desalinear */
 }
 
 input:focus {
@@ -82,14 +85,18 @@ input:focus {
   box-shadow: 0 0 4px rgba(67, 160, 71, 0.25);
 }
 
-/* PASSWORD BOX */
+/* ============ PASSWORD BOX ============ */
 .password-box {
   position: relative;
 }
 
+.password-box input {
+  padding-right: 46px !important;  /* ⭐ Fix: deja espacio para el ícono */
+}
+
 .password-box .eye {
   position: absolute;
-  right: 12px;
+  right: 14px;  /* ⭐ Ahora alineado bonito */
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -110,7 +117,7 @@ input:focus {
   transform: scale(1.15);
 }
 
-/* BOTÓN */
+/* ============ BOTÓN ============ */
 button {
   width: 100%;
   margin-top: 15px;
@@ -133,18 +140,19 @@ button[disabled] {
   background: #a5d6a7;
 }
 
-/* ERROR */
+/* ============ ERROR ============ */
 .error {
   color: #d32f2f;
   margin-top: 10px;
   text-align: center;
 }
 
-/* REGISTRO */
+/* ============ REGISTRO ============ */
 .register-text {
   margin-top: 20px;
   color: #444;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 .register-text a {

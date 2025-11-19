@@ -1,12 +1,10 @@
-<!-- NAVBAR SUPERIOR SOLO LOGO (tipo Cifrato) -->
+<!-- NAVBAR SUPERIOR SOLO LOGO -->
 <div class="login-topbar" (click)="goHome()">
   <img src="assets/img/icono.jpg" class="topbar-logo" alt="Logo" />
   <span class="topbar-title">Portal Empleos</span>
 </div>
 
-<!-- CUERPO DEL LOGIN -->
 <section class="login-page">
-
   <div class="login-container">
 
     <h1 class="login-title">Iniciar sesión</h1>
@@ -16,18 +14,16 @@
 
     <form (ngSubmit)="login()" novalidate class="login-form">
 
-      <!-- Email -->
       <label for="email">Correo electrónico</label>
       <input
         type="email"
         id="email"
         [(ngModel)]="email"
         name="email"
-        placeholder="Ejemplo@gmail.com"
+        placeholder="corredorecologico@gmail.com"
         required
       />
 
-      <!-- Password -->
       <label for="password">Contraseña</label>
       <div class="password-box">
 
@@ -40,37 +36,21 @@
           required
         />
 
-        <!-- Ícono ver/ocultar -->
         <span class="eye" (click)="togglePassword()">
-
-          <!-- Ver -->
-          <img
-            *ngIf="!showPassword"
-            src="assets/img/eye.svg.png"
-            alt="Mostrar contraseña"
-          />
-
-          <!-- Ocultar -->
-          <img
-            *ngIf="showPassword"
-            src="assets/img/eye-off.svg.png"
-            alt="Ocultar contraseña"
-          />
-
+          <img *ngIf="!showPassword" src="assets/img/eye.svg.png" />
+          <img *ngIf="showPassword" src="assets/img/eye-off.svg.png" />
         </span>
+
       </div>
 
-      <!-- Botón -->
       <button type="submit" [disabled]="loading">
         {{ loading ? 'Cargando...' : 'Iniciar sesión' }}
       </button>
 
-      <!-- Error -->
       <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
     </form>
 
-    <!-- Registro -->
     <p class="register-text">
       ¿No tienes cuenta?<br />
       <a routerLink="/register-candidato">Registrar Candidato</a> |
@@ -78,5 +58,4 @@
     </p>
 
   </div>
-
 </section>

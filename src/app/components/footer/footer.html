@@ -6,18 +6,30 @@
     <!-- Redes -->
     <div class="footer-section">
       <h3>Síguenos en nuestras redes</h3>
+
       <div class="footer-icons">
-        <span>📺</span>
-        <span>💼</span>
-        <span>💬</span>
+
+        <a href="https://github.com/jorgeStevenR" target="_blank">
+          <img src="assets/img/github.png" alt="GitHub" class="social-icon" />
+        </a>
+
+        <a href="https://www.linkedin.com/in/jorge-steven-rodriguez-vargas-b09bba2b1/"
+           target="_blank">
+          <img src="assets/img/linkedin.png" alt="LinkedIn" class="social-icon" />
+        </a>
+
+        <a href="https://wa.me/573222878633" target="_blank">
+          <img src="assets/img/whatsapp.png" alt="WhatsApp" class="social-icon" />
+        </a>
+
       </div>
     </div>
 
     <!-- Contacto -->
     <div class="footer-section">
       <h3>Contáctanos</h3>
-      <p>+57 315 000 0000</p>
-      <p>empleos@corredor.com</p>
+      <p>315 560 1153</p>
+      <p>Brajan.velasquez@uniminuto.edu.co</p>
     </div>
 
     <!-- Legal -->
@@ -30,7 +42,14 @@
     <!-- Registro -->
     <div class="footer-section">
       <h3>Únete al portal del corredor ecológico</h3>
-      <button class="footer-btn">Registrarme</button>
+
+      <!-- 🔥 BOTÓN CON SCROLL A ARRIBA -->
+      <button class="footer-btn"
+              routerLink="/register-candidato"
+              (click)="scrollToTop()">
+        Registrarme como Usuario
+      </button>
+
     </div>
 
   </div>
@@ -40,7 +59,7 @@
 
   <!-- COPYRIGHT -->
   <div class="footer-copy">
-    © 2025 Portal Empleos. Todos los derechos reservados.
+    © 2025 Portal Empleos Corredor Ecologico Uniminuto. 
   </div>
 
 </footer>

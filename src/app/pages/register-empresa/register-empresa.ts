@@ -27,10 +27,18 @@ export class RegisterEmpresaComponent {
   description = '';
   loading = false;
 
+  // 👁️ Nuevo: control del ojo
+  showPassword = false;
+
   constructor(
     private companyService: CompanyService,
     private router: Router
   ) {}
+
+  // 👁️ Cambiar visible / oculto
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   onRegister(): void {
 

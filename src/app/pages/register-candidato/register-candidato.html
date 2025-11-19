@@ -38,14 +38,36 @@
 
       <!-- Contraseña -->
       <label for="password">Contraseña</label>
-      <input
-        id="password"
-        type="password"
-        name="password"
-        [(ngModel)]="password"
-        placeholder="********"
-        required
-      />
+      <div class="password-box">
+
+        <input
+          id="password"
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="********"
+          required
+        />
+
+        <span class="eye" (click)="togglePassword()">
+
+          <!-- Mostrar -->
+          <img
+            *ngIf="!showPassword"
+            src="assets/img/eye.svg.png"
+            alt="mostrar"
+          />
+
+          <!-- Ocultar -->
+          <img
+            *ngIf="showPassword"
+            src="assets/img/eye-off.svg.png"
+            alt="ocultar"
+          />
+
+        </span>
+
+      </div>
 
       <button type="submit" [disabled]="loading || form.invalid">
         {{ loading ? 'Registrando...' : 'Registrar' }}

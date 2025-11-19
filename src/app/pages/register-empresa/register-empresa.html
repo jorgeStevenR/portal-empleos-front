@@ -51,15 +51,24 @@
         Ingresa un correo válido.
       </p>
 
-      <!-- Password -->
+      <!-- Password + Ojo -->
       <label>Contraseña *</label>
-      <input
-        type="password"
-        name="password"
-        [(ngModel)]="password"
-        required
-        placeholder="********"
-      />
+      <div class="password-box">
+
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="********"
+        />
+
+        <span class="eye" (click)="togglePassword()">
+          <img *ngIf="!showPassword" src="assets/img/eye.svg.png" alt="Mostrar">
+          <img *ngIf="showPassword" src="assets/img/eye-off.svg.png" alt="Ocultar">
+        </span>
+
+      </div>
 
       <!-- Sitio Web -->
       <label>Sitio web (opcional)</label>
@@ -88,6 +97,7 @@
         placeholder="Describe brevemente tu empresa..."
       ></textarea>
 
+      <!-- Botón -->
       <button type="submit" [disabled]="loading || form.invalid">
         {{ loading ? 'Registrando...' : 'Registrar Empresa' }}
       </button>
