@@ -28,6 +28,10 @@ export class ApplicationService {
     return this.http.get(`${this.apiUrl}/user/${userId}`);
   }
 
+  getByJobId(jobId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/job/${jobId}`);
+  }
+
   update(id: number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, data);
   }
@@ -35,7 +39,11 @@ export class ApplicationService {
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
-  getByJobId(jobId: number): Observable<any> {
-  return this.http.get(`${this.apiUrl}/job/${jobId}`);
+
+  // ⭐ FALTABA ESTE MÉTODO
+  updateStatus(idApp: number, newStatus: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${idApp}/status`, {
+      status: newStatus
+    });
   }
 }

@@ -4,14 +4,32 @@
 
   <!-- FORMULARIO -->
   <form (ngSubmit)="createJob()" class="job-form">
-    <input [(ngModel)]="newJob.title" name="title" placeholder="Título del empleo" required />
-    <textarea [(ngModel)]="newJob.description" name="description" placeholder="Descripción" required></textarea>
-    <input [(ngModel)]="newJob.location" name="location" placeholder="Ubicación" />
+    <input
+      [(ngModel)]="newJob.title"
+      name="title"
+      placeholder="Título del empleo"
+      required
+    />
+
+    <textarea
+      [(ngModel)]="newJob.description"
+      name="description"
+      placeholder="Descripción"
+      required
+    ></textarea>
+
+    <input
+      [(ngModel)]="newJob.location"
+      name="location"
+      placeholder="Ubicación"
+    />
+
     <select [(ngModel)]="newJob.mode" name="mode">
       <option value="ONSITE">Presencial</option>
       <option value="REMOTE">Remoto</option>
       <option value="HYBRID">Híbrido</option>
     </select>
+
     <button type="submit">Publicar oferta</button>
   </form>
 
@@ -20,30 +38,25 @@
 
     <div class="job-item" *ngFor="let job of jobs">
       <h3>{{ job.title }}</h3>
-      <p>{{ job.description }}</p>
+
+      <!-- 🔥 TEXTO FIJO CON SCROLL -->
+      <p class="job-description">
+        {{ job.description }}
+      </p>
+
       <p><strong>Ubicación:</strong> {{ job.location }}</p>
       <p><strong>Modalidad:</strong> {{ job.mode }}</p>
 
-      <button (click)="deleteJob(job.idJob)">🗑 Eliminar</button>
+      <div class="job-actions">
+        <button class="btn-delete" (click)="deleteJob(job.idJob)">🗑 Eliminar</button>
 
-      <!-- 🔥 LISTA DE POSTULACIONES -->
-      <div class="postulaciones" *ngIf="postulaciones[job.idJob]?.length">
-        <h4>Postulantes:</h4>
+        <button class="editar-btn" [routerLink]="['/editar-empleo', job.idJob]">
+          ✏ Editar
+        </button>
 
-        <div class="postulante" *ngFor="let p of postulaciones[job.idJob]">
-          <p><strong>{{ p.user.name }}</strong> — {{ p.user.emailEntity.email }}</p>
-
-          <p><strong>Estado:</strong> {{ p.status }}</p>
-
-          <a 
-            *ngIf="p.user.cvUrl"
-            [href]="p.user.cvUrl"
-            target="_blank"
-            class="cv-btn"
-          >📄 Ver CV</a>
-
-          <p class="fecha">Postulado el: {{ p.appliedAt | date:'medium' }}</p>
-        </div>
+        <button class="ver-postulantes-btn" [routerLink]="['/postulantes-empleo', job.idJob]">
+          👥 Ver Postulantes
+        </button>
       </div>
 
     </div>
@@ -53,5 +66,4 @@
   <ng-template #noJobs>
     <p>No has publicado ofertas aún.</p>
   </ng-template>
-
 </div>

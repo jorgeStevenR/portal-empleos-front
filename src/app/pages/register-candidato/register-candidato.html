@@ -1,55 +1,62 @@
-<section class="register-page">
+<div class="login-page">
 
-  <div class="register-container">
+  <div class="login-container">
 
-    <h1 class="register-title">Crea tu cuenta</h1>
-    <p class="register-text">
+    <h1 class="login-title">Crear cuenta</h1>
+    <p class="login-text">
       Accede a oportunidades laborales en el corredor ecológico.
     </p>
 
-    <form (ngSubmit)="onRegister()" class="register-form">
+    <form (ngSubmit)="onRegister()" #form="ngForm" class="login-form" novalidate>
 
+      <!-- Nombre -->
       <label for="name">Nombre completo</label>
       <input
         id="name"
         type="text"
-        placeholder="Juan Pérez"
-        [(ngModel)]="name"
         name="name"
+        [(ngModel)]="name"
+        placeholder="Juan Pérez"
         required
       />
 
+      <!-- Email -->
       <label for="email">Correo electrónico</label>
       <input
         id="email"
         type="email"
-        placeholder="ejemplo@gmail.com"
-        [(ngModel)]="email"
         name="email"
+        [(ngModel)]="email"
+        #emailCtrl="ngModel"
+        placeholder="ejemplo@gmail.com"
         required
+        email
       />
+      <p class="error" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+        Ingresa un correo válido.
+      </p>
 
+      <!-- Contraseña -->
       <label for="password">Contraseña</label>
       <input
         id="password"
         type="password"
-        placeholder="***********"
-        [(ngModel)]="password"
         name="password"
+        [(ngModel)]="password"
+        placeholder="********"
         required
       />
 
-      <button type="submit" [disabled]="loading">
+      <button type="submit" [disabled]="loading || form.invalid">
         {{ loading ? 'Registrando...' : 'Registrar' }}
       </button>
-
     </form>
 
-    <p class="login-link">
+    <p class="register-text">
       ¿Ya tienes cuenta?
       <a routerLink="/login">Inicia sesión</a>
     </p>
 
   </div>
 
-</section>
+</div>

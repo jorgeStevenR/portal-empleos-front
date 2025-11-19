@@ -1,0 +1,57 @@
+<div class="postulantes-container">
+
+  <h2>Postulantes de: {{ job?.title }}</h2>
+
+  <div *ngIf="postulantes.length === 0">
+    <p>No hay postulantes aún.</p>
+  </div>
+
+  <div class="postulante-card" *ngFor="let p of postulantes">
+
+    <h3>{{ p.user.name }}</h3>
+
+    <p>
+      <strong>Email:</strong>
+      {{ p.user.emailEntity?.email || 'Sin correo' }}
+    </p>
+
+    <p><strong>Estado actual:</strong> {{ p.status }}</p>
+
+    <!-- CV DEL USUARIO -->
+    <div class="cv-section">
+
+      <!-- SI TIENE CV -->
+      <ng-container *ngIf="p.user.cvUrl; else sinCv">
+        <a 
+          [href]="p.user.cvUrl"
+          target="_blank"
+          class="cv-btn">
+          📄 Ver Hoja de Vida (PDF)
+        </a>
+      </ng-container>
+
+      <!-- SI NO TIENE CV -->
+      <ng-template #sinCv>
+        <p class="no-cv">❌ Este candidato no adjuntó hoja de vida.</p>
+      </ng-template>
+
+    </div>
+
+    <br />
+
+    <!-- BOTONES -->
+    <button class="aprobar-btn" (click)="cambiarEstado(p.idApplication, 'ACCEPTED')">
+      ✔ Aceptar
+    </button>
+
+    <button class="rechazar-btn" (click)="cambiarEstado(p.idApplication, 'REJECTED')">
+      ✖ Rechazar
+    </button>
+
+  </div>
+
+  <button routerLink="/empresa" class="volver-btn">
+    ⬅ Volver
+  </button>
+
+</div>

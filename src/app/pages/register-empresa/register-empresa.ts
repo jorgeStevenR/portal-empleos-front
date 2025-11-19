@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-empresa',
@@ -15,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./register-empresa.css']
 })
 export class RegisterEmpresaComponent {
+
   nit = '';
   name = '';
   email = '';
@@ -29,6 +31,9 @@ export class RegisterEmpresaComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   onRegister() {
+
+    if (this.loading) return;
+
     if (!this.name || !this.email || !this.password || !this.nit) {
       alert('⚠️ Por favor completa los campos obligatorios.');
       return;
@@ -49,15 +54,30 @@ export class RegisterEmpresaComponent {
     };
 
     this.http.post(this.apiUrl, newCompany).subscribe({
+
       next: () => {
         alert('✅ Empresa registrada correctamente.');
+        this.loading = false;
         this.router.navigate(['/login']);
       },
-      error: (err) => {
+
+      error: (err: HttpErrorResponse) => {
         console.error('❌ Error al registrar empresa:', err);
-        alert('❌ Error al registrar la empresa.');
-      },
-      complete: () => (this.loading = false)
+
+        let msg = '❌ Error al registrar la empresa.';
+
+        if (err.error?.message) {
+          msg = '❌ ' + err.error.message;
+        }
+
+        alert(msg);
+
+        // 🔥🔥 IMPORTANTE:
+        // REHABILITAR EL BOTÓN DESPUÉS DE UN ERROR
+        this.loading = false;
+      }
+
     });
   }
+
 }

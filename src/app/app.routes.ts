@@ -12,19 +12,18 @@ import { RegisterEmpresaComponent } from './pages/register-empresa/register-empr
 import { OfertasListComponent } from './pages/ofertas-laborales/ofertas-list/ofertas-list';
 import { OfertaDetalleComponent } from './pages/ofertas-laborales/oferta-detalle/oferta-detalle';
 
-// 🌿 Perfil de usuario
+// 🌿 Perfil
 import { PerfilComponent } from './pages/perfil/perfil';
-
-// 🌿 Perfil empresa
 import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa';
 
 // 🌿 Postulación
 import { PostulacionComponent } from './pages/postulacion/postulacion';
-
-// 🌿 NUEVO — Detalle de postulación
 import { PostulacionDetalleComponent } from './pages/postulacion-detalle/postulacion-detalle';
 
-// 🏢 Paneles privados
+// 🌿 Editar empleo
+import { EditarEmpleoComponent } from './pages/editar-empleo/editar-empleo';
+
+// 🏢 Privados
 import { AdminComponent } from './pages/admin/admin';
 import { EmpresaComponent } from './pages/empresa/empresa';
 import { CandidatoComponent } from './pages/candidato/candidato';
@@ -36,22 +35,17 @@ import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
 
-  // ===========================
-  // RUTA PRINCIPAL
-  // ===========================
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   // ===========================
-  // PÚBLICAS
+  // PUBLICAS
   // ===========================
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
 
-  // Registro
   { path: 'register-candidato', component: RegisterCandidatoComponent },
   { path: 'register-empresa', component: RegisterEmpresaComponent },
 
-  // Ofertas
   { path: 'ofertas-laborales', component: OfertasListComponent },
   { path: 'oferta/:id', component: OfertaDetalleComponent },
 
@@ -64,7 +58,6 @@ export const routes: Routes = [
     canActivate: [userGuard]
   },
 
-  // ⭐ NUEVA RUTA — DETALLE DE POSTULACIÓN
   {
     path: 'postulacion-detalle/:idApp',
     component: PostulacionDetalleComponent,
@@ -98,8 +91,24 @@ export const routes: Routes = [
     canActivate: [companyGuard]
   },
 
+  // ⭐ NUEVO — EDITAR EMPLEO
+  {
+    path: 'editar-empleo/:id',
+    component: EditarEmpleoComponent,
+    canActivate: [companyGuard]
+  },
+
+  // ⭐ NUEVO — VER POSTULANTES DE UN EMPLEO
+  {
+    path: 'postulantes-empleo/:id',
+    loadComponent: () =>
+      import('./pages/postulantes-empleo/postulantes-empleo')
+        .then(m => m.PostulantesEmpleoComponent),
+    canActivate: [companyGuard]
+  },
+
   // ===========================
-  // PRIVADAS — ADMIN
+  // ADMIN
   // ===========================
   {
     path: 'admin',
@@ -108,7 +117,7 @@ export const routes: Routes = [
   },
 
   // ===========================
-  // 404 - fallback
+  // 404
   // ===========================
   { path: '**', redirectTo: 'home' }
 ];

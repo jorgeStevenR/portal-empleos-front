@@ -1,16 +1,15 @@
-/* ============ FONDO GRADIENTE ============ */
-.register-page {
-  min-height: 100vh;
+/* FONDO DEGRADADO - IGUAL AL LOGIN */
+.login-page {
+  min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   background: linear-gradient(180deg, #e8f5e9, #d7f4d9, #f3fff3);
-  overflow-x: hidden;
+  padding: 0;
 }
 
-/* ============ CAJA CENTRAL ============ */
-.register-container {
+/* CARD */
+.login-container {
   background: white;
   padding: 40px;
   border-radius: 14px;
@@ -20,25 +19,27 @@
   text-align: center;
 }
 
-/* TÍTULOS */
-.register-title {
+/* TITULO */
+.login-title {
   font-size: 1.9rem;
   color: #1b5e20;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
-.register-text {
+/* SUBTITULO */
+.login-text {
   font-size: 0.95rem;
   color: #666;
   margin-bottom: 25px;
 }
 
-/* FORMULARIO */
-.register-form {
+/* FORM */
+.login-form {
   text-align: left;
 }
 
+/* LABELS */
 label {
   font-weight: 600;
   color: #333;
@@ -46,7 +47,9 @@ label {
   display: block;
 }
 
-input {
+/* INPUTS */
+input,
+textarea {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
@@ -55,17 +58,46 @@ input {
   font-size: 15px;
   outline: none;
   transition: 0.25s;
+  margin-bottom: 15px;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   border-color: #43a047;
   box-shadow: 0 0 4px rgba(67, 160, 71, 0.25);
+}
+
+/* TEXTAREA ESPECIAL EMPRESA */
+.empresa-textarea {
+  min-height: 120px;
+  max-height: 200px;
+  overflow-y: auto;
+  resize: vertical;
+}
+
+/* ANGULAR STATES */
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #e53935 !important;
+  background: #ffeaea !important;
+}
+
+input.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched {
+  border-color: #2e7d32 !important;
+}
+
+/* ERROR */
+.error {
+  color: #d32f2f;
+  margin-top: -5px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
 }
 
 /* BOTÓN */
 button {
   width: 100%;
-  margin-top: 15px;
   padding: 12px;
   background: #2e7d32;
   border: none;
@@ -74,6 +106,7 @@ button {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
   transition: 0.2s;
 }
 
@@ -85,19 +118,19 @@ button[disabled] {
   background: #a5d6a7;
 }
 
-/* ENLACE LOGIN */
-.login-link {
+/* LINKS */
+.register-text {
   margin-top: 20px;
   color: #444;
   font-size: 0.95rem;
 }
 
-.login-link a {
+.register-text a {
   color: #1b5e20;
   font-weight: 600;
   text-decoration: none;
 }
 
-.login-link a:hover {
+.register-text a:hover {
   text-decoration: underline;
 }

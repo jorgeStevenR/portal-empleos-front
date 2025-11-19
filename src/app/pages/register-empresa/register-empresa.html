@@ -1,70 +1,104 @@
-<section class="register-container">
-  <div class="register-card">
-    <h2>🏢 Registro de Empresa</h2>
-    <p class="subtitle">Crea tu cuenta empresarial para publicar vacantes</p>
+<div class="login-page">
 
-    <form (ngSubmit)="onRegister()" autocomplete="off">
+  <div class="login-container">
+
+    <h1 class="login-title">Registro de Empresa</h1>
+    <p class="login-text">
+      Crea tu cuenta empresarial para publicar vacantes.
+    </p>
+
+    <form (ngSubmit)="onRegister()" #form="ngForm" class="login-form" novalidate>
+
+      <!-- NIT -->
+      <label>NIT o identificación tributaria *</label>
       <input
         type="text"
-        placeholder="NIT o identificación tributaria *"
-        [(ngModel)]="nit"
         name="nit"
+        [(ngModel)]="nit"
+        #nitCtrl="ngModel"
+        placeholder="900123456-7"
         required
+        pattern="^[0-9]+(-[0-9])?$"
+        minlength="5"
+        maxlength="15"
       />
+      <p class="error" *ngIf="nitCtrl.invalid && nitCtrl.touched">
+        Solo números y un guion opcional (Ej: 900123456-7)
+      </p>
 
+      <!-- Nombre -->
+      <label>Nombre de la empresa *</label>
       <input
         type="text"
-        placeholder="Nombre de la empresa *"
-        [(ngModel)]="name"
         name="name"
+        [(ngModel)]="name"
+        placeholder="Mi Empresa S.A.S."
         required
       />
 
+      <!-- Email -->
+      <label>Correo electrónico *</label>
       <input
         type="email"
-        placeholder="Correo electrónico *"
-        [(ngModel)]="email"
         name="email"
+        [(ngModel)]="email"
+        #emailCtrl="ngModel"
         required
+        email
+        placeholder="empresa@correo.com"
       />
+      <p class="error" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+        Ingresa un correo válido.
+      </p>
 
+      <!-- Password -->
+      <label>Contraseña *</label>
       <input
         type="password"
-        placeholder="Contraseña *"
-        [(ngModel)]="password"
         name="password"
+        [(ngModel)]="password"
         required
+        placeholder="********"
       />
 
+      <!-- Sitio Web -->
+      <label>Sitio web (opcional)</label>
       <input
         type="text"
-        placeholder="Sitio web (opcional)"
-        [(ngModel)]="website"
         name="website"
+        [(ngModel)]="website"
+        placeholder="https://"
       />
 
+      <!-- Ubicación -->
+      <label>Ubicación</label>
       <input
         type="text"
-        placeholder="Ubicación (Ciudad, País)"
-        [(ngModel)]="location"
         name="location"
+        [(ngModel)]="location"
+        placeholder="Ciudad, País"
       />
 
+      <!-- Descripción -->
+      <label>Descripción</label>
       <textarea
-        placeholder="Descripción de la empresa (opcional)"
-        [(ngModel)]="description"
+        class="empresa-textarea"
         name="description"
-        rows="3"
+        [(ngModel)]="description"
+        placeholder="Describe brevemente tu empresa..."
       ></textarea>
 
-      <button type="submit" [disabled]="loading">
+      <button type="submit" [disabled]="loading || form.invalid">
         {{ loading ? 'Registrando...' : 'Registrar Empresa' }}
       </button>
+
     </form>
 
-    <p class="login-link">
+    <p class="register-text">
       ¿Ya tienes cuenta?
       <a routerLink="/login">Inicia sesión</a>
     </p>
+
   </div>
-</section>
+
+</div>

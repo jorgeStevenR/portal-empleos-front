@@ -1,10 +1,10 @@
 // ============================================
 // 📂 src/app/pages/empresa/empresa.ts
 // ============================================
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';            // 👈 IMPORTANTE
 import { JobService } from '../../services/job.service';
 import { AuthService } from '../../services/auth.service';
 import { ApplicationService } from '../../services/application.service';
@@ -12,14 +12,14 @@ import { ApplicationService } from '../../services/application.service';
 @Component({
   selector: 'app-empresa',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],      // 👈 AÑADIMOS RouterModule
   templateUrl: './empresa.html',
   styleUrls: ['./empresa.css']
 })
 export class EmpresaComponent implements OnInit {
 
   jobs: any[] = [];
-  postulaciones: any = {}; // 🔥 { jobId: [postulaciones] }
+  postulaciones: any = {};
   newJob: any = {};
 
   constructor(
@@ -48,7 +48,6 @@ export class EmpresaComponent implements OnInit {
       next: (data) => {
         this.jobs = data;
 
-        // 🔥 cargar postulaciones por cada empleo
         this.jobs.forEach(job => {
           this.appService.getByJobId(job.idJob).subscribe(res => {
             this.postulaciones[job.idJob] = res;
