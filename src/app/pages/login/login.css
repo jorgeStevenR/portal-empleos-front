@@ -87,22 +87,16 @@ input:focus {
   position: relative;
 }
 
-/* Icono toggle 👁️ / 🙈 */
-.toggle-eye {
+.password-box .eye {
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 20px;
-  user-select: none;
   color: #2e7d32;
-  transition: 0.2s;
-}
-
-.toggle-eye:hover {
-  color: #1b5e20;
-  transform: translateY(-50%) scale(1.1);
+  user-select: none;
+  font-weight: bold;
 }
 
 /* BOTÓN */

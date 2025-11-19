@@ -25,9 +25,10 @@
 
     <br />
 
-    <!-- SELECT ESTILIZADO -->
+    <!-- SELECT FIX: referencia segura -->
     <select class="estado-select"
-            (change)="cambiarEstado(p.idApplication, ($event.target as HTMLSelectElement).value)"
+            #selEstado
+            (change)="cambiarEstado(p.idApplication, selEstado.value)"
             [value]="p.status">
 
       <option value="IN_PROGRESS">En revisión</option>

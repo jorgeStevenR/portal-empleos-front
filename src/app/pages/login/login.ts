@@ -1,3 +1,6 @@
+// ============================================
+// 📂 src/app/pages/login/login.ts
+// ============================================
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,16 +21,10 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
-  showPassword = false;
-
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
 
   goHome() {
     this.router.navigate(['/home']);
@@ -47,14 +44,23 @@ export class LoginComponent {
 
         console.log("TOKEN:", resp.token);
         console.log("ROLE:", resp.role);
-        console.log("ID:", resp.id);
+        console.log("ID:", resp.id); // 🔥 ESTE ES EL ID DEL BACKEND
 
+        // --------------------------------------------------
+        // 🔥 GUARDAR SESIÓN SIEMPRE COMO userId
+        // --------------------------------------------------
         this.authService.saveSession(resp.token, resp.role, resp.id);
 
+        // --------------------------------------------------
+        // 🔥 NORMALIZAR ROL (por si backend manda COMPANY)
+        // --------------------------------------------------
         const normalizedRole = resp.role.startsWith('ROLE_')
           ? resp.role
           : `ROLE_${resp.role}`;
 
+        // --------------------------------------------------
+        // 🔥 REDIRECCIÓN SEGÚN ROL
+        // --------------------------------------------------
         switch (normalizedRole) {
           case 'ROLE_USER':
             this.router.navigate(['/perfil']);
