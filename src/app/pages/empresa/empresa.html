@@ -1,69 +1,104 @@
 <div class="empresa-container">
 
-  <h2>Mis Ofertas Laborales</h2>
+  <!-- 🟢 CREAR OFERTA -->
+  <div class="card">
+    <h2>Crear Oferta Laboral</h2>
 
-  <!-- FORMULARIO -->
-  <form (ngSubmit)="createJob()" class="job-form">
-    <input
-      [(ngModel)]="newJob.title"
-      name="title"
-      placeholder="Título del empleo"
-      required
-    />
+    <form (ngSubmit)="createJob()" class="job-form">
+      
+      <input
+        [(ngModel)]="newJob.title"
+        name="title"
+        placeholder="Título del empleo"
+        required
+      />
 
-    <textarea
-      [(ngModel)]="newJob.description"
-      name="description"
-      placeholder="Descripción"
-      required
-    ></textarea>
+      <textarea
+        [(ngModel)]="newJob.description"
+        name="description"
+        placeholder="Descripción"
+        required
+      ></textarea>
 
-    <input
-      [(ngModel)]="newJob.location"
-      name="location"
-      placeholder="Ubicación"
-    />
+      <input
+        [(ngModel)]="newJob.location"
+        name="location"
+        placeholder="Ubicación"
+      />
 
-    <select [(ngModel)]="newJob.mode" name="mode">
-      <option value="ONSITE">Presencial</option>
-      <option value="REMOTE">Remoto</option>
-      <option value="HYBRID">Híbrido</option>
-    </select>
+      <!-- SALARIO SOLO NÚMEROS + FORMATO -->
+      <input
+        type="text"
+        [(ngModel)]="newJob.salary"
+        name="salary"
+        placeholder="Salario"
+        (input)="onlyNumbers($event)"
+      />
 
-    <button type="submit">Publicar oferta</button>
-  </form>
+      <select [(ngModel)]="newJob.mode" name="mode">
+        <option value="ONSITE">Presencial</option>
+        <option value="REMOTE">Remoto</option>
+        <option value="HYBRID">Híbrido</option>
+      </select>
 
-  <!-- LISTA DE EMPLEOS -->
-  <div class="job-list" *ngIf="jobs.length; else noJobs">
+      <button type="submit">Publicar oferta</button>
+    </form>
+  </div>
 
-    <div class="job-item" *ngFor="let job of jobs">
-      <h3>{{ job.title }}</h3>
+  <!-- 🔵 OFERTAS PUBLICADAS -->
+  <div class="card lista-card">
 
-      <!-- 🔥 TEXTO FIJO CON SCROLL -->
-      <p class="job-description">
-        {{ job.description }}
-      </p>
+    <h2>Mis Ofertas Laborales</h2>
 
-      <p><strong>Ubicación:</strong> {{ job.location }}</p>
-      <p><strong>Modalidad:</strong> {{ job.mode }}</p>
+    <div class="job-list" *ngIf="jobs.length; else noJobs">
 
-      <div class="job-actions">
-        <button class="btn-delete" (click)="deleteJob(job.idJob)">🗑 Eliminar</button>
+      <div class="job-item" *ngFor="let job of jobs">
 
-        <button class="editar-btn" [routerLink]="['/editar-empleo', job.idJob]">
-          ✏ Editar
-        </button>
+        <h3>{{ job.title }}</h3>
 
-        <button class="ver-postulantes-btn" [routerLink]="['/postulantes-empleo', job.idJob]">
-          👥 Ver Postulantes
-        </button>
+        <p class="job-description">{{ job.description }}</p>
+
+        <p><strong>Ubicación:</strong> {{ job.location }}</p>
+        <p><strong>Modalidad:</strong> {{ traducirModo(job.mode) }}</p>
+        <p>
+          <strong>Salario:</strong>
+          $ {{ formatSalary(job.salary) }} COP
+        </p>
+
+        <div class="job-actions">
+          <button class="action-btn btn-delete" (click)="openModal(job.idJob)">
+            Eliminar
+          </button>
+          <button class="action-btn btn-edit" [routerLink]="['/editar-empleo', job.idJob]">
+            Editar
+          </button>
+          <button class="action-btn btn-view" [routerLink]="['/postulantes-empleo', job.idJob]">
+            Ver Postulantes
+          </button>
+        </div>
+
       </div>
 
     </div>
 
-  </div>
+    <ng-template #noJobs>
+      <p>No tienes ofertas publicadas aún.</p>
+    </ng-template>
 
-  <ng-template #noJobs>
-    <p>No has publicado ofertas aún.</p>
-  </ng-template>
+  </div>
+</div>
+
+<!-- 🟥 MODAL CONFIRMACIÓN -->
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-box">
+
+    <h3>¿Eliminar oferta?</h3>
+    <p>Esta acción no se puede deshacer. ¿Deseas continuar?</p>
+
+    <div class="modal-buttons">
+      <button class="modal-btn cancel" (click)="cerrarModal()">Cancelar</button>
+      <button class="modal-btn delete" (click)="confirmarEliminacion()">Eliminar</button>
+    </div>
+
+  </div>
 </div>

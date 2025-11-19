@@ -3,9 +3,27 @@
   <h2>Editar Oferta</h2>
 
   <form (ngSubmit)="guardarCambios()">
-    <input [(ngModel)]="job.title" name="title" placeholder="Título" required />
-    <textarea [(ngModel)]="job.description" name="description" required></textarea>
-    <input [(ngModel)]="job.location" name="location" placeholder="Ubicación" />
+
+    <input
+      [(ngModel)]="job.title"
+      name="title"
+      placeholder="Título"
+      required
+    />
+
+    <textarea
+      [(ngModel)]="job.description"
+      name="description"
+      placeholder="Descripción"
+      required
+    ></textarea>
+
+    <input
+      [(ngModel)]="job.location"
+      name="location"
+      placeholder="Ubicación"
+    />
+
     <select [(ngModel)]="job.mode" name="mode">
       <option value="ONSITE">Presencial</option>
       <option value="REMOTE">Remoto</option>
@@ -14,22 +32,5 @@
 
     <button class="btn-guardar">Guardar cambios</button>
   </form>
-
-  <hr />
-
-  <h3>Postulados a esta oferta</h3>
-
-  <div *ngIf="postulantes.length > 0; else noApps">
-    <div class="postulante" *ngFor="let p of postulantes">
-      <p><strong>{{ p.user.name }}</strong> — {{ p.user.emailEntity.email }}</p>
-      <p><strong>Estado:</strong> {{ p.status }}</p>
-      <a *ngIf="p.user.cvUrl" [href]="p.user.cvUrl" target="_blank" class="cv-btn">📄 Ver CV</a>
-      <p class="fecha">Postulado: {{ p.appliedAt | date:'medium' }}</p>
-    </div>
-  </div>
-
-  <ng-template #noApps>
-    <p>No hay postulantes aún.</p>
-  </ng-template>
 
 </div>

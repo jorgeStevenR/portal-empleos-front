@@ -1,47 +1,73 @@
 /* ============================================
-   📦 CONTENEDOR PRINCIPAL EMPRESA
-   ============================================ */
+   📦 CONTENEDOR PRINCIPAL
+============================================ */
 .empresa-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 140px auto 40px;
-  background: #fff;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 /* ============================================
-   📄 FORMULARIO DE NUEVA OFERTA
-   ============================================ */
+   🟢 CAJAS
+============================================ */
+.card {
+  background: #fff;
+  padding: 24px 28px;
+  border-radius: 14px;
+  margin-bottom: 35px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1b5e20;
+}
+
+/* ============================================
+   📄 FORMULARIO
+============================================ */
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .job-form input,
-.job-form textarea,
 .job-form select {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 9px;
+  padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #cfd8dc;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
-/* Textarea con altura controlada */
 .job-form textarea {
-  min-height: 110px;
-  max-height: 160px;
-  resize: vertical;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  font-size: 14px;
+  height: 130px;
+  max-height: 130px;
+  resize: none;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
-/* Botón publicar */
 .job-form button {
   width: 100%;
   background: #2e7d32;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 1rem;
   transition: 0.25s ease;
 }
 
@@ -51,91 +77,144 @@
 }
 
 /* ============================================
-   📋 LISTA DE EMPLEOS
-   ============================================ */
+   📋 LISTA
+============================================ */
 .job-list {
   margin-top: 18px;
 }
 
-/* ============================================
-   🗂️ CARD DE CADA EMPLEO
-   ============================================ */
 .job-item {
-  border-bottom: 1px solid #ddd;
-  padding: 14px 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .job-item h3 {
-  margin: 0 0 6px;
+  margin-bottom: 8px;
 }
 
-/* Descripción del empleo con scroll */
+/* ============================================
+   DESCRIPCIÓN
+============================================ */
 .job-description {
   max-height: 120px;
   overflow-y: auto;
   background: #f7fff7;
-  padding: 8px;
+  padding: 10px 12px;
   border-radius: 8px;
   margin-bottom: 8px;
-  white-space: pre-wrap;
   font-size: 14px;
+  line-height: 1.35rem;
+  white-space: pre-line;
+  text-align: left;
+  box-sizing: border-box;
 }
 
 /* ============================================
-   🎛️ BOTONES DE ACCIONES
-   ============================================ */
+   🎛️ BOTONES 
+============================================ */
 .job-actions {
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
 }
 
-/* BOTONES BASE — estilo uniforme */
 .action-btn {
+  flex: 1;
   min-width: 150px;
-  padding: 10px 18px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
   font-size: 14px;
   font-weight: 600;
-  text-align: center;
-
-  border: none;
-  border-radius: 10px;
   cursor: pointer;
+  color: white;
+  text-align: center;
+  transition: 0.25s ease-in-out;
+  box-shadow: 0 3px 9px rgba(0,0,0,0.12);
+}
 
-  color: #fff;
+.btn-delete { background: #d32f2f; }
+.btn-delete:hover { background: #b71c1c; transform: translateY(-2px); }
+
+.btn-edit { background: #2e7d32; }
+.btn-edit:hover { background: #1b5e20; transform: translateY(-2px); }
+
+.btn-view { background: #00796b; }
+.btn-view:hover { background: #004d40; transform: translateY(-2px); }
+
+/* ============================================
+   MODAL
+============================================ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 6px;
-
-  transition: all 0.25s ease-in-out;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+  align-items: center;
+  backdrop-filter: blur(3px);
+  z-index: 9999;
 }
 
-/* 🔴 ELIMINAR */
-.btn-delete {
-  background: #d32f2f;
-}
-.btn-delete:hover {
-  background: #b71c1c;
-  transform: translateY(-2px);
-}
-
-/* 🟢 EDITAR */
-.editar-btn {
-  background: #2e7d32;
-}
-.editar-btn:hover {
-  background: #1b5e20;
-  transform: translateY(-2px);
+.modal-box {
+  background: white;
+  width: 90%;
+  max-width: 380px;
+  padding: 22px;
+  border-radius: 14px;
+  text-align: center;
+  animation: fadeInUp 0.35s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
-/* 🔵 VER POSTULANTES */
-.ver-postulantes-btn {
-  background: #00796b;
+.modal-box h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: #b71c1c;
+  font-weight: 700;
 }
-.ver-postulantes-btn:hover {
-  background: #004d40;
-  transform: translateY(-2px);
+
+.modal-box p {
+  margin-bottom: 18px;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 14px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: 0.25s ease;
+}
+
+.modal-btn.cancel { background: #777; }
+.modal-btn.cancel:hover { background: #5f5f5f; }
+
+.modal-btn.delete { background: #d32f2f; }
+.modal-btn.delete:hover { background: #b71c1c; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   🔥 OCULTAR NAVBAR Y TOPBAR CON MODAL
+============================================ */
+.modal-open app-navbar,
+.modal-open app-topbar {
+  display: none !important;
 }

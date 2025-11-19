@@ -74,3 +74,20 @@ app-root {
 router-outlet + * {
   flex-grow: 1; /* El contenido empuja al footer hacia abajo */
 }
+
+
+/* ======================================================
+   🔥 OCULTAR NAVBAR + TOPBAR CUANDO HAY MODAL ABIERTO
+====================================================== */
+
+.modal-open app-navbar,
+.modal-open .navbar-container,
+.modal-open app-topbar,
+.modal-open .topbar-container {
+  display: none !important;
+}
+
+/* Evitar scroll al abrir el modal */
+.modal-open {
+  overflow: hidden !important;
+}

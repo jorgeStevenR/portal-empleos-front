@@ -14,9 +14,9 @@ bootstrapApplication(App, {
     provideRouter(routes),
     provideHttpClient(
       withInterceptors([
-        loadingInterceptor, // 🌀 Barra superior animada mientras carga
-        tokenInterceptor,   // 🪪 Inyecta el token JWT automáticamente
-        errorInterceptor    // 🚨 Maneja errores globales (toast)
+        tokenInterceptor,     // 🟢 PRIMERO: Adjunta el token JWT
+        loadingInterceptor,   // 🟡 Barra de carga
+        errorInterceptor      // 🔴 Maneja errores globales
       ])
     )
   ]

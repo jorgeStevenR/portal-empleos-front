@@ -41,6 +41,14 @@ export class OfertasListComponent implements OnInit {
     this.jobService.getAllJobs().subscribe({
       next: (data: any[]) => {
 
+        // 🔥 Convertir salario a número seguro
+        data.forEach(job => {
+          if (job.salary != null) {
+            const clean = String(job.salary).replace(/[^0-9]/g, "");
+            job.salary = Number(clean);
+          }
+        });
+
         // ORDENAR NUEVOS PRIMERO
         this.empleos = data.sort((a, b) => b.idJob - a.idJob);
 

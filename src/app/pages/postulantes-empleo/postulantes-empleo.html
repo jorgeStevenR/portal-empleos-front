@@ -12,24 +12,25 @@
 
     <p><strong>Email:</strong> {{ p.user.emailEntity?.email || 'Sin correo' }}</p>
 
-    <p><strong>Estado actual:</strong> {{ p.status }}</p>
+    <p><strong>Estado actual:</strong> {{ traducirEstado(p.status) }}</p>
 
     <!-- CV -->
     <ng-container *ngIf="p.user.cvUrl; else sinCV">
-      <a class="cv-btn" [href]="p.user.cvUrl" target="_blank">📄 Ver Hoja de vida</a>
+      <a class="cv-btn" [href]="p.user.cvUrl" target="_blank">Ver Hoja de vida</a>
     </ng-container>
 
     <ng-template #sinCV>
-      <p class="no-cv">❌ Este candidato no adjuntó hoja de vida.</p>
+      <p class="no-cv">Este candidato no adjuntó hoja de vida.</p>
     </ng-template>
 
     <br />
 
-    <!-- SELECT FINAL FIX -->
+    <!-- SELECT DE ESTADO -->
     <select class="estado-select"
             (change)="onSelectChange(p.idApplication, $event)"
             [value]="p.status">
 
+      <option value="PENDING">Pendiente</option>
       <option value="IN_PROGRESS">En revisión</option>
       <option value="ACCEPTED">Aceptar</option>
       <option value="REJECTED">Rechazar</option>
@@ -38,6 +39,6 @@
 
   </div>
 
-  <button routerLink="/empresa" class="volver-btn">⬅ Volver</button>
+  <button routerLink="/empresa" class="volver-btn">Volver</button>
 
 </div>

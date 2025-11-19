@@ -35,6 +35,13 @@ export class OfertaDetalleComponent implements OnInit {
 
     this.jobService.getById(id).subscribe({
       next: (data) => {
+
+        // 🔥 Convertir salario si viene como string
+        if (data.salary != null) {
+          const clean = String(data.salary).replace(/[^0-9]/g, '');
+          data.salary = Number(clean);
+        }
+
         this.job = data;
         this.verificarPostulacion();
       },
@@ -43,9 +50,6 @@ export class OfertaDetalleComponent implements OnInit {
     });
   }
 
-  // ================================================
-  // 🔍 Verificar si el usuario ya se postuló
-  // ================================================
   verificarPostulacion(): void {
     const userId = this.auth.getUserId();
     if (!userId) return;
@@ -60,9 +64,6 @@ export class OfertaDetalleComponent implements OnInit {
     });
   }
 
-  // ================================================
-  // 🚀 Ir al formulario de postulación
-  // ================================================
   irAFormularioPostulacion(): void {
     this.router.navigate(['/postulacion', this.job.idJob]);
   }

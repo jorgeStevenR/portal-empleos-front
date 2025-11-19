@@ -35,7 +35,19 @@ export class PostulantesEmpleoComponent implements OnInit {
     );
   }
 
-  /** NUEVA FUNCIÓN QUE ARREGLA EL PROBLEMA EN VERCEL */
+  /** Traducción bonita del estado */
+  traducirEstado(estado: string): string {
+    const map: any = {
+      PENDING: 'Pendiente',
+      IN_PROGRESS: 'En revisión',
+      ACCEPTED: 'Aceptado',
+      REJECTED: 'Rechazado',
+      CANCELED: 'Cancelado'
+    };
+    return map[estado] || estado;
+  }
+
+  /** Arreglo especial para Vercel */
   onSelectChange(idApp: number, event: Event) {
     const select = event.target as HTMLSelectElement | null;
 

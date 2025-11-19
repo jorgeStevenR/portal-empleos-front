@@ -2,6 +2,7 @@
 .ofertas-container {
   text-align: center;
   padding: 60px 20px 40px;
+  animation: fadeIn 0.6s ease;
 }
 
 .ofertas-container h2 {
@@ -40,12 +41,12 @@
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 60px 55px;      /* más espacio vertical y horizontal */
-  padding: 0 60px;     /* espacio lateral */
+  gap: 60px 55px;
+  padding: 0 60px;
   justify-items: center;
+  animation: fadeUp 0.7s ease;
 }
 
-/* Responsive */
 @media (max-width: 1100px) {
   .ofertas-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -67,7 +68,7 @@
   padding: 25px;
   width: 100%;
   max-width: 360px;
-  min-height: 260px;
+  min-height: 300px;
   box-shadow: 0 8px 28px rgba(0,0,0,0.08);
   border: 1px solid #eef5f0;
   transition: all 0.28s ease;
@@ -75,10 +76,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  animation: fadeUp 0.7s ease;
 }
 
 .oferta-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 0 12px 32px rgba(0,0,0,0.12);
 }
 
@@ -101,6 +103,7 @@
   top: 14px;
   right: 14px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  animation: badgePop 0.5s ease;
 }
 
 /* ====== HEADER ====== */
@@ -109,6 +112,7 @@
   align-items: center;
   gap: 14px;
   margin-bottom: 18px;
+  min-height: 60px;
 }
 
 .empresa-logo {
@@ -121,14 +125,21 @@
   border: 2px solid #dcefe2;
 }
 
+/* ====== empresa y título UNA LÍNEA ====== */
 .empresa-info {
   text-align: left;
+  max-width: 230px;
 }
 
 .empresa-nombre {
   font-size: 1.05rem;
   font-weight: 600;
   color: #1d7c3a;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .ubicacion {
@@ -136,24 +147,47 @@
   color: #555;
 }
 
-/* ====== TITULO ====== */
+/* TITULO */
 .titulo {
   font-size: 1.15rem;
   font-weight: 700;
   color: #0d3a20;
   margin-bottom: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
-/* ====== DESCRIPCIÓN ====== */
+/* ====== DESCRIPCIÓN (3 líneas máx) ====== */
 .descripcion {
   color: #4b4b4b;
   font-size: 0.9rem;
   line-height: 1.35rem;
   margin-bottom: 20px;
-  min-height: 52px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: justify;
 }
 
-/* ====== BOTÓN ====== */
+/* ====== SALARIO ====== */
+.salario {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a7f37;
+  margin: 6px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================================================
+   BOTÓN — ANIMACIONES NUEVAS 🌟
+========================================================= */
 .btn-ver {
   background: #1b8a3a;
   color: white;
@@ -162,21 +196,41 @@
   border-radius: 8px;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.25s ease, transform 0.25s ease;
   font-weight: 600;
   margin-top: auto;
+  position: relative;
+  overflow: hidden;
 }
 
+/* hover suave + elevación */
 .btn-ver:hover {
   background: #156b2c;
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* efecto ripple */
+.btn-ver:active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: ripple 0.5s ease-out;
 }
 
 .btn-postulado {
   background: #1b8a3a !important;
 }
 
-/* ====== PAGINADOR ====== */
+/* =========================================================
+   PAGINADOR
+========================================================= */
 .paginador {
   margin: 40px auto 20px;
   display: flex;
@@ -193,6 +247,13 @@
   font-size: 1rem;
   border-radius: 6px;
   cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* hover */
+.paginador button:hover:not([disabled]) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
 }
 
 .paginador button[disabled] {
@@ -207,13 +268,53 @@
   color: #1b8a3a;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .paginador span:hover {
   background: #e8f7ee;
+  transform: scale(1.08);
 }
 
 .paginador .activo {
   background: #1b8a3a;
   color: white;
+  animation: pulse 0.6s infinite alternate;
+}
+
+/* =========================================================
+   🔥 KEYFRAMES DE ANIMACIONES
+========================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ripple {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(18);
+  }
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.14); }
+}
+
+@keyframes badgePop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

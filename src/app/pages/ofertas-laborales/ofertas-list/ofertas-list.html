@@ -47,6 +47,10 @@
 
         <h3 class="titulo">{{ job.title }}</h3>
 
+      <div class="salario" *ngIf="job.salary">
+        $ {{ job.salary | number:'1.0-0' }} COP
+      </div>
+
         <p class="descripcion">
           {{
             job.description.length > 100
@@ -63,11 +67,10 @@
 
     </div>
 
-    <!-- PAGINADOR -->
     <div class="paginador" *ngIf="totalPaginas > 1">
       
       <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
-        ⬅
+        Anterior
       </button>
 
       <span
@@ -79,7 +82,7 @@
       </span>
 
       <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
-        ➡
+        Siguiente
       </button>
 
     </div>
