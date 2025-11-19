@@ -21,10 +21,18 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
+  // 👁️ Control mostrar/ocultar contraseña
+  showPassword = false;
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
+
+  // 👁️ Cambiar entre text/password
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   goHome() {
     this.router.navigate(['/home']);
@@ -44,23 +52,14 @@ export class LoginComponent {
 
         console.log("TOKEN:", resp.token);
         console.log("ROLE:", resp.role);
-        console.log("ID:", resp.id); // 🔥 ESTE ES EL ID DEL BACKEND
+        console.log("ID:", resp.id);
 
-        // --------------------------------------------------
-        // 🔥 GUARDAR SESIÓN SIEMPRE COMO userId
-        // --------------------------------------------------
         this.authService.saveSession(resp.token, resp.role, resp.id);
 
-        // --------------------------------------------------
-        // 🔥 NORMALIZAR ROL (por si backend manda COMPANY)
-        // --------------------------------------------------
         const normalizedRole = resp.role.startsWith('ROLE_')
           ? resp.role
           : `ROLE_${resp.role}`;
 
-        // --------------------------------------------------
-        // 🔥 REDIRECCIÓN SEGÚN ROL
-        // --------------------------------------------------
         switch (normalizedRole) {
           case 'ROLE_USER':
             this.router.navigate(['/perfil']);

@@ -93,10 +93,21 @@ input:focus {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 20px;
-  color: #2e7d32;
   user-select: none;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.password-box img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.password-box img:hover {
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 /* BOTÓN */
