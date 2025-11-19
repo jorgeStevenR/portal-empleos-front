@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ApplicationService } from '../../services/application.service';
 import { JobService } from '../../services/job.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-postulantes-empleo',
@@ -20,7 +21,8 @@ export class PostulantesEmpleoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private appService: ApplicationService,
-    private jobService: JobService
+    private jobService: JobService,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -28,28 +30,26 @@ export class PostulantesEmpleoComponent implements OnInit {
 
     this.jobService.getById(this.idJob).subscribe(j => this.job = j);
 
-    this.cargarPostulantes();
+    this.appService.getByJobId(this.idJob).subscribe(p =>
+      this.postulantes = p
+    );
   }
 
-  cargarPostulantes(): void {
-    this.appService.getByJobId(this.idJob).subscribe({
-      next: (res) => {
-        this.postulantes = res;
-      },
-      error: (err) => console.error('❌ Error cargando postulantes:', err)
-    });
-  }
-
-  cambiarEstado(idApp: number, estado: string): void {
-    this.appService.updateStatus(idApp, estado).subscribe({
+  cambiarEstado(idApp: number, nuevoEstado: string) {
+    this.appService.updateStatus(idApp, nuevoEstado).subscribe({
       next: () => {
-        alert(`✔ Estado actualizado a: ${estado}`);
-        this.cargarPostulantes();
+        this.toast.show("Estado actualizado", "success");
+
+        // Refrescar lista
+        this.appService.getByJobId(this.idJob).subscribe(p =>
+          this.postulantes = p
+        );
       },
       error: (err) => {
+        this.toast.show("Error al cambiar estado", "error");
         console.error(err);
-        alert("❌ No se pudo actualizar el estado");
       }
     });
   }
+
 }

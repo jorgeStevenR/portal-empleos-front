@@ -10,48 +10,34 @@
 
     <h3>{{ p.user.name }}</h3>
 
-    <p>
-      <strong>Email:</strong>
-      {{ p.user.emailEntity?.email || 'Sin correo' }}
-    </p>
+    <p><strong>Email:</strong> {{ p.user.emailEntity?.email || 'Sin correo' }}</p>
 
     <p><strong>Estado actual:</strong> {{ p.status }}</p>
 
-    <!-- CV DEL USUARIO -->
-    <div class="cv-section">
+    <!-- CV -->
+    <ng-container *ngIf="p.user.cvUrl; else sinCV">
+      <a class="cv-btn" [href]="p.user.cvUrl" target="_blank">📄 Ver Hoja de vida</a>
+    </ng-container>
 
-      <!-- SI TIENE CV -->
-      <ng-container *ngIf="p.user.cvUrl; else sinCv">
-        <a 
-          [href]="p.user.cvUrl"
-          target="_blank"
-          class="cv-btn">
-          📄 Ver Hoja de Vida (PDF)
-        </a>
-      </ng-container>
-
-      <!-- SI NO TIENE CV -->
-      <ng-template #sinCv>
-        <p class="no-cv">❌ Este candidato no adjuntó hoja de vida.</p>
-      </ng-template>
-
-    </div>
+    <ng-template #sinCV>
+      <p class="no-cv">❌ Este candidato no adjuntó hoja de vida.</p>
+    </ng-template>
 
     <br />
 
-    <!-- BOTONES -->
-    <button class="aprobar-btn" (click)="cambiarEstado(p.idApplication, 'ACCEPTED')">
-      ✔ Aceptar
-    </button>
+    <!-- SELECT ESTILIZADO -->
+    <select class="estado-select"
+            (change)="cambiarEstado(p.idApplication, $event.target.value)"
+            [value]="p.status">
 
-    <button class="rechazar-btn" (click)="cambiarEstado(p.idApplication, 'REJECTED')">
-      ✖ Rechazar
-    </button>
+      <option value="IN_PROGRESS">En revisión</option>
+      <option value="ACCEPTED">Aceptar</option>
+      <option value="REJECTED">Rechazar</option>
+
+    </select>
 
   </div>
 
-  <button routerLink="/empresa" class="volver-btn">
-    ⬅ Volver
-  </button>
+  <button routerLink="/empresa" class="volver-btn">⬅ Volver</button>
 
 </div>
