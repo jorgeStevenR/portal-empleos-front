@@ -17,37 +17,32 @@ export class CompanyService {
     private auth: AuthService
   ) {}
 
-  // ============================
+  // 🟢 CREAR EMPRESA
+  create(company: any): Observable<any> {
+    return this.http.post(this.apiUrl, company);
+  }
+
   // 🔵 OBTENER TODAS LAS EMPRESAS
-  // ============================
   getAll(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
 
-  // ============================
   // 🔵 OBTENER EMPRESA POR ID
-  // ============================
   getById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  // ============================
   // 🔵 ACTUALIZAR EMPRESA
-  // ============================
   update(id: number, company: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, company);
   }
 
-  // ============================
   // 🔴 ELIMINAR EMPRESA
-  // ============================
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  // ============================
-  // 🟢 SUBIR LOGO DE EMPRESA (S3)
-  // ============================
+  // 🟢 SUBIR LOGO A S3
   uploadLogo(companyId: number, file: File): Observable<any> {
     const token = this.auth.getToken();
 

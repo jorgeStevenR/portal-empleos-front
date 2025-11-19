@@ -1,12 +1,13 @@
 // ============================================
 // 📂 src/app/pages/register-empresa/register-empresa.ts
 // ============================================
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-register-empresa',
@@ -26,11 +27,12 @@ export class RegisterEmpresaComponent {
   description = '';
   loading = false;
 
-  private apiUrl = 'http://localhost:8080/api/companies';
+  constructor(
+    private companyService: CompanyService,
+    private router: Router
+  ) {}
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  onRegister() {
+  onRegister(): void {
 
     if (this.loading) return;
 
@@ -53,7 +55,7 @@ export class RegisterEmpresaComponent {
       }
     };
 
-    this.http.post(this.apiUrl, newCompany).subscribe({
+    this.companyService.create(newCompany).subscribe({
 
       next: () => {
         alert('✅ Empresa registrada correctamente.');
@@ -65,18 +67,11 @@ export class RegisterEmpresaComponent {
         console.error('❌ Error al registrar empresa:', err);
 
         let msg = '❌ Error al registrar la empresa.';
-
-        if (err.error?.message) {
-          msg = '❌ ' + err.error.message;
-        }
+        if (err.error?.message) msg = '❌ ' + err.error.message;
 
         alert(msg);
-
-        // 🔥🔥 IMPORTANTE:
-        // REHABILITAR EL BOTÓN DESPUÉS DE UN ERROR
         this.loading = false;
       }
-
     });
   }
 
