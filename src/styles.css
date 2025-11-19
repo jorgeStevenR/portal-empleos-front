@@ -48,7 +48,7 @@ body {
 /* 🔥 CONTENEDOR GLOBAL PARA TODAS LAS PÁGINAS */
 .page-container {
   width: 100%;
-  max-width: 1300px;   /* 🔥 CENTRADO GLOBAL */
+  max-width: 1500px;   /* 🔥 CENTRADO GLOBAL */
   margin: 0 auto;      /* Centra todo */
   
   padding-top: 140px;   /* espacio navbar + topbar */

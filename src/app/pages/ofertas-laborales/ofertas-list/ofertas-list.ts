@@ -17,10 +17,17 @@ import { FiltroEmpleosPipe } from '../../../pipes/filtro-empleos.pipe';
 export class OfertasListComponent implements OnInit {
 
   empleos: any[] = [];
+  empleosPagina: any[] = [];
+
   postuladosIds: number[] = [];
 
   filtro: string = '';
   cargando = true;
+
+  // PAGINACIÓN
+  paginaActual = 1;
+  itemsPorPagina = 12;
+  totalPaginas = 1;
 
   constructor(
     private jobService: JobService,
@@ -31,46 +38,53 @@ export class OfertasListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // 1️⃣ Obtener ofertas
     this.jobService.getAllJobs().subscribe({
       next: (data: any[]) => {
-        this.empleos = data;
 
-        // 2️⃣ Obtener postulaciones del usuario
+        // ORDENAR NUEVOS PRIMERO
+        this.empleos = data.sort((a, b) => b.idJob - a.idJob);
+
+        // PAGINACIÓN
+        this.totalPaginas = Math.ceil(this.empleos.length / this.itemsPorPagina);
+        this.actualizarPagina();
+
+        // POSTULACIONES
         const userId = this.authService.getUserId();
-
         if (userId) {
           this.applicationService.getByUserId(userId).subscribe({
             next: (apps: any[]) => {
               this.postuladosIds = apps.map(a => a.job.idJob);
-              console.log('Postulados del usuario:', this.postuladosIds);
-            },
-            error: err => console.error('Error al traer postulaciones', err)
+            }
           });
         }
 
-        this.cargando = false;
-      },
-      error: (err) => {
-        console.error('❌ Error al cargar empleos', err);
         this.cargando = false;
       }
     });
   }
 
-  // 🔥 Saber si el usuario YA se postuló a este job
+  actualizarPagina() {
+    const inicio = (this.paginaActual - 1) * this.itemsPorPagina;
+    const fin = inicio + this.itemsPorPagina;
+    this.empleosPagina = this.empleos.slice(inicio, fin);
+  }
+
+  cambiarPagina(nueva: number) {
+    if (nueva >= 1 && nueva <= this.totalPaginas) {
+      this.paginaActual = nueva;
+      this.actualizarPagina();
+    }
+  }
+
   esPostulado(idJob: number): boolean {
     return this.postuladosIds.includes(idJob);
   }
 
   verDetalle(id: number): void {
-    if (id) {
-      this.router.navigate(['/oferta', id]);
-    }
+    this.router.navigate(['/oferta', id]);
   }
 
   onImageError(event: Event) {
-    const img = event.target as HTMLImageElement;
-    img.src = 'assets/img/default-job.png';
+    (event.target as HTMLImageElement).src = 'assets/img/default-job.png';
   }
 }

@@ -33,25 +33,48 @@
   box-shadow: 0 0 6px rgba(29, 138, 69, 0.3);
 }
 
-/* ====== GRID ====== */
+/* =========================================================
+   GRID DE 3 COLUMNAS 🌟
+========================================================= */
 .ofertas-grid {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 35px;
-  padding: 0 25px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px 55px;      /* más espacio vertical y horizontal */
+  padding: 0 60px;     /* espacio lateral */
+  justify-items: center;
 }
 
-/* ====== TARJETA ====== */
+/* Responsive */
+@media (max-width: 1100px) {
+  .ofertas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .ofertas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   TARJETA
+========================================================= */
 .oferta-card {
   background: white;
   border-radius: 16px;
-  padding: 28px 25px;
+  padding: 25px;
+  width: 100%;
+  max-width: 360px;
+  min-height: 260px;
   box-shadow: 0 8px 28px rgba(0,0,0,0.08);
   border: 1px solid #eef5f0;
   transition: all 0.28s ease;
   cursor: pointer;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .oferta-card:hover {
@@ -59,14 +82,14 @@
   box-shadow: 0 12px 32px rgba(0,0,0,0.12);
 }
 
-/* ====== TARJETA POSTULADO (VERDE) ====== */
+/* TARJETA POSTULADO */
 .oferta-card.postulado {
   background: #e9f8ef;
   border: 2px solid #1b8a3a;
   box-shadow: 0 12px 32px rgba(27, 138, 58, 0.12);
 }
 
-/* BADGE VERDE */
+/* BADGE */
 .badge-postulado {
   background: #1b8a3a;
   color: white;
@@ -80,7 +103,7 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* ====== HEADER EMPRESA ====== */
+/* ====== HEADER ====== */
 .empresa-header {
   display: flex;
   align-items: center;
@@ -98,16 +121,14 @@
   border: 2px solid #dcefe2;
 }
 
-/* ====== EMPRESA INFO ====== */
 .empresa-info {
   text-align: left;
 }
 
-.empresa-info .empresa-nombre {
-  font-size: 1.1rem;
+.empresa-nombre {
+  font-size: 1.05rem;
   font-weight: 600;
   color: #1d7c3a;
-  margin: 0;
 }
 
 .ubicacion {
@@ -117,19 +138,19 @@
 
 /* ====== TITULO ====== */
 .titulo {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #0d3a20;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 /* ====== DESCRIPCIÓN ====== */
 .descripcion {
   color: #4b4b4b;
-  font-size: 0.95rem;
-  line-height: 1.45rem;
+  font-size: 0.9rem;
+  line-height: 1.35rem;
   margin-bottom: 20px;
-  min-height: 48px;
+  min-height: 52px;
 }
 
 /* ====== BOTÓN ====== */
@@ -143,6 +164,7 @@
   cursor: pointer;
   transition: all 0.25s ease;
   font-weight: 600;
+  margin-top: auto;
 }
 
 .btn-ver:hover {
@@ -150,7 +172,48 @@
   transform: translateY(-3px);
 }
 
-/* ====== BOTÓN EN TARJETA POSTULADO ====== */
 .btn-postulado {
   background: #1b8a3a !important;
+}
+
+/* ====== PAGINADOR ====== */
+.paginador {
+  margin: 40px auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.paginador button {
+  background: #1b8a3a;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.paginador button[disabled] {
+  background: #9ccfb0;
+  cursor: not-allowed;
+}
+
+.paginador span {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #1b8a3a;
+  color: #1b8a3a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.paginador span:hover {
+  background: #e8f7ee;
+}
+
+.paginador .activo {
+  background: #1b8a3a;
+  color: white;
 }

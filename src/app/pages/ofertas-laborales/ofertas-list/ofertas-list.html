@@ -1,7 +1,7 @@
 <div class="page-container">
   <section class="ofertas-container">
     
-    <h2>🌿 Ofertas Laborales Disponibles</h2>
+    <h2>Ofertas Laborales Disponibles</h2>
 
     <input
       type="text"
@@ -10,32 +10,28 @@
       class="search-input"
     />
 
-    <!-- Loading -->
     <div *ngIf="cargando" class="loading">
       <span class="spinner"></span> Cargando ofertas...
     </div>
 
-    <!-- Sin resultados -->
     <div *ngIf="!cargando && empleos.length === 0" class="no-results">
       No hay ofertas disponibles en este momento.
     </div>
 
     <!-- GRID -->
-    <div class="ofertas-grid" *ngIf="!cargando && empleos.length > 0">
+    <div class="ofertas-grid" *ngIf="!cargando && empleosPagina.length > 0">
       
       <div
         class="oferta-card"
         [class.postulado]="esPostulado(job.idJob)"
-        *ngFor="let job of empleos | filtroEmpleos:filtro"
+        *ngFor="let job of empleosPagina | filtroEmpleos:filtro"
         (click)="verDetalle(job.idJob)"
       >
 
-        <!-- BADGE POSTULADO -->
         <div *ngIf="esPostulado(job.idJob)" class="badge-postulado">
           ✔ Ya postulaste
         </div>
         
-        <!-- HEADER -->
         <div class="empresa-header">
           <img
             [src]="job.company?.logoUrl || 'assets/img/default-job.png'"
@@ -49,7 +45,6 @@
           </div>
         </div>
 
-        <!-- BODY -->
         <h3 class="titulo">{{ job.title }}</h3>
 
         <p class="descripcion">
@@ -60,15 +55,32 @@
           }}
         </p>
 
-        <!-- BOTÓN -->
-        <button
-          class="btn-ver"
-          [class.btn-postulado]="esPostulado(job.idJob)"
-        >
+        <button class="btn-ver" [class.btn-postulado]="esPostulado(job.idJob)">
           Ver más
         </button>
 
       </div>
+
+    </div>
+
+    <!-- PAGINADOR -->
+    <div class="paginador" *ngIf="totalPaginas > 1">
+      
+      <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
+        ⬅
+      </button>
+
+      <span
+        *ngFor="let p of [].constructor(totalPaginas); let i = index"
+        (click)="cambiarPagina(i + 1)"
+        [class.activo]="paginaActual === i + 1"
+      >
+        {{ i + 1 }}
+      </span>
+
+      <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
+        ➡
+      </button>
 
     </div>
 

@@ -1,7 +1,7 @@
 <div class="postulacion-container">
   <div class="postulacion-card">
 
-    <h2>📝 Finalizar postulación</h2>
+    <h2>Finalizar postulación</h2>
 
     <p class="sub">
       Estás aplicando a:
@@ -10,7 +10,8 @@
       en <strong>{{ job?.company?.name }}</strong>
     </p>
 
-    <label>Carta de presentación:</label>
+    <label class="label-carta">Carta de presentación:</label>
+
     <textarea
       [(ngModel)]="coverLetter"
       placeholder="Escribe un mensaje para la empresa..."
@@ -20,7 +21,6 @@
       ✔ Enviar postulación
     </button>
 
-    <!-- 🔥 FIX REAL AQUÍ -->
     <button class="btn-volver" [routerLink]="['/oferta', idJob]">
       ⬅ Volver
     </button>
