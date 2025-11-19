@@ -35,6 +35,16 @@ export class PostulantesEmpleoComponent implements OnInit {
     );
   }
 
+  /** NUEVA FUNCIÓN QUE ARREGLA EL PROBLEMA EN VERCEL */
+  onSelectChange(idApp: number, event: Event) {
+    const select = event.target as HTMLSelectElement | null;
+
+    if (select) {
+      const nuevoEstado = select.value;
+      this.cambiarEstado(idApp, nuevoEstado);
+    }
+  }
+
   cambiarEstado(idApp: number, nuevoEstado: string) {
     this.appService.updateStatus(idApp, nuevoEstado).subscribe({
       next: () => {

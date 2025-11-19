@@ -25,10 +25,9 @@
 
     <br />
 
-    <!-- SELECT FIX: referencia segura -->
+    <!-- SELECT FINAL FIX -->
     <select class="estado-select"
-            #selEstado
-            (change)="cambiarEstado(p.idApplication, selEstado.value)"
+            (change)="onSelectChange(p.idApplication, $event)"
             [value]="p.status">
 
       <option value="IN_PROGRESS">En revisión</option>
