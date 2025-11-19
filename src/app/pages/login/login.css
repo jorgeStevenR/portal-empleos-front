@@ -87,22 +87,22 @@ input:focus {
   position: relative;
 }
 
-.password-box .eye {
+/* Icono toggle 👁️ / 🙈 */
+.toggle-eye {
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 18px;
-  background-image: url("/assets/img/eye.svg");
-  background-size: 22px;
-  background-repeat: no-repeat;
-  width: 25px;
-  height: 25px;
+  font-size: 20px;
+  user-select: none;
+  color: #2e7d32;
+  transition: 0.2s;
 }
 
-.password-box .eye.off {
-  background-image: url("/assets/img/eye-off.svg");
+.toggle-eye:hover {
+  color: #1b5e20;
+  transform: translateY(-50%) scale(1.1);
 }
 
 /* BOTÓN */

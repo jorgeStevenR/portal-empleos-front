@@ -31,14 +31,18 @@
       <label for="password">Contraseña</label>
       <div class="password-box">
         <input
-          type="password"
+          [type]="showPassword ? 'text' : 'password'"
           id="password"
           [(ngModel)]="password"
           name="password"
           placeholder="**************"
           required
         />
-        <span class="eye">👁️</span>
+
+        <!-- 👁️ Icono toggle SIN IMAGENES -->
+        <span class="toggle-eye" (click)="togglePassword()">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </span>
       </div>
 
       <!-- Botón -->
