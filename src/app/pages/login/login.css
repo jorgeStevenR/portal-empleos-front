@@ -94,6 +94,15 @@ input:focus {
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 18px;
+  background-image: url("/assets/img/eye.svg");
+  background-size: 22px;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+}
+
+.password-box .eye.off {
+  background-image: url("/assets/img/eye-off.svg");
 }
 
 /* BOTÓN */
