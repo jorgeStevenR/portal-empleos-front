@@ -1,7 +1,3 @@
-// ============================================
-// 📂 src/app/pages/postulacion-detalle/postulacion-detalle.ts
-// ============================================
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -37,12 +33,12 @@ export class PostulacionDetalleComponent implements OnInit {
       next: (data) => {
         this.application = data;
 
-        // 🔥 Traer job completo con empresa incluida
+        // Traer job completo
         this.jobService.getById(data.job.idJob).subscribe(jobFull => {
           this.application.job = jobFull;
         });
 
-        // 🔥 Traer al usuario completo (incluye CV)
+        // Traer usuario completo
         this.userService.getById(data.user.idUser).subscribe(userFull => {
           this.candidato = userFull;
           this.cargando = false;
@@ -50,5 +46,41 @@ export class PostulacionDetalleComponent implements OnInit {
       },
       error: () => this.cargando = false
     });
+  }
+
+  // ============================
+  // ⭐ TRADUCIR ESTADOS ENUM
+  // ============================
+  traducirEstado(estado: string): string {
+    const map: any = {
+      PENDING: "Pendiente",
+      IN_PROGRESS: "En revisión",
+      ACCEPTED: "Aceptado",
+      REJECTED: "Rechazado",
+      CANCELED: "Cancelado"
+    };
+    return map[estado] || estado;
+  }
+
+  traducirModo(mode: string): string {
+    const map: any = {
+      ONSITE: "Presencial",
+      REMOTE: "Remoto",
+      HYBRID: "Híbrido"
+    };
+    return map[mode] || mode;
+  }
+
+  // ============================
+  // ⭐ Añadir clases de color
+  // ============================
+  estadoClase(estado: string): string {
+    switch (estado) {
+      case 'PENDING': return 'pending';
+      case 'ACCEPTED': return 'accepted';
+      case 'REJECTED': return 'rejected';
+      case 'IN_PROGRESS': return 'pending'; // mismo estilo
+      default: return '';
+    }
   }
 }

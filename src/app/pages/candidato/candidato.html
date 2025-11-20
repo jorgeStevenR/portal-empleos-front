@@ -12,11 +12,11 @@
 
       <p><strong>Empresa:</strong> {{ app.job.company?.name }}</p>
       <p><strong>Ubicación:</strong> {{ app.job.location }}</p>
-      <p><strong>Modalidad:</strong> {{ app.job.mode }}</p>
-      <p><strong>Estado:</strong> {{ app.status }}</p>
+      <p><strong>Modalidad:</strong> {{ traducirModo(app.job.mode) }}</p>
+      <p><strong>Estado:</strong> {{ traducirEstado(app.status) }}</p>
 
-      <!-- 🔥 Ahora abre el detalle completo -->
-      <button class="btn-ver" [routerLink]="['/postulacion-detalle', app.idApplication]">
+      <button class="btn-ver" 
+              [routerLink]="['/postulacion-detalle', app.idApplication]">
         Ver detalle
       </button>
 

@@ -1,7 +1,3 @@
-// ============================================
-// 📂 src/app/pages/candidato/candidato.ts
-// ============================================
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -41,8 +37,10 @@ export class CandidatoComponent implements OnInit {
 
     this.applicationService.getByUserId(this.userId).subscribe({
       next: (apps) => {
+
         this.applications = apps;
 
+        // Cargar información completa del job
         this.applications.forEach(app => {
           this.jobService.getById(app.job.idJob).subscribe(jobCompleto => {
             app.job = jobCompleto;
@@ -53,5 +51,27 @@ export class CandidatoComponent implements OnInit {
       },
       error: () => this.loading = false
     });
+  }
+
+  /** TRADUCIR ESTADO (ENUM → español) */
+  traducirEstado(state: string): string {
+    const estados: any = {
+      PENDING: "Pendiente",
+      IN_PROGRESS: "En revisión",
+      ACCEPTED: "Aceptado",
+      REJECTED: "Rechazado",
+      CANCELED: "Cancelado"
+    };
+    return estados[state] || state;
+  }
+
+  /** TRADUCIR MODO */
+  traducirModo(mode: string): string {
+    const modos: any = {
+      ONSITE: "Presencial",
+      REMOTE: "Remoto",
+      HYBRID: "Híbrido"
+    };
+    return modos[mode] || mode;
   }
 }

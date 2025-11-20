@@ -15,6 +15,7 @@
 
     <p class="ubicacion">
       📍 {{ application.job.location }}
+      • {{ traducirModo(application.job.mode) }}
     </p>
 
     <hr class="divider" />
@@ -22,8 +23,8 @@
     <!-- ESTADO -->
     <h3 class="subtitulo">Estado de tu postulación</h3>
 
-    <div class="estado-box" [ngClass]="application.status.toLowerCase()">
-      {{ application.status }}
+    <div class="estado-box" [ngClass]="estadoClase(application.status)">
+      {{ traducirEstado(application.status) }}
     </div>
 
     <!-- CARTA -->
@@ -36,12 +37,13 @@
     <!-- FECHA -->
     <p class="fecha">
       <strong>Fecha de postulación:</strong><br>
-      {{ application.appliedAt | date:'longDate' }} — {{ application.appliedAt | date:'shortTime' }}
+      {{ application.appliedAt | date:'longDate' }} —
+      {{ application.appliedAt | date:'shortTime' }}
     </p>
 
-    <!-- DATOS DEL CANDIDATO -->
     <hr class="divider" />
 
+    <!-- DATOS DEL CANDIDATO -->
     <h3 class="subtitulo">Datos del candidato</h3>
 
     <div class="cand-box">

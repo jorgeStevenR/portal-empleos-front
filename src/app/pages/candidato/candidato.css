@@ -1,7 +1,7 @@
 /* ===== CONTENEDOR GENERAL ===== */
 .candidato-container {
   max-width: 800px;
-  margin: 100px auto 30px;   /* 🔥 Baja el contenido y deja espacio arriba */
+  margin: 100px auto 30px;
   background: #fff;
   padding: 20px;
   border-radius: 12px;
@@ -20,6 +20,7 @@ h2 {
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 15px;
+  background: #f9fff9;
 }
 
 /* ===== BOTÓN VER OFERTA ===== */
